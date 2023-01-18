@@ -1,0 +1,35 @@
+<form class="notes">
+
+  <div class="row">
+    <div class="col-sm-9">
+      <label for="newNoteLine">New note&hellip;</label>
+      <input name="newNoteLine" id="newNoteLine" required>
+    </div>
+    <div class="col-sm-3">
+      <label for="newDurationLine">Duration&hellip;</label>
+      <input name="newDurationLine" id="newDurationLine" required>
+    </div>
+  </div>
+
+  <div class="row" *ngFor="let note of notes; let i = index">
+    <div class="col-sm-9">
+      <h4>{{note.noteType}}</h4>
+      <p>{{note.description}}</p>
+    </div>
+    <div class="col-sm-3">
+      {{note.startDateTime}} and
+      {{note.endDateTime}}
+    </div>
+  </div>
+
+  <!-- <div class="row">
+    <div class="col-sm-9">
+      Afternoon nap
+    </div>
+    <div class="col-sm-3">
+      2hrs
+    </div>
+  </div> -->
+
+
+</form>
