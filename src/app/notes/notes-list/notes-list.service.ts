@@ -11,8 +11,8 @@ export class NotesListService {
     new Note(
       'feeding',
       'Applesauce',
-      new Date("2023-01-01"),
-      new Date()
+      new Date("2023-01-01, 9:00:27"),
+      new Date("2023-01-01, 9:47:33")
     ),
     new Note(
       'wet + poop',

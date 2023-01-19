@@ -1,15 +1,30 @@
-<form class="notes">
+<div class="notes">
 
-  <div class="row">
-    <div class="col-sm-9">
-      <label for="newNoteLine">New note&hellip;</label>
-      <input name="newNoteLine" id="newNoteLine" required>
+  <form class="new-note mb-5">
+
+    <div class="row mb-3">
+      <div class="col-sm-9">
+        <!-- <div class="form-floating"> -->
+          <label for="newNoteLine" class="new-note-label">New note&hellip;</label>
+          <textarea name="newNoteLine" id="newNoteLine" class="form-control" placeholder='E.g., "nap time" or "feeding (both)"&hellip;' required></textarea>
+        <!-- </div> -->
+      </div>
+      <div class="col-sm-3">
+        <!-- <div class="form-floating"> -->
+          <label for="newDurationLine" class="new-note-label">Duration&hellip;</label>
+          <textarea name="newDurationLine" id="newDurationLine" class="form-control" placeholder='E.g., 25min or 2hr&hellip;' required></textarea>
+        <!-- </div> -->
+
+      </div>
     </div>
-    <div class="col-sm-3">
-      <label for="newDurationLine">Duration&hellip;</label>
-      <input name="newDurationLine" id="newDurationLine" required>
+
+    <div class="row">
+      <div class="col-sm-3 offset-sm-9">
+          <button type="submit" class="btn btn-primary">Add Note</button>
+      </div>
     </div>
-  </div>
+
+  </form>
 
   <div class="row" *ngFor="let note of notes; let i = index">
     <div class="col-sm-9">
@@ -17,8 +32,7 @@
       <p>{{note.description}}</p>
     </div>
     <div class="col-sm-3">
-      {{note.startDateTime}} and
-      {{note.endDateTime}}
+      {{ (note.endDateTime.getTime() - note.startDateTime.getTime()) / 1000 / 60 / 60 }} hours
     </div>
   </div>
 
@@ -32,4 +46,4 @@
   </div> -->
 
 
-</form>
+</div>
