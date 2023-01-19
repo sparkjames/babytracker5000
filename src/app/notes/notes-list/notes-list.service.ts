@@ -11,20 +11,16 @@ export class NotesListService {
     new Note(
       'feeding',
       'Applesauce',
-      new Date("2023-01-01, 9:00:27"),
-      new Date("2023-01-01, 9:47:33")
+      '25min'
     ),
     new Note(
       'wet + poop',
-      'small poop',
-      new Date(),
-      new Date()
+      'small poop'
     ),
     new Note(
       'nap',
       '1st nap of day',
-      new Date('January 17, 2023 10:15:00'),
-      new Date('January 17, 2023 11:00:00')
+      '2hr'
     )
   ];
 

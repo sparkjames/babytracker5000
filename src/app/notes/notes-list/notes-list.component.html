@@ -1,18 +1,33 @@
 <div class="notes">
 
-  <form class="new-note mb-5">
+  <form class="new-note mb-5" (ngSubmit)="onSubmitNewNote(newNoteForm)" #newNoteForm="ngForm" ngNativeValidate>
+    <!-- <form class="new-note mb-5" #newNoteForm="ngForm"> -->
 
     <div class="row mb-3">
       <div class="col-sm-9">
         <!-- <div class="form-floating"> -->
           <label for="newNoteLine" class="new-note-label">New note&hellip;</label>
-          <textarea name="newNoteLine" id="newNoteLine" class="form-control" placeholder='E.g., "nap time" or "feeding (both)"&hellip;' required></textarea>
+          <textarea
+            name="newNoteLine"
+            id="newNoteLine"
+            class="form-control"
+            placeholder='E.g., "nap time" or "feeding (both)"&hellip;'
+            required
+            ngModel
+            ></textarea>
         <!-- </div> -->
       </div>
       <div class="col-sm-3">
         <!-- <div class="form-floating"> -->
           <label for="newDurationLine" class="new-note-label">Duration&hellip;</label>
-          <textarea name="newDurationLine" id="newDurationLine" class="form-control" placeholder='E.g., 25min or 2hr&hellip;' required></textarea>
+          <textarea
+            name="newDurationLine"
+            id="newDurationLine"
+            class="form-control"
+            placeholder='E.g., 25min or 2hr&hellip;'
+            required
+            ngModel
+            ></textarea>
         <!-- </div> -->
 
       </div>
@@ -20,7 +35,13 @@
 
     <div class="row">
       <div class="col-sm-3 offset-sm-9">
-          <button type="submit" class="btn btn-primary">Add Note</button>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="!newNoteForm.valid"
+            >
+            Add Note
+          </button>
       </div>
     </div>
 
@@ -32,7 +53,8 @@
       <p>{{note.description}}</p>
     </div>
     <div class="col-sm-3">
-      {{ (note.endDateTime.getTime() - note.startDateTime.getTime()) / 1000 / 60 / 60 }} hours
+      <!-- {{ (note.endDateTime.getTime() - note.startDateTime.getTime()) / 1000 / 60 / 60 }} hours -->
+      {{note.duration}}
     </div>
   </div>
 

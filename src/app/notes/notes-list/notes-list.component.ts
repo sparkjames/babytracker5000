@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Note } from '../note.model';
 import { NotesListService } from './notes-list.service';
@@ -25,6 +26,29 @@ export class NotesListComponent implements OnInit, OnDestroy {
     //   this.notes = notes;
     // });
     // this.notes = this.notesListService.getNotes();
+  }
+
+  onSubmitNewNote(form: NgForm){
+    console.log('submitted');
+    console.log(form);
+
+    let newNoteLine;
+    let newDurationLine;
+
+    if( form.value.newNoteLine ){
+      newNoteLine = form.value.newNoteLine;
+
+      if (form.value.newDurationLine) {
+        newDurationLine = form.value.newDurationLine;
+      }
+
+      const newNote = new Note( 'Feeding', newNoteLine, newDurationLine );
+      this.notesListService.addNote(newNote);
+
+      form.reset();
+
+    }
+
   }
 
   ngOnDestroy(): void {
