@@ -33,16 +33,21 @@ export class NotesListComponent implements OnInit, OnDestroy {
     console.log(form);
 
     let newNoteLine;
+    let newNoteType;
     let newDurationLine;
 
     if( form.value.newNoteLine ){
       newNoteLine = form.value.newNoteLine;
 
+      if (form.value.newNoteType) {
+        newNoteType = form.value.newNoteType;
+      }
+
       if (form.value.newDurationLine) {
         newDurationLine = form.value.newDurationLine;
       }
 
-      const newNote = new Note( 'Feeding', newNoteLine, newDurationLine );
+      const newNote = new Note( newNoteType, newNoteLine, newDurationLine );
       this.notesListService.addNote(newNote);
 
       form.reset();

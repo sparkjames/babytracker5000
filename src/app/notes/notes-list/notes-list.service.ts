@@ -9,16 +9,16 @@ export class NotesListService {
 
   private notes: Note[] = [
     new Note(
-      'feeding',
+      'Feeding',
       'Applesauce',
       '25min'
     ),
     new Note(
-      'wet + poop',
+      'Diaper',
       'small poop'
     ),
     new Note(
-      'nap',
+      'Sleep',
       '1st nap of day',
       '2hr'
     )

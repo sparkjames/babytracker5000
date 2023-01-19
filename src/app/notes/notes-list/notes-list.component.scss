@@ -10,6 +10,7 @@
   padding: .75rem;
 }
 
+select.ng-touched.ng-invalid,
 textarea.ng-touched.ng-invalid {
   // styles taken from bootstrap
   // @extend .is-invalid;
