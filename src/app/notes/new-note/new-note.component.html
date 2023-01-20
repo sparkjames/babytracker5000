@@ -1,0 +1,59 @@
+<form class="new-note mb-5" (ngSubmit)="onSubmitNewNote(newNoteForm)" #newNoteForm="ngForm" ngNativeValidate>
+    <!-- <form class="new-note mb-5" #newNoteForm="ngForm"> -->
+
+    <div class="row mb-3">
+      <div class="col-sm-6">
+        <!-- <div class="form-floating"> -->
+          <label for="newNoteLine" class="new-note-label">New note&hellip;</label>
+          <textarea
+            name="newNoteLine"
+            id="newNoteLine"
+            class="form-control"
+            placeholder='E.g., "nap time" or "feeding (both)"&hellip;'
+            required
+            ngModel
+            ></textarea>
+        <!-- </div> -->
+      </div>
+      <div class="col-sm-3">
+        <label for="newNoteType" class="new-note-label">Type</label>
+        <select
+          name="newNoteType"
+          id="newNoteType"
+          class="form-control"
+          ngModel
+          >
+          <option value="Feeding" selected>Feeding</option>
+          <option value="Diaper">Diaper</option>
+          <option value="Sleep">Sleep</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="col-sm-3">
+        <!-- <div class="form-floating"> -->
+          <label for="newDurationLine" class="new-note-label">Duration&hellip;</label>
+          <textarea
+            name="newDurationLine"
+            id="newDurationLine"
+            class="form-control"
+            placeholder='E.g., 25min or 2hr&hellip;'
+            ngModel
+            ></textarea>
+        <!-- </div> -->
+
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12" style="text-align: right;">
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="!newNoteForm.valid"
+            >
+            Add Note
+          </button>
+      </div>
+    </div>
+
+  </form>

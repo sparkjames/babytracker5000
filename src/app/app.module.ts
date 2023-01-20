@@ -6,11 +6,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NotesListComponent } from './notes/notes-list/notes-list.component';
 import { NotesListService } from './notes/notes-list/notes-list.service';
+import { NewNoteComponent } from './notes/new-note/new-note.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NotesListComponent
+    NotesListComponent,
+    NewNoteComponent
   ],
   imports: [
     BrowserModule,
