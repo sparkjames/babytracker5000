@@ -5,8 +5,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NotesListComponent } from './notes/notes-list/notes-list.component';
-import { NotesListService } from './notes/notes-list/notes-list.service';
+import { NotesService } from './notes/notes.service';
 import { NewNoteComponent } from './notes/new-note/new-note.component';
+import { NoteStorageService } from './notes/note-storage.service';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { NewNoteComponent } from './notes/new-note/new-note.component';
     FormsModule
   ],
   providers: [
-    NotesListService
+    NotesService,
+    NoteStorageService
   ],
   bootstrap: [AppComponent]
 })

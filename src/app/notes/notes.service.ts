@@ -1,27 +1,27 @@
 import { Injectable } from "@angular/core";
 import { Subject } from "rxjs";
 
-import { Note } from "../note.model";
+import { Note } from "./note.model";
 
 @Injectable()
-export class NotesListService {
+export class NotesService {
   notesChanged = new Subject<Note[]>();
 
   private notes: Note[] = [
-    new Note(
-      'Feeding',
-      'Applesauce',
-      '25min'
-    ),
-    new Note(
-      'Diaper',
-      'small poop'
-    ),
-    new Note(
-      'Sleep',
-      '1st nap of day',
-      '2hr'
-    )
+    // new Note(
+    //   'Feeding',
+    //   'Applesauce',
+    //   '25min'
+    // ),
+    // new Note(
+    //   'Diaper',
+    //   'small poop'
+    // ),
+    // new Note(
+    //   'Sleep',
+    //   '1st nap of day',
+    //   '2hr'
+    // )
   ];
 
   constructor(){
