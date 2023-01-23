@@ -46,4 +46,9 @@ export class NotesService {
     this.notesChanged.next( this.notes.slice() );
   }
 
+  deleteNote( index: number ){
+    this.notes.splice(index, 1);
+    this.notesChanged.next( this.notes.slice() );
+  }
+
 }

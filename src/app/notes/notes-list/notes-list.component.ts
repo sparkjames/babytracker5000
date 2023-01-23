@@ -55,6 +55,15 @@ export class NotesListComponent implements OnInit, OnDestroy {
   onClickDeleteNoteListItem(index: number) {
     console.log('clicked DELETE');
     this.clickedControl = true;
+
+    const confirmDelete = confirm( 'This will delete this note from the list.' );
+    if( confirmDelete ){
+      console.log('YES delete it');
+      this.notesService.deleteNote(index);
+      this.noteStorageService.storeNotes();
+    } else {
+      console.log('NO do not delete it.');
+    }
   }
 
   ngOnDestroy(): void {
