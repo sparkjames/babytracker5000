@@ -14,6 +14,8 @@ export class NotesListComponent implements OnInit, OnDestroy {
   notes: Note[];
   notesSubscription: Subscription;
   private noteStorageSubscription: Subscription;
+  private clickedControl: boolean = false;
+  public viewControls: number = -1;
 
   constructor( private notesService: NotesService, private noteStorageService: NoteStorageService ){
     this.notesSubscription = this.notesService.notesChanged.subscribe((notes: Note[]) => {
@@ -25,6 +27,34 @@ export class NotesListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     // this.noteStorageSubscription = this.noteStorageService.fetchNotes().subscribe();
+  }
+
+  onClickNoteListItem(index: number){
+    if( !this.clickedControl ){
+      console.log('clicked ROW');
+      console.log(index);
+
+      if( this.viewControls != index ){
+        this.viewControls = index;
+      } else {
+        this.viewControls = -1;
+      }
+
+    }
+
+    // console.log('view controls for');
+    // console.log(this.viewControls);
+    this.clickedControl = false;
+  }
+
+  onClickEditNoteListItem(index: number){
+    console.log('clicked EDIT');
+    this.clickedControl = true;
+  }
+
+  onClickDeleteNoteListItem(index: number) {
+    console.log('clicked DELETE');
+    this.clickedControl = true;
   }
 
   ngOnDestroy(): void {

@@ -29,3 +29,19 @@ textarea.ng-touched.ng-invalid {
   flex-direction: column-reverse;
   width: 100%;
 }
+
+
+
+.notes-listing-controls {
+  display: flex;
+  justify-content: flex-end;
+  gap: .5em;
+}
+
+.button-label {
+    width: 0;
+    display: inline-block;
+    height: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
