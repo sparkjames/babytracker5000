@@ -30,6 +30,24 @@ textarea.ng-touched.ng-invalid {
   width: 100%;
 }
 
+.notes-listing-item {
+  cursor: pointer;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+
+  &:nth-child(odd){
+    background-color: rgb(232, 240, 251);
+  }
+
+  // + .notes-listing-item {
+  //   margin-top: 1rem;
+  // }
+
+  &:hover {
+    background-color: var(--bs-info, lightsteelblue);
+  }
+
+}
 
 
 .notes-listing-controls {

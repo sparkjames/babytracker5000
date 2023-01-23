@@ -3,10 +3,10 @@
   <app-new-note></app-new-note>
 
   <div class="notes-listing">
-    <div class="row" *ngFor="let note of notes; let i = index" (click)="onClickNoteListItem(i)">
+    <div class="row notes-listing-item" *ngFor="let note of notes; let i = index" (click)="onClickNoteListItem(i)">
 
       <div class="col-sm-6">
-        <p>{{note.description}}</p>
+        {{note.description}}
       </div>
 
       <div class="col-sm">
