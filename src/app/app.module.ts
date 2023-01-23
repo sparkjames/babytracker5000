@@ -8,6 +8,7 @@ import { NotesListComponent } from './notes/notes-list/notes-list.component';
 import { NotesService } from './notes/notes.service';
 import { NewNoteComponent } from './notes/new-note/new-note.component';
 import { NoteStorageService } from './notes/note-storage.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { NoteStorageService } from './notes/note-storage.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [
     NotesService,

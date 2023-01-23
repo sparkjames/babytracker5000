@@ -1,6 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { NoteStorageService } from '../note-storage.service';
 import { Note } from '../note.model';
 import { NotesService } from '../notes.service';
 
@@ -12,7 +13,10 @@ import { NotesService } from '../notes.service';
 export class NewNoteComponent implements OnDestroy {
   notesSubscription: Subscription;
 
-  constructor(private notesService: NotesService) {
+  constructor(
+    private notesService: NotesService,
+    private noteStorageService: NoteStorageService
+  ) {
     this.notesSubscription = this.notesService.notesChanged.subscribe();
   }
 
@@ -37,6 +41,8 @@ export class NewNoteComponent implements OnDestroy {
 
       const newNote = new Note(newNoteType, newNoteLine, newDurationLine);
       this.notesService.addNote(newNote);
+
+      this.noteStorageService.storeNotes();
 
       form.reset();
 

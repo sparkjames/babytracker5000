@@ -28,9 +28,10 @@ export class NotesService {
 
   }
 
-  // setNotes(notes: Note[]){
-
-  // }
+  setNotes(notes: Note[]){
+    this.notes = notes;
+    this.notesChanged.next( this.notes.slice() );
+  }
 
   getNotes(){
     return this.notes.slice();
