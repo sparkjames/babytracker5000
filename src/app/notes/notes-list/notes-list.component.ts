@@ -16,6 +16,7 @@ export class NotesListComponent implements OnInit, OnDestroy {
   private noteStorageSubscription: Subscription;
   private clickedControl: boolean = false;
   public viewControls: number = -1;
+  public editMode: number = -1;
 
   constructor( private notesService: NotesService, private noteStorageService: NoteStorageService ){
     this.notesSubscription = this.notesService.notesChanged.subscribe((notes: Note[]) => {
@@ -31,8 +32,8 @@ export class NotesListComponent implements OnInit, OnDestroy {
 
   onClickNoteListItem(index: number){
     if( !this.clickedControl ){
-      console.log('clicked ROW');
-      console.log(index);
+      // console.log('clicked ROW');
+      // console.log(index);
 
       if( this.viewControls != index ){
         this.viewControls = index;
@@ -48,12 +49,13 @@ export class NotesListComponent implements OnInit, OnDestroy {
   }
 
   onClickEditNoteListItem(index: number){
-    console.log('clicked EDIT');
+    // console.log('clicked EDIT');
     this.clickedControl = true;
+    this.editMode = index;
   }
 
   onClickDeleteNoteListItem(index: number) {
-    console.log('clicked DELETE');
+    // console.log('clicked DELETE');
     this.clickedControl = true;
 
     const confirmDelete = confirm( 'This will delete this note from the list.' );

@@ -36,7 +36,10 @@ export class NoteStorageService {
       .get<Note[]>(this.APIEndpoint)
       .pipe(
         tap(notes => {
-          this.notesService.setNotes(notes);
+          if( notes ){
+            this.notesService.setNotes(notes);
+          }
+
           console.log('finished fetch');
           console.log(notes);
         })

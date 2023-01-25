@@ -1,5 +1,5 @@
-import { Component, OnDestroy } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { NoteStorageService } from '../note-storage.service';
 import { Note } from '../note.model';
@@ -10,48 +10,69 @@ import { NotesService } from '../notes.service';
   templateUrl: './new-note.component.html',
   styleUrls: ['./new-note.component.scss']
 })
-export class NewNoteComponent implements OnDestroy {
-  notesSubscription: Subscription;
+export class NewNoteComponent implements OnInit, OnDestroy {
+  public defaultNoteType: string = 'Feeding';
+  public newNoteForm: FormGroup = new FormGroup({
+    description: new FormControl( null, Validators.required ),
+    noteType: new FormControl(null, Validators.required),
+    duration: new FormControl(null)
+    // feedDetails: new FormControl(null),
+    // diaperDetails: new FormControl(null)
+  });
 
   constructor(
-    private notesService: NotesService,
-    private noteStorageService: NoteStorageService
+    // private notesService: NotesService,
+    // private noteStorageService: NoteStorageService,
+    // private notesSubscription: Subscription,
+    // public newNoteForm: FormGroup
   ) {
-    this.notesSubscription = this.notesService.notesChanged.subscribe();
+    // this.notesSubscription = this.notesService.notesChanged.subscribe();
   }
 
-  onSubmitNewNote(form: NgForm) {
+  ngOnInit(): void {}
+
+  onSubmitNewNote() {
     console.log('submitted');
-    console.log(form);
+    console.log(this.newNoteForm);
 
-    let newNoteLine;
-    let newNoteType;
-    let newDurationLine;
+    // let newDescription;
+    // let newNoteType;
+    // let newDurationLine;
+    // let newFeedDetails;
+    // let newDiaperDetails;
 
-    if (form.value.newNoteLine) {
-      newNoteLine = form.value.newNoteLine;
+    // if (form.value.description) {
+    //   newDescription = form.value.description;
 
-      if (form.value.newNoteType) {
-        newNoteType = form.value.newNoteType;
-      }
+    //   if (form.value.noteType) {
+    //     newNoteType = form.value.noteType;
+    //   }
 
-      if (form.value.newDurationLine) {
-        newDurationLine = form.value.newDurationLine;
-      }
+    //   if (form.value.duration) {
+    //     newDurationLine = form.value.duration;
+    //   }
 
-      const newNote = new Note(newNoteType, newNoteLine, newDurationLine);
-      this.notesService.addNote(newNote);
+    //   if (form.value.newFeedDetails) {
+    //     newFeedDetails = form.value.newFeedDetails;
+    //   }
 
-      this.noteStorageService.storeNotes();
+    //   if (form.value.newDiaperDetails) {
+    //     newDiaperDetails = form.value.newDiaperDetails;
+    //   }
 
-      form.reset();
+    //   const newNote = new Note( new Date(), newNoteType, newDescription, newDurationLine);
+    //   this.notesService.addNote(newNote);
 
-    }
+    //   this.noteStorageService.storeNotes();
+
+    //   form.reset();
+
+    // }
 
   }
 
   ngOnDestroy(): void {
-    this.notesSubscription.unsubscribe();
+    // this.notesSubscription.unsubscribe();
   }
 
 }

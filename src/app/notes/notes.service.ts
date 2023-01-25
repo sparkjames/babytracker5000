@@ -34,7 +34,7 @@ export class NotesService {
   }
 
   getNotes(){
-    return this.notes.slice();
+    return this.notes ? this.notes.slice() : [];
   }
 
   getNote( index:number ){

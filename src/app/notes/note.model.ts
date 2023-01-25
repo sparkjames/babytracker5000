@@ -1,19 +1,23 @@
 export class Note {
 
   constructor(
-    public noteType: string,
+    public createdDateTime: Date,
     public description: string,
+    public noteType: string,
     public duration?: string,
-    public createdDateTime?: Date,
-    public startDateTime?: Date,
-    public endDateTime?: Date
-  ){
-    this.noteType = noteType;
-    this.description = description;
-    this.duration = duration;
+    public feedDetails?: string,
+    public diaperDetails?: string
+    // public startDateTime?: Date,
+    // public endDateTime?: Date
+  ) {
     this.createdDateTime = createdDateTime;
-    this.startDateTime = startDateTime;
-    this.endDateTime = endDateTime;
+    this.description = description;
+    this.noteType = noteType;
+    this.duration = duration;
+    this.feedDetails = feedDetails;
+    this.diaperDetails = diaperDetails;
+    // this.startDateTime = startDateTime;
+    // this.endDateTime = endDateTime;
   }
 
 }

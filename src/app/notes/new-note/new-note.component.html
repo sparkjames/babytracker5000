@@ -1,27 +1,50 @@
-<form class="new-note mb-5" (ngSubmit)="onSubmitNewNote(newNoteForm)" #newNoteForm="ngForm" ngNativeValidate>
+<!-- <form
+  class="new-note mb-5"
+  (ngSubmit)="onSubmitNewNote(newNoteForm)"
+  #newNoteForm="ngForm"
+  ngNativeValidate
+  > -->
+<form
+  class="new-note mb-5"
+  [formGroup]="newNoteForm"
+  (ngSubmit)="onSubmitNewNote()"
+  >
     <!-- <form class="new-note mb-5" #newNoteForm="ngForm"> -->
 
     <div class="row mb-3">
+
       <div class="col-sm-6">
-        <!-- <div class="form-floating"> -->
-          <label for="newNoteLine" class="new-note-label">New note&hellip;</label>
+        <label for="newNoteLine" class="new-note-label">New note</label>
+        <!-- <textarea
+          name="description"
+          id="newNoteLine"
+          class="form-control"
+          placeholder='E.g., "nap time" or "feeding (both)"&hellip;'
+          required
+          ngModel
+          ></textarea> -->
           <textarea
-            name="newNoteLine"
-            id="newNoteLine"
-            class="form-control"
-            placeholder='E.g., "nap time" or "feeding (both)"&hellip;'
-            required
-            ngModel
-            ></textarea>
-        <!-- </div> -->
+          name="description"
+          id="newNoteLine"
+          class="form-control"
+          placeholder='E.g., "nap time" or "feeding (both)"&hellip;'
+          formControlName="description"
+          ></textarea>
       </div>
-      <div class="col-sm-3">
+
+      <div class="col-sm">
         <label for="newNoteType" class="new-note-label">Type</label>
-        <select
-          name="newNoteType"
+        <!-- <select
+          name="noteType"
           id="newNoteType"
           class="form-control"
-          ngModel
+          [(ngModel)]="defaultNoteType"
+          > -->
+        <select
+          name="noteType"
+          id="newNoteType"
+          class="form-control"
+          formControlName="noteType"
           >
           <option value="Feeding" selected>Feeding</option>
           <option value="Diaper">Diaper</option>
@@ -29,27 +52,127 @@
           <option value="other">Other</option>
         </select>
       </div>
-      <div class="col-sm-3">
-        <!-- <div class="form-floating"> -->
-          <label for="newDurationLine" class="new-note-label">Duration&hellip;</label>
-          <textarea
-            name="newDurationLine"
-            id="newDurationLine"
-            class="form-control"
-            placeholder='E.g., 25min or 2hr&hellip;'
-            ngModel
-            ></textarea>
-        <!-- </div> -->
+
+      <div class="col-sm new-note-duration" *ngIf="newNoteForm.value.noteType == 'Sleep'">
+        <label for="newDurationLine" class="new-note-label">Duration</label>
+        <!-- <textarea
+          name="duration"
+          id="newDurationLine"
+          class="form-control"
+          placeholder='E.g., 25min or 2hr&hellip;'
+          ngModel
+          ></textarea> -->
+        <textarea
+          name="duration"
+          id="newDurationLine"
+          class="form-control"
+          placeholder='E.g., 25min or 2hr&hellip;'
+          formControlName="duration"
+        ></textarea>
 
       </div>
+
+      <div class="col-sm new-note-feedDetails" *ngIf="newNoteForm.value.noteTypeteType == 'Feeding'">
+        <p class="new-note-label">Details</p>
+
+        <div class="new-note-details-options">
+
+          <div class="form-check">
+            <input
+                name="feedDetails[]"
+                id="feedDetails-left-breast"
+                value="Left Breast"
+                type="checkbox"
+                class="btn-check"
+                autocomplete="off"
+              >
+            <label for="feedDetails-left-breast" class="new-note-checkboxLabel btn btn-outline-secondary">Left Breast</label>
+          </div>
+
+          <div class="form-check">
+            <input
+                name="feedDetails[]"
+                id="feedDetails-right-breast"
+                value="Right Breast"
+                type="checkbox"
+                class="btn-check"
+                autocomplete="off"
+              >
+            <label for="feedDetails-right-breast" class="new-note-checkboxLabel btn btn-outline-secondary">Right Breast</label>
+          </div>
+
+          <div class="form-check">
+            <input
+                name="feedDetails[]"
+                id="feedDetails-bottle"
+                value="Bottle"
+                type="checkbox"
+                class="btn-check"
+                autocomplete="off"
+              >
+            <label for="feedDetails-bottle" class="new-note-checkboxLabel btn btn-outline-secondary">Bottle</label>
+          </div>
+
+          <div class="form-check">
+            <input
+                name="feedDetails[]"
+                id="feedDetails-other"
+                value="Other"
+                type="checkbox"
+                class="btn-check"
+                autocomplete="off"
+              >
+            <label for="feedDetails-other" class="new-note-checkboxLabel btn btn-outline-secondary">Other</label>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="col-sm new-note-diaperDetails" *ngIf="newNoteForm.value.noteType == 'Diaper'">
+        <p class="new-note-label">Details</p>
+
+        <div class="new-note-details-options">
+
+          <div class="form-check">
+            <input
+                name="diaperDetails[]"
+                id="diaperDetails-wet"
+                value="Wet"
+                type="checkbox"
+                class="btn-check"
+                autocomplete="off"
+              >
+            <label for="diaperDetails-wet" class="new-note-checkboxLabel btn btn-outline-secondary">Wet</label>
+          </div>
+
+          <div class="form-check">
+            <input
+                name="diaperDetails[]"
+                id="diaperDetails-poo"
+                value="Poo"
+                type="checkbox"
+                class="btn-check"
+                autocomplete="off"
+              >
+            <label for="diaperDetails-poo" class="new-note-checkboxLabel btn btn-outline-secondary">Poo</label>
+          </div>
+
+        </div>
+
+      </div>
+
     </div>
 
     <div class="row">
       <div class="col-xs-12" style="text-align: right;">
-          <button
+          <!-- <button
             type="submit"
             class="btn btn-primary"
             [disabled]="!newNoteForm.valid"
+            > -->
+          <button
+            type="submit"
+            class="btn btn-primary"
             >
             Add Note
           </button>
