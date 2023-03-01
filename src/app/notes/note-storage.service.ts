@@ -31,11 +31,21 @@ export class NoteStorageService {
   }
 
   fetchNotes() {
-    // console.log('start fetch');
+    console.log('start fetch');
     return this.http
       .get<Note[]>(this.APIEndpoint)
       .pipe(
-        tap(notes => {
+        map( notes => {
+          console.log(notes);
+          return notes.map( note => {
+            return {
+              ...note,
+              feedDetails: note.feedDetails ? note.feedDetails : '',
+              diaperDetails: note.diaperDetails ? note.diaperDetails : ''
+            }
+          })
+        }),
+        tap( notes => {
           if( notes ){
             this.notesService.setNotes(notes);
           }

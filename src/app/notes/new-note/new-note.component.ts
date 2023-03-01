@@ -135,7 +135,14 @@ export class NewNoteComponent implements OnInit, OnDestroy {
         duration = this.newNoteForm.value.duration;
       }
 
-      const newNote = new Note(new Date(), description, noteType, duration, JSON.stringify(selectedFeedDetails), JSON.stringify(selectedDiaperDetails));
+      const newNote = new Note(
+        new Date(),
+        description,
+        noteType,
+        duration,
+        selectedFeedDetails.join('|'),
+        selectedDiaperDetails.join('|')
+      );
       this.notesService.addNote(newNote);
 
       this.noteStorageService.storeNotes();
