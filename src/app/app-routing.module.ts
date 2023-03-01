@@ -1,7 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { NotesListComponent } from './notes/notes-list/notes-list.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  { path: '', redirectTo: '/list', pathMatch: 'full' },
+  { path: 'list', component: NotesListComponent }
+  // login
+  // account
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
