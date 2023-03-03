@@ -14,7 +14,8 @@ import { DetailOption } from './detail-option.model';
 })
 export class NewNoteComponent implements OnInit, OnDestroy {
   // public defaultNoteType: string = 'Feeding';
-  // @Input() editMode: number;
+  private editNoteSubscription: Subscription;
+  editMode = -1;
 
   // https://www.netjstech.com/2020/10/checkbox-in-angular-form-example.html
   feedDetailOptions: Array<DetailOption> = [
@@ -48,17 +49,44 @@ export class NewNoteComponent implements OnInit, OnDestroy {
     private editNoteService: EditNoteService
   ) {
     // this.notesSubscription = this.notesService.notesChanged.subscribe();
-    // this.editMode = -1;
+    this.editNoteSubscription = this.editNoteService.editNote.subscribe((index: number) => {
+      this.editMode = index;
+    });
   }
 
   ngOnInit(): void {
-    // if (this.editMode > -1){
-    //   this.initForm();
-    // }
+    if (this.editMode > -1){
+      this.initForm();
+    }
   }
 
   private initForm(): void{
     console.log('start form with edit data');
+    let description = '';
+    let noteType = '';
+    let duration = '';
+    let feedDetails = [];
+    let diaperDetails = [];
+
+    if( this.editMode > -1){
+      const note = this.notesService.getNote(this.editMode);
+      // console.log('edit this note', note);
+      description = note.description;
+      noteType = note.noteType;
+      duration = note.duration ? note.duration : '';
+      feedDetails = note.feedDetails ? note.feedDetails.split('|') : [];
+      diaperDetails = note.diaperDetails ? note.diaperDetails.split('|') : [];
+
+      this.newNoteForm = new FormGroup({
+        description: new FormControl(description, Validators.required),
+        noteType: new FormControl(noteType, Validators.required),
+        duration: new FormControl(duration),
+        feedDetails: this.createFeedDetails(this.feedDetailOptions, feedDetails),
+        diaperDetails: this.createDiaperDetails(this.diaperDetailOptions, diaperDetails)
+      });
+
+    }
+
   }
 
   getFeedControls(): any {
@@ -75,16 +103,25 @@ export class NewNoteComponent implements OnInit, OnDestroy {
     return controls;
   }
 
-  createFeedDetails(feedDetails: Array<DetailOption>): FormArray {
+  createFeedDetails(feedDetails: Array<DetailOption>, selectedValues: Array<string> = []): FormArray {
     const arr = feedDetails.map(detail => {
-      return new FormControl(detail.selected);
+      // console.log('detail = ', detail);
+      let isSelected = false;
+      if (selectedValues.indexOf(detail.value) > -1 ){
+        isSelected = true;
+      }
+      return new FormControl(isSelected);
     });
     return new FormArray(arr);
   }
 
-  createDiaperDetails(diaperDetails: Array<DetailOption>): FormArray {
+  createDiaperDetails(diaperDetails: Array<DetailOption>, selectedValues: Array<string> = []): FormArray {
     const arr = diaperDetails.map(detail => {
-      return new FormControl(detail.selected);
+      let isSelected = false;
+      if (selectedValues.indexOf(detail.value) > -1) {
+        isSelected = true;
+      }
+      return new FormControl(isSelected);
     });
     return new FormArray(arr);
   }
@@ -169,6 +206,7 @@ export class NewNoteComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     // this.notesSubscription.unsubscribe();
+    this.editNoteSubscription.unsubscribe();
   }
 
 }
