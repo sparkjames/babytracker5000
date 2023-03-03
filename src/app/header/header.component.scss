@@ -1,3 +1,13 @@
 .header {
+  background-color: var(--bs-primary, #f0f);
   margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  padding-top: 2rem;
+}
+
+.site-heading {
+  color: var(--bs-primary-text, #fff);
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  font-size: 3rem;
 }
