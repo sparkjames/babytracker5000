@@ -96,14 +96,15 @@
             class="btn btn-primary"
             [disabled]="!newNoteForm.valid"
             >
-            {{ editMode > -1 ? 'Edit Note' : 'Add Note' }}
+            <!-- {{ editMode > -1 ? 'Edit Note' : 'Add Note' }} -->
+            Add Note
           </button>
-          <button
+          <!-- <button
             type="button"
             class="btn btn-secondary"
             (click)="onCancelEdit()"
             *ngIf="editMode > -1"
-            >Cancel</button>
+            >Cancel</button> -->
       </div>
     </div>
 

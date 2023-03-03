@@ -1,6 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { EditNoteService } from '../edit-note.service';
 import { NoteStorageService } from '../note-storage.service';
 import { Note } from '../note.model';
 import { NotesService } from '../notes.service';
@@ -13,7 +14,7 @@ import { DetailOption } from './detail-option.model';
 })
 export class NewNoteComponent implements OnInit, OnDestroy {
   // public defaultNoteType: string = 'Feeding';
-  @Input() editMode: number;
+  // @Input() editMode: number;
 
   // https://www.netjstech.com/2020/10/checkbox-in-angular-form-example.html
   feedDetailOptions: Array<DetailOption> = [
@@ -44,17 +45,16 @@ export class NewNoteComponent implements OnInit, OnDestroy {
   constructor(
     private notesService: NotesService,
     private noteStorageService: NoteStorageService,
-    // private notesSubscription: Subscription,
-    // public newNoteForm: FormGroup
+    private editNoteService: EditNoteService
   ) {
     // this.notesSubscription = this.notesService.notesChanged.subscribe();
-    this.editMode = -1;
+    // this.editMode = -1;
   }
 
   ngOnInit(): void {
-    if (this.editMode > -1){
-      this.initForm();
-    }
+    // if (this.editMode > -1){
+    //   this.initForm();
+    // }
   }
 
   private initForm(): void{
@@ -164,7 +164,7 @@ export class NewNoteComponent implements OnInit, OnDestroy {
   }
 
   onCancelEdit(){
-    this.editMode = -1;
+    // this.editMode = -1;
   }
 
   ngOnDestroy(): void {

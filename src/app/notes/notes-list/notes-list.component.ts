@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { EditNoteService } from '../edit-note.service';
 import { NoteStorageService } from '../note-storage.service';
 import { Note } from '../note.model';
 import { NotesService } from '../notes.service';
@@ -14,16 +15,24 @@ export class NotesListComponent implements OnInit, OnDestroy {
   notes: Note[];
   notesSubscription: Subscription;
   private noteStorageSubscription: Subscription;
+  private editNoteSubscription: Subscription;
   private clickedControl = false;
   public viewControls = -1;
   public editMode = -1;
 
-  constructor( private notesService: NotesService, private noteStorageService: NoteStorageService ){
+  constructor(
+    private notesService: NotesService,
+    private noteStorageService: NoteStorageService,
+    private editNoteService: EditNoteService
+    ){
     this.notesSubscription = this.notesService.notesChanged.subscribe((notes: Note[]) => {
       this.notes = notes;
     });
     this.notes = this.notesService.getNotes();
     this.noteStorageSubscription = this.noteStorageService.fetchNotes().subscribe();
+    this.editNoteSubscription = this.editNoteService.editNote.subscribe( (index:number) => {
+      this.editMode = index;
+    });
   }
 
   ngOnInit(): void {
@@ -49,9 +58,16 @@ export class NotesListComponent implements OnInit, OnDestroy {
   }
 
   onClickEditNoteListItem(index: number){
-    // console.log('clicked EDIT');
-    this.clickedControl = true;
-    this.editMode = index;
+    // console.log('clicked EDIT', index);
+    if( this.editMode === index ){
+      // this.editNoteService.setEditNote(-1);
+      this.clearState();
+
+    } else {
+      this.clickedControl = true;
+      this.editNoteService.setEditNote(index);
+    }
+
   }
 
   onClickDeleteNoteListItem(index: number) {
@@ -72,13 +88,14 @@ export class NotesListComponent implements OnInit, OnDestroy {
 
   clearState(){
     this.viewControls = -1;
-    this.editMode = -1;
+    this.editNoteService.setEditNote(-1);
     this.clickedControl = false;
   }
 
   ngOnDestroy(): void {
     this.notesSubscription.unsubscribe();
     this.noteStorageSubscription.unsubscribe();
+    this.editNoteSubscription.unsubscribe();
   }
 
 }

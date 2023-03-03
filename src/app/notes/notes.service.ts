@@ -1,12 +1,11 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, Subject } from "rxjs";
+import { Subject } from "rxjs";
 
 import { Note } from "./note.model";
 
 @Injectable()
 export class NotesService {
   notesChanged = new Subject<Note[]>();
-  editNote = new BehaviorSubject<number>(-1);
 
   private notes: Note[] = [
     // new Note(

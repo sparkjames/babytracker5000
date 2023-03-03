@@ -6,7 +6,7 @@
     <div class="notes-listing">
       <div class="row notes-listing-item" *ngFor="let note of notes; let i = index" (click)="onClickNoteListItem(i)">
 
-        <app-new-note *ngIf="editMode > 1" [editMode]="editMode"></app-new-note>
+        <app-new-note *ngIf="editMode === i"></app-new-note>
 
         <div class="col-sm-6">
           {{note.description}}
