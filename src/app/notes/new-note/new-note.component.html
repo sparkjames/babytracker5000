@@ -1,28 +1,13 @@
-<!-- <form
-  class="new-note mb-5"
-  (ngSubmit)="onSubmitNewNote(newNoteForm)"
-  #newNoteForm="ngForm"
-  ngNativeValidate
-  > -->
 <form
   class="new-note mb-5"
   [formGroup]="newNoteForm"
   (ngSubmit)="onSubmit()"
   >
-    <!-- <form class="new-note mb-5" #newNoteForm="ngForm"> -->
 
     <div class="row mb-3">
 
       <div class="col-sm-6">
         <label for="newNoteLine" class="new-note-label">New note</label>
-        <!-- <textarea
-          name="description"
-          id="newNoteLine"
-          class="form-control"
-          placeholder='E.g., "nap time" or "feeding (both)"&hellip;'
-          required
-          ngModel
-          ></textarea> -->
           <textarea
           name="description"
           id="newNoteLine"
@@ -34,12 +19,6 @@
 
       <div class="col-sm">
         <label for="newNoteType" class="new-note-label">Type</label>
-        <!-- <select
-          name="noteType"
-          id="newNoteType"
-          class="form-control"
-          [(ngModel)]="defaultNoteType"
-          > -->
         <select
           name="noteType"
           id="newNoteType"
@@ -55,13 +34,6 @@
 
       <div class="col-sm new-note-duration" *ngIf="newNoteForm.value.noteType == 'Sleep'">
         <label for="newDurationLine" class="new-note-label">Duration</label>
-        <!-- <textarea
-          name="duration"
-          id="newDurationLine"
-          class="form-control"
-          placeholder='E.g., 25min or 2hr&hellip;'
-          ngModel
-          ></textarea> -->
         <textarea
           name="duration"
           id="newDurationLine"
@@ -90,58 +62,6 @@
             <label for="feedDetails-{{ i }}" class="new-note-checkboxLabel btn btn-outline-secondary">{{ feedDetailOptions[i].label }}</label>
           </div>
 
-          <!-- <div class="form-check">
-            <input
-                name="feedDetails[]"
-                id="feedDetails-left-breast"
-                value="Left Breast"
-                type="checkbox"
-                class="btn-check"
-                autocomplete="off"
-                [formControlName]="0"
-              >
-            <label for="feedDetails-left-breast" class="new-note-checkboxLabel btn btn-outline-secondary">Left Breast</label>
-          </div>
-
-          <div class="form-check">
-            <input
-                name="feedDetails[]"
-                id="feedDetails-right-breast"
-                value="Right Breast"
-                type="checkbox"
-                class="btn-check"
-                autocomplete="off"
-                [formControlName]="1"
-              >
-            <label for="feedDetails-right-breast" class="new-note-checkboxLabel btn btn-outline-secondary">Right Breast</label>
-          </div>
-
-          <div class="form-check">
-            <input
-                name="feedDetails[]"
-                id="feedDetails-bottle"
-                value="Bottle"
-                type="checkbox"
-                class="btn-check"
-                autocomplete="off"
-                [formControlName]="2"
-              >
-            <label for="feedDetails-bottle" class="new-note-checkboxLabel btn btn-outline-secondary">Bottle</label>
-          </div>
-
-          <div class="form-check">
-            <input
-                name="feedDetails[]"
-                id="feedDetails-other"
-                value="Other"
-                type="checkbox"
-                class="btn-check"
-                autocomplete="off"
-                [formControlName]="3"
-              >
-            <label for="feedDetails-other" class="new-note-checkboxLabel btn btn-outline-secondary">Other</label>
-          </div> -->
-
         </div>
       </div>
 
@@ -163,32 +83,6 @@
             <label for="diaperDetails-{{ i }}" class="new-note-checkboxLabel btn btn-outline-secondary">{{ diaperDetailOptions[i].label }}</label>
           </div>
 
-          <!-- <div class="form-check">
-            <input
-                name="diaperDetails[]"
-                id="diaperDetails-wet"
-                value="Wet"
-                type="checkbox"
-                class="btn-check"
-                autocomplete="off"
-                [formControlName]="0"
-              >
-            <label for="diaperDetails-wet" class="new-note-checkboxLabel btn btn-outline-secondary">Wet</label>
-          </div>
-
-          <div class="form-check">
-            <input
-                name="diaperDetails[]"
-                id="diaperDetails-poo"
-                value="Poo"
-                type="checkbox"
-                class="btn-check"
-                autocomplete="off"
-                [formControlName]="1"
-              >
-            <label for="diaperDetails-poo" class="new-note-checkboxLabel btn btn-outline-secondary">Poo</label>
-          </div> -->
-
         </div>
 
       </div>
@@ -202,12 +96,14 @@
             class="btn btn-primary"
             [disabled]="!newNoteForm.valid"
             >
-          <!-- <button
-            type="submit"
-            class="btn btn-primary"
-            > -->
-            Add Note
+            {{ editMode > -1 ? 'Edit Note' : 'Add Note' }}
           </button>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            (click)="onCancelEdit()"
+            *ngIf="editMode > -1"
+            >Cancel</button>
       </div>
     </div>
 

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { NoteStorageService } from '../note-storage.service';
@@ -13,6 +13,7 @@ import { DetailOption } from './detail-option.model';
 })
 export class NewNoteComponent implements OnInit, OnDestroy {
   // public defaultNoteType: string = 'Feeding';
+  @Input() editMode: number;
 
   // https://www.netjstech.com/2020/10/checkbox-in-angular-form-example.html
   feedDetailOptions: Array<DetailOption> = [
@@ -47,9 +48,18 @@ export class NewNoteComponent implements OnInit, OnDestroy {
     // public newNoteForm: FormGroup
   ) {
     // this.notesSubscription = this.notesService.notesChanged.subscribe();
+    this.editMode = -1;
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    if (this.editMode > -1){
+      this.initForm();
+    }
+  }
+
+  private initForm(): void{
+    console.log('start form with edit data');
+  }
 
   getFeedControls(): any {
     // console.log('in getFeedControls()...');
@@ -151,6 +161,10 @@ export class NewNoteComponent implements OnInit, OnDestroy {
 
     }
 
+  }
+
+  onCancelEdit(){
+    this.editMode = -1;
   }
 
   ngOnDestroy(): void {

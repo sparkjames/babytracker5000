@@ -14,9 +14,9 @@ export class NotesListComponent implements OnInit, OnDestroy {
   notes: Note[];
   notesSubscription: Subscription;
   private noteStorageSubscription: Subscription;
-  private clickedControl: boolean = false;
-  public viewControls: number = -1;
-  public editMode: number = -1;
+  private clickedControl = false;
+  public viewControls = -1;
+  public editMode = -1;
 
   constructor( private notesService: NotesService, private noteStorageService: NoteStorageService ){
     this.notesSubscription = this.notesService.notesChanged.subscribe((notes: Note[]) => {
@@ -60,12 +60,20 @@ export class NotesListComponent implements OnInit, OnDestroy {
 
     const confirmDelete = confirm( 'This will delete this note from the list.' );
     if( confirmDelete ){
-      console.log('YES delete it');
+      // console.log('YES delete it');
       this.notesService.deleteNote(index);
       this.noteStorageService.storeNotes();
+      this.clearState();
+
     } else {
-      console.log('NO do not delete it.');
+      // console.log('NO do not delete it.');
     }
+  }
+
+  clearState(){
+    this.viewControls = -1;
+    this.editMode = -1;
+    this.clickedControl = false;
   }
 
   ngOnDestroy(): void {
