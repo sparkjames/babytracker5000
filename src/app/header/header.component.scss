@@ -1,5 +1,6 @@
 .header {
   background-color: var(--bs-primary, #f0f);
+  background-image: linear-gradient(20deg, hsl(340, 88%, 68%) 0%, var(--bs-primary, #f0f) 100%);
   margin-bottom: 3rem;
   padding-bottom: 2rem;
   padding-top: 2rem;
@@ -7,7 +8,17 @@
 
 .site-heading {
   color: var(--bs-primary-text, #fff);
-  font-family: 'Courier New', Courier, monospace;
+  font-family: var(--font-sans, 'sans-serif');
   font-weight: bold;
-  font-size: 3rem;
+  font-size: clamp(1.8rem, 3rem, 5vw);
+  text-transform: uppercase;
+  letter-spacing: -.05em;
+  text-shadow: 0 0 11px rgba(0,0,0,.28);
+
+  em {
+    letter-spacing: -0.1em;
+    font-size: 1.33em;
+    opacity: .8;
+    mix-blend-mode: overlay;
+  }
 }
