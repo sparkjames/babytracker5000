@@ -1,7 +1,3 @@
-
-
-
-
 .notes-listing {
   display: flex;
   flex-direction: column-reverse;
@@ -25,6 +21,11 @@
     background-color: var(--bs-info, lightsteelblue);
   }
 
+}
+
+.notes-listing-item .row {
+    margin-left: 0;
+    margin-right: 0;
 }
 
 
