@@ -19,17 +19,20 @@
 
       <div class="col-sm">
         <label for="{{ input_id_noteType }}" class="note-form-label">Type</label>
-        <select
+        <div class="select-wrap">
+          <select
           name="noteType"
           id="{{ input_id_noteType }}"
           class="form-control"
           formControlName="noteType"
           >
-          <option value="Feeding" selected>Feeding</option>
-          <option value="Diaper">Diaper</option>
-          <option value="Sleep">Sleep</option>
-          <option value="other">Other</option>
-        </select>
+            <option value="Feeding" selected>Feeding</option>
+            <option value="Diaper">Diaper</option>
+            <option value="Sleep">Sleep</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
       </div>
 
       <div class="col-sm note-form-duration" *ngIf="noteForm.value.noteType == 'Sleep'">

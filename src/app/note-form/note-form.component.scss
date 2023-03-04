@@ -1,14 +1,36 @@
+// @import '~/bootstrap/scss/bootstrap-utilities.scss';
+@import '../../../node_modules/bootstrap/scss/bootstrap-utilities.scss';
 
 .note-form {
   // margin-bottom: 3rem;
 }
 
 .note-form-label {
-  // visibility: hidden;
-  // height: 0;
-  // display: block;
   margin-bottom: 0;
-  padding: .75rem;
+  padding-bottom: .25rem;
+  padding-left: .75rem;
+  padding-right: .75rem;
+  padding-top: 1.25rem;
+
+  @include media-breakpoint-up(sm) {
+    padding-bottom: .75rem;
+    padding-top: .75rem;
+  }
+}
+
+.select-wrap {
+  position: relative;
+
+  &::after {
+    font-family: bootstrap-icons;
+    content: '\F22A';
+    position: absolute;
+    right: 0.5em;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--bs-secondary, #f0f);
+    pointer-events: none;
+  }
 }
 
 select.ng-touched.ng-invalid,
