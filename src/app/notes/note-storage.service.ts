@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { NotesService } from './notes.service';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Note } from './note.model';
-import { map, tap } from 'rxjs';
+import { catchError, map, tap } from 'rxjs';
 
 @Injectable()
 export class NoteStorageService {
@@ -52,6 +52,11 @@ export class NoteStorageService {
 
           console.log('finished fetch');
           console.log(notes);
+        }),
+        catchError((error, caught) => {
+          console.log('Error in fetching note list: ', error);
+          // console.log(caught);
+          return [];
         })
       );
   }

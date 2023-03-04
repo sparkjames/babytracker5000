@@ -16,7 +16,7 @@ export class NotesListComponent implements OnInit, OnDestroy {
   notesSubscription: Subscription;
   private noteStorageSubscription: Subscription;
   private editNoteSubscription: Subscription;
-  private clickedControl = false;
+  // private clickedControl = false;
   public viewControls = -1;
   public editMode = -1;
 
@@ -39,22 +39,26 @@ export class NotesListComponent implements OnInit, OnDestroy {
     // this.noteStorageSubscription = this.noteStorageService.fetchNotes().subscribe();
   }
 
-  onClickNoteListItem(index: number){
-    if( !this.clickedControl ){
-      // console.log('clicked ROW');
-      // console.log(index);
+  onClickNoteListItem(event:any, index: number){
+    console.log('%%% CLICK %%% onClickNoteListItem()', event);
 
-      if( this.viewControls != index ){
-        this.viewControls = index;
-      } else {
-        this.viewControls = -1;
-      }
+    let parent_container = event.target;
+    do {
+      parent_container = parent_container ? parent_container.parentNode : document.body;
+    }
+    while (!parent_container.matches('form,button') && parent_container !== document.body);
+    // console.log('parent container = ', parent_container);
 
+    if (parent_container.matches('form,button')){
+      return;
     }
 
-    // console.log('view controls for');
-    // console.log(this.viewControls);
-    this.clickedControl = false;
+    if( this.viewControls !== index ){
+      this.viewControls = index;
+    } else {
+      this.viewControls = -1;
+    }
+
   }
 
   onClickEditNoteListItem(index: number){
@@ -64,7 +68,7 @@ export class NotesListComponent implements OnInit, OnDestroy {
       this.clearState();
 
     } else {
-      this.clickedControl = true;
+      // this.clickedControl = true;
       this.editNoteService.setEditNote(index);
     }
 
@@ -72,7 +76,7 @@ export class NotesListComponent implements OnInit, OnDestroy {
 
   onClickDeleteNoteListItem(index: number) {
     // console.log('clicked DELETE');
-    this.clickedControl = true;
+    // this.clickedControl = true;
 
     const confirmDelete = confirm( 'This will delete this note from the list.' );
     if( confirmDelete ){
@@ -89,7 +93,7 @@ export class NotesListComponent implements OnInit, OnDestroy {
   clearState(){
     this.viewControls = -1;
     this.editNoteService.setEditNote(-1);
-    this.clickedControl = false;
+    // this.clickedControl = false;
   }
 
   ngOnDestroy(): void {

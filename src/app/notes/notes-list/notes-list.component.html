@@ -4,7 +4,7 @@
     <app-new-note></app-new-note>
 
     <div class="notes-listing">
-      <div class="row notes-listing-item" *ngFor="let note of notes; let i = index" (click)="onClickNoteListItem(i)">
+      <div class="row notes-listing-item" *ngFor="let note of notes; let i = index" (click)="onClickNoteListItem($event,i)">
 
         <app-new-note *ngIf="editMode === i"></app-new-note>
 
