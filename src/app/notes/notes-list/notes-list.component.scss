@@ -3,10 +3,12 @@
 
   .new-note-heading {
     background-color: var(--color-sticky-note-1-light);
+    border-radius: 4px 4px 0 0;
     border: 1px solid var(--color-sticky-note-1-dark);
     border-bottom-color: var(--color-sticky-note-1-light);
-    border-radius: 4px 4px 0 0;
     display: inline-block;
+    font-size: 1rem;
+    letter-spacing: .025em;
     margin-bottom: 0;
     padding: .5rem 1rem;
     position: relative;
@@ -20,8 +22,8 @@
 
   .note-form-container {
     background-color: var(--color-sticky-note-1-light);
-    border: 1px solid var(--color-sticky-note-1-dark);
     border-radius: 0 4px 4px 4px;
+    border: 1px solid var(--color-sticky-note-1-dark);
     display: block;
     padding: 1rem;
   }
@@ -47,10 +49,6 @@
     background-color: rgb(232, 240, 251);
   }
 
-  // + .notes-listing-item {
-  //   margin-top: 1rem;
-  // }
-
   &:hover {
     background-color: var(--bs-info, lightsteelblue);
   }
@@ -58,21 +56,21 @@
 }
 
 .notes-listing-item .row {
-    margin-left: 0;
-    margin-right: 0;
+  margin-left: 0;
+  margin-right: 0;
 }
 
 
 .notes-listing-controls {
   display: flex;
-  justify-content: flex-end;
   gap: .5em;
+  justify-content: flex-end;
 }
 
 .button-label {
-    width: 0;
-    display: inline-block;
-    height: 0;
-    visibility: hidden;
-    pointer-events: none;
+  display: inline-block;
+  height: 0;
+  pointer-events: none;
+  visibility: hidden;
+  width: 0;
 }
