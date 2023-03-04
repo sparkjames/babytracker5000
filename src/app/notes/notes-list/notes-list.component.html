@@ -1,9 +1,14 @@
 <div class="notes">
   <div class="container">
 
-    <app-note-form></app-note-form>
+    <div class="new-note">
+      <h2 class="new-note-heading"><span>New entry&hellip;</span></h2>
+      <app-note-form></app-note-form>
+    </div>
 
     <div class="notes-listing">
+      <!-- <h3 class="notes-listing-heading">Notes</h3> -->
+
       <div class="notes-listing-item" *ngFor="let note of notes; let i = index" (click)="onClickNoteListItem($event,i)">
 
         <div class="row" *ngIf="editMode === i">

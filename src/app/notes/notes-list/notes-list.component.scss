@@ -1,8 +1,41 @@
+.new-note {
+  margin-bottom: 5rem;
+}
+
+.new-note-heading {
+  background-color: var(--color-sticky-note-1-light);
+  border: 1px solid var(--color-sticky-note-1-dark);
+  border-bottom-color: var(--color-sticky-note-1-light);
+  border-radius: 4px 4px 0 0;
+  display: inline-block;
+  margin-bottom: 0;
+  padding: .5rem 1rem;
+  position: relative;
+  top: 1px;
+
+  span {
+    mix-blend-mode: hard-light;
+    opacity: .7;
+  }
+}
+
+.note-form-container {
+  background-color: var(--color-sticky-note-1-light);
+  border: 1px solid var(--color-sticky-note-1-dark);
+  border-radius: 0 4px 4px 4px;
+  display: block;
+  padding: 1rem;
+}
+
 .notes-listing {
   display: flex;
   flex-direction: column-reverse;
   width: 100%;
 }
+
+// .notes-listing-heading {
+//   order: 1;
+// }
 
 .notes-listing-item {
   cursor: pointer;

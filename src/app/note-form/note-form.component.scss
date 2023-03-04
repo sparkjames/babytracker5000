@@ -5,16 +5,26 @@
   // margin-bottom: 3rem;
 }
 
+.note-form-section {
+  + .note-form-section {
+    margin-top: 2rem;
+
+    @include media-breakpoint-up(sm) {
+      margin-top: 0;
+    }
+  }
+}
+
 .note-form-label {
   margin-bottom: 0;
   padding-bottom: .25rem;
   padding-left: .75rem;
   padding-right: .75rem;
-  padding-top: 1.25rem;
+  // padding-top: 1.25rem;
 
   @include media-breakpoint-up(sm) {
     padding-bottom: .75rem;
-    padding-top: .75rem;
+    // padding-top: .75rem;
   }
 }
 

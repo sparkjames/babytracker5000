@@ -1,13 +1,13 @@
 <form
-  class="note-form mb-5"
+  class="note-form"
   [formGroup]="noteForm"
   (ngSubmit)="onSubmit()"
   >
 
     <div class="row mb-3">
 
-      <div class="col-sm-6">
-        <label for="{{ input_id_description }}" class="note-form-label">New note</label>
+      <div class="col-sm-6 note-form-section">
+        <label for="{{ input_id_description }}" class="note-form-label">Notes</label>
           <textarea
           name="description"
           id="{{ input_id_description }}"
@@ -18,7 +18,7 @@
           ></textarea>
       </div>
 
-      <div class="col-sm">
+      <div class="col-sm note-form-section">
         <label for="{{ input_id_noteType }}" class="note-form-label">Type</label>
         <div class="select-wrap">
           <select
@@ -36,7 +36,7 @@
 
       </div>
 
-      <div class="col-sm note-form-duration" *ngIf="noteForm.value.noteType == 'Sleep'">
+      <div class="col-sm note-form-section note-form-duration" *ngIf="noteForm.value.noteType == 'Sleep'">
         <label for="{{ input_id_duration }}" class="note-form-label">Duration</label>
         <textarea
           name="duration"
@@ -48,7 +48,7 @@
 
       </div>
 
-      <div class="col-sm note-form-feedDetails" *ngIf="noteForm.value.noteType == 'Feeding'">
+      <div class="col-sm note-form-section note-form-feedDetails" *ngIf="noteForm.value.noteType == 'Feeding'">
         <p class="note-form-label">Details</p>
 
         <div class="note-form-details-options" formArrayName="feedDetails">
@@ -69,7 +69,7 @@
         </div>
       </div>
 
-      <div class="col-sm note-form-diaperDetails" *ngIf="noteForm.value.noteType == 'Diaper'">
+      <div class="col-sm note-form-section note-form-diaperDetails" *ngIf="noteForm.value.noteType == 'Diaper'">
         <p class="note-form-label">Details</p>
 
         <div class="note-form-details-options" formArrayName="diaperDetails">

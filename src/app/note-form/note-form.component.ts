@@ -10,7 +10,10 @@ import { v4 as uuid } from 'uuid';
 @Component({
   selector: 'app-note-form',
   templateUrl: './note-form.component.html',
-  styleUrls: ['./note-form.component.scss']
+  styleUrls: ['./note-form.component.scss'],
+  host: {
+    class: 'note-form-container'
+  }
 })
 export class NoteFormComponent implements OnInit {
 
@@ -177,13 +180,16 @@ export class NoteFormComponent implements OnInit {
 
       if (this.noteId && this.noteId > -1) {
         this.notesService.updateNote( this.noteId, newNote );
+        this.editMode = -1;
+        this.editModeChange.emit(this.editMode);
+
       } else {
-        this.notesService.addNote( newNote );
+        this.notesService.addNote(newNote);
+        this.noteForm.reset();
       }
 
       this.noteStorageService.storeNotes();
 
-      this.noteForm.reset();
 
     }
 
