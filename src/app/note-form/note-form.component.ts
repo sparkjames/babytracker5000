@@ -167,7 +167,12 @@ export class NoteFormComponent implements OnInit {
         selectedFeedDetails.join('|'),
         selectedDiaperDetails.join('|')
       );
-      this.notesService.addNote(newNote);
+
+      if (this.noteId && this.noteId > -1) {
+        this.notesService.updateNote( this.noteId, newNote );
+      } else {
+        this.notesService.addNote( newNote );
+      }
 
       this.noteStorageService.storeNotes();
 

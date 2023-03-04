@@ -26,6 +26,7 @@ export class NoteStorageService {
         notes
       )
       .subscribe(response => {
+        console.log('Notes stored.');
         console.log(response);
       });
   }

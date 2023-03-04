@@ -47,4 +47,9 @@ export class NotesService {
     this.notesChanged.next( this.notes.slice() );
   }
 
+  updateNote( index: number, note: Note ){
+    this.notes[index] = note;
+    this.notesChanged.next(this.notes.slice());
+  }
+
 }
