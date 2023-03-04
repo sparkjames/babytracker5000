@@ -1,5 +1,5 @@
 <form
-  class="new-note mb-5"
+  class="note-form mb-5"
   [formGroup]="noteForm"
   (ngSubmit)="onSubmit()"
   >
@@ -7,7 +7,7 @@
     <div class="row mb-3">
 
       <div class="col-sm-6">
-        <label for="{{ input_id_description }}" class="new-note-label">New note</label>
+        <label for="{{ input_id_description }}" class="note-form-label">New note</label>
           <textarea
           name="description"
           id="{{ input_id_description }}"
@@ -18,7 +18,7 @@
       </div>
 
       <div class="col-sm">
-        <label for="{{ input_id_noteType }}" class="new-note-label">Type</label>
+        <label for="{{ input_id_noteType }}" class="note-form-label">Type</label>
         <select
           name="noteType"
           id="{{ input_id_noteType }}"
@@ -32,8 +32,8 @@
         </select>
       </div>
 
-      <div class="col-sm new-note-duration" *ngIf="noteForm.value.noteType == 'Sleep'">
-        <label for="{{ input_id_duration }}" class="new-note-label">Duration</label>
+      <div class="col-sm note-form-duration" *ngIf="noteForm.value.noteType == 'Sleep'">
+        <label for="{{ input_id_duration }}" class="note-form-label">Duration</label>
         <textarea
           name="duration"
           id="{{ input_id_duration }}"
@@ -44,10 +44,10 @@
 
       </div>
 
-      <div class="col-sm new-note-feedDetails" *ngIf="noteForm.value.noteType == 'Feeding'">
-        <p class="new-note-label">Details</p>
+      <div class="col-sm note-form-feedDetails" *ngIf="noteForm.value.noteType == 'Feeding'">
+        <p class="note-form-label">Details</p>
 
-        <div class="new-note-details-options" formArrayName="feedDetails">
+        <div class="note-form-details-options" formArrayName="feedDetails">
 
           <div class="form-check" *ngFor="let thisControl of getFeedControls(); let i = index">
             <input
@@ -59,16 +59,16 @@
                 autocomplete="off"
                 [formControl]="thisControl"
               >
-            <label for="{{ input_id_feedDetails }}-{{ i }}" class="new-note-checkboxLabel btn btn-outline-secondary">{{ feedDetailOptions[i].label }}</label>
+            <label for="{{ input_id_feedDetails }}-{{ i }}" class="note-form-checkboxLabel btn btn-outline-secondary">{{ feedDetailOptions[i].label }}</label>
           </div>
 
         </div>
       </div>
 
-      <div class="col-sm new-note-diaperDetails" *ngIf="noteForm.value.noteType == 'Diaper'">
-        <p class="new-note-label">Details</p>
+      <div class="col-sm note-form-diaperDetails" *ngIf="noteForm.value.noteType == 'Diaper'">
+        <p class="note-form-label">Details</p>
 
-        <div class="new-note-details-options" formArrayName="diaperDetails">
+        <div class="note-form-details-options" formArrayName="diaperDetails">
 
           <div class="form-check" *ngFor="let thisControl of getDiaperControls(); let i = index">
             <input
@@ -80,7 +80,7 @@
                 autocomplete="off"
                 [formControl]="thisControl"
               >
-            <label for="{{ input_id_diaperDetails }}-{{ i }}" class="new-note-checkboxLabel btn btn-outline-secondary">{{ diaperDetailOptions[i].label }}</label>
+            <label for="{{ input_id_diaperDetails }}-{{ i }}" class="note-form-checkboxLabel btn btn-outline-secondary">{{ diaperDetailOptions[i].label }}</label>
           </div>
 
         </div>
