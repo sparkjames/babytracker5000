@@ -1,27 +1,18 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
-import { EditNoteService } from '../edit-note.service';
-import { NoteStorageService } from '../note-storage.service';
-import { Note } from '../note.model';
-import { NotesService } from '../notes.service';
-import { DetailOption } from '../../note-form/detail-option.model';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-new-note',
   templateUrl: './new-note.component.html',
   styleUrls: ['./new-note.component.scss']
 })
-export class NewNoteComponent implements OnInit, OnDestroy {
+export class NewNoteComponent {
+
+  noteId = -1;
 
   // constructor() {}
 
-  ngOnInit(): void {
-    //
-  }
-
   private initForm(): void{
-    console.log('start form with edit data');
+    // console.log('start form with edit data');
     // let description = '';
     // let noteType = '';
     // let duration = '';
@@ -47,12 +38,6 @@ export class NewNoteComponent implements OnInit, OnDestroy {
 
     // }
 
-  }
-
-
-  ngOnDestroy(): void {
-    // this.notesSubscription.unsubscribe();
-    // this.editNoteSubscription.unsubscribe();
   }
 
 }

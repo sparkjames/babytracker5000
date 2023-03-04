@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NoteStorageService } from '../notes/note-storage.service';
 import { Note } from '../notes/note.model';
@@ -12,7 +12,8 @@ import { NoteFormControls } from './note-form.model';
   styleUrls: ['./note-form.component.scss']
 })
 export class NoteFormComponent implements OnInit {
-  public noteForm: FormGroup = new FormGroup({});
+
+  @Input() noteId:number | undefined;
 
   // https://www.netjstech.com/2020/10/checkbox-in-angular-form-example.html
   feedDetailOptions: Array<DetailOption> = [
@@ -26,18 +27,46 @@ export class NoteFormComponent implements OnInit {
     { id: 1, label: 'Wet', value: 'Wet', selected: false },
     { id: 2, label: 'Poo', value: 'Poo', selected: false },
   ];
+  // public noteForm: FormGroup = new FormGroup({});
+  noteForm: FormGroup;
 
   selectedFeedDetails: string[] = [];
   selectedDiaperDetails: string[] = [];
+  formControls: { description: FormControl<string | null>; noteType: FormControl<string | null>; duration: FormControl<string | null>; feedDetails: FormArray<any>; diaperDetails: FormArray<any>; };
 
   constructor(
-    private formControls: NoteFormControls,
     private notesService: NotesService,
     private noteStorageService: NoteStorageService
-  ){}
+  ){
+    this.formControls = {
+      description: new FormControl('', Validators.required),
+      noteType: new FormControl('Feeding', Validators.required),
+      duration: new FormControl(''),
+      feedDetails: this.createFeedDetails(this.feedDetailOptions),
+      diaperDetails: this.createDiaperDetails(this.diaperDetailOptions)
+    };
+
+    this.noteForm = new FormGroup(this.formControls);
+  }
 
   ngOnInit(): void {
-    this.noteForm = new FormGroup( this.formControls );
+    if (this.noteId && this.noteId > -1){
+      const note = this.notesService.getNote(this.noteId);
+      // console.log('edit this note', note);
+      const description = note.description;
+      const noteType = note.noteType;
+      const duration = note.duration ? note.duration : '';
+      const feedDetails = note.feedDetails ? note.feedDetails.split('|') : [];
+      const diaperDetails = note.diaperDetails ? note.diaperDetails.split('|') : [];
+
+      this.noteForm = new FormGroup({
+        description: new FormControl(description, Validators.required),
+        noteType: new FormControl(noteType, Validators.required),
+        duration: new FormControl(duration),
+        feedDetails: this.createFeedDetails(this.feedDetailOptions, feedDetails),
+        diaperDetails: this.createDiaperDetails(this.diaperDetailOptions, diaperDetails)
+      });
+    }
   }
 
   getFeedControls(): any {
