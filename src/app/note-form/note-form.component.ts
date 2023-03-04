@@ -5,6 +5,7 @@ import { Note } from '../notes/note.model';
 import { NotesService } from '../notes/notes.service';
 import { DetailOption } from './detail-option.model';
 import { NoteFormControls } from './note-form.model';
+import { v4 as uuid } from 'uuid';
 
 @Component({
   selector: 'app-note-form',
@@ -35,6 +36,12 @@ export class NoteFormComponent implements OnInit {
   selectedFeedDetails: string[] = [];
   selectedDiaperDetails: string[] = [];
   formControls: { description: FormControl<string | null>; noteType: FormControl<string | null>; duration: FormControl<string | null>; feedDetails: FormArray<any>; diaperDetails: FormArray<any>; };
+
+  input_id_description = uuid();
+  input_id_noteType = uuid();
+  input_id_duration = uuid();
+  input_id_feedDetails = uuid();
+  input_id_diaperDetails = uuid();
 
   constructor(
     private notesService: NotesService,
@@ -198,6 +205,10 @@ export class NoteFormComponent implements OnInit {
     } else {
       // console.log('NO do not delete it.');
     }
+  }
+
+  generateID(){
+    return uuid();
   }
 
 }
