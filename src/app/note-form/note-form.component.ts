@@ -177,9 +177,22 @@ export class NoteFormComponent implements OnInit {
 
   }
 
-  onCancelEdit() {
+  onClickCancelEdit() {
     this.editMode = -1;
     this.editModeChange.emit( this.editMode );
+  }
+
+  onClickDeleteNoteListItem( index:number ){
+    const confirmDelete = confirm('This will delete this note from the list.');
+    if (confirmDelete) {
+      // console.log('YES delete it');
+      this.notesService.deleteNote(index);
+      this.noteStorageService.storeNotes();
+      this.editMode = -1;
+
+    } else {
+      // console.log('NO do not delete it.');
+    }
   }
 
 }

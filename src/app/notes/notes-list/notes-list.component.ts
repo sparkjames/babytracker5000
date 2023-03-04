@@ -14,7 +14,6 @@ export class NotesListComponent implements OnInit, OnDestroy {
   notes: Note[];
   notesSubscription: Subscription;
   private noteStorageSubscription: Subscription;
-  public viewControls = -1;
   public editMode = -1;
 
   constructor(
@@ -46,43 +45,13 @@ export class NotesListComponent implements OnInit, OnDestroy {
     }
     console.log('%%% CLICK %%% onClickNoteListItem()', event);
 
-    if( this.viewControls !== index ){
-      this.viewControls = index;
-    } else {
-      this.viewControls = -1;
-    }
-
-  }
-
-  onClickEditNoteListItem(index: number){
-    // console.log('clicked EDIT', index);
-    if( this.editMode === index ){
-      this.clearState();
+    if (this.editMode === index) {
+      this.editMode = -1;
 
     } else {
       this.editMode = index;
     }
 
-  }
-
-  onClickDeleteNoteListItem(index: number) {
-    // console.log('clicked DELETE');
-
-    const confirmDelete = confirm( 'This will delete this note from the list.' );
-    if( confirmDelete ){
-      // console.log('YES delete it');
-      this.notesService.deleteNote(index);
-      this.noteStorageService.storeNotes();
-      this.clearState();
-
-    } else {
-      // console.log('NO do not delete it.');
-    }
-  }
-
-  clearState(){
-    this.viewControls = -1;
-    this.editMode = -1;
   }
 
   ngOnDestroy(): void {

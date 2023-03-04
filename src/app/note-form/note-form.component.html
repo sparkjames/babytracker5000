@@ -91,19 +91,33 @@
 
     <div class="row">
       <div class="col-xs-12" style="text-align: right;">
+
           <button
             type="submit"
             class="btn btn-primary"
             [disabled]="!noteForm.valid"
             >
-            {{ noteId && noteId > -1 ? 'Edit Note' : 'Add Note' }}
+            {{ noteId && noteId > -1 ? 'Save' : 'Add Note' }}
           </button>
+
           <button
             type="button"
             class="btn btn-secondary"
-            (click)="onCancelEdit()"
+            (click)="onClickCancelEdit()"
             *ngIf="noteId && noteId > -1"
-            >Cancel</button>
+            >
+            Cancel
+          </button>
+
+          <button
+            type="button"
+            class="btn btn-danger"
+            (click)="onClickDeleteNoteListItem(noteId)"
+            *ngIf="noteId && noteId > -1"
+            >
+            <i class="bi bi-x-circle"></i><span class="button-label">Delete</span>
+          </button>
+
       </div>
     </div>
 
