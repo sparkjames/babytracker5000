@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NoteStorageService } from '../notes/note-storage.service';
 import { Note } from '../notes/note.model';
@@ -14,6 +14,8 @@ import { NoteFormControls } from './note-form.model';
 export class NoteFormComponent implements OnInit {
 
   @Input() noteId:number | undefined;
+  @Input() editMode:number | undefined;
+  @Output() editModeChange = new EventEmitter<number>();
 
   // https://www.netjstech.com/2020/10/checkbox-in-angular-form-example.html
   feedDetailOptions: Array<DetailOption> = [
@@ -176,7 +178,8 @@ export class NoteFormComponent implements OnInit {
   }
 
   onCancelEdit() {
-    // this.editMode = -1;
+    this.editMode = -1;
+    this.editModeChange.emit( this.editMode );
   }
 
 }
