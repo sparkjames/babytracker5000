@@ -68,3 +68,15 @@ textarea.ng-touched.ng-invalid {
 .note-form-checkboxLabel {
   font-size: .75rem;
 }
+
+.form-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.btn-delete {
+  i {
+    margin-right: .25em;
+  }
+}
