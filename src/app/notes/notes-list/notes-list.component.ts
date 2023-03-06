@@ -12,12 +12,11 @@ import { NotesService } from '../notes.service';
 export class NotesListComponent implements OnInit, OnDestroy {
 
   notes: Note[];
-  editMode = -1;
+  editMode = false;
   isFetching = false;
   isFetchingSubscription: Subscription;
 
   private notesSubscription: Subscription;
-  private noteStorageSubscription: Subscription;
 
   constructor(
     private notesService: NotesService,
@@ -25,9 +24,6 @@ export class NotesListComponent implements OnInit, OnDestroy {
   ) {
     // Subscribe to isFetching from the storage service.
     this.isFetchingSubscription = this.noteStorageService.isFetching.subscribe( status => this.isFetching = status );
-
-    // Trigger process to fetch stored notes.
-    this.noteStorageSubscription = this.noteStorageService.fetchNotes().subscribe();
 
     // Subscribe to the notes and initialize the array of notes so that the HTML list populates.
     this.notesSubscription = this.notesService.notesChanged.subscribe((notes: Note[]) => {
@@ -57,19 +53,21 @@ export class NotesListComponent implements OnInit, OnDestroy {
       return;
     }
     console.log('%%% CLICK %%% onClickNoteListItem()', event);
+    console.log('note index = ', index);
 
-    if (this.editMode === index) {
-      this.editMode = -1;
+    if (this.editMode === false) {
+      this.editMode = true;
 
     } else {
-      this.editMode = index;
+      this.editMode = false;
     }
+
+    console.log('final editMode index = ', this.editMode);
 
   }
 
   ngOnDestroy(): void {
     this.notesSubscription.unsubscribe();
-    this.noteStorageSubscription.unsubscribe();
   }
 
 }

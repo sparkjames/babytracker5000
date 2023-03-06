@@ -16,9 +16,9 @@ import { v4 as uuid } from 'uuid';
 })
 export class NoteFormComponent implements OnInit {
 
-  @Input() noteId:number | undefined;
-  @Input() editMode:number | undefined;
-  @Output() editModeChange = new EventEmitter<number>();
+  @Input() noteId = -1;
+  @Input() editMode:boolean | undefined;
+  @Output() editModeChange = new EventEmitter<boolean>();
 
   // https://www.netjstech.com/2020/10/checkbox-in-angular-form-example.html
   feedDetailOptions: Array<DetailOption> = [
@@ -61,7 +61,8 @@ export class NoteFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.noteId && this.noteId > -1){
+    console.log('in form component this.noteId = ', this.noteId);
+    if (this.noteId > -1){
       const note = this.notesService.getNote(this.noteId);
       // console.log('edit this note', note);
       const description = note.description;
@@ -177,10 +178,9 @@ export class NoteFormComponent implements OnInit {
         selectedDiaperDetails.join('|')
       );
 
-      if (this.noteId && this.noteId > -1) {
+      if (this.noteId > -1) {
         this.notesService.updateNote( this.noteId, newNote );
-        this.editMode = -1;
-        this.editModeChange.emit(this.editMode);
+        this.cancelEditMode();
 
       } else {
         this.notesService.addNote(newNote);
@@ -195,8 +195,7 @@ export class NoteFormComponent implements OnInit {
   }
 
   onClickCancelEdit() {
-    this.editMode = -1;
-    this.editModeChange.emit( this.editMode );
+    this.cancelEditMode();
   }
 
   onClickDeleteNoteListItem( index:number ){
@@ -205,11 +204,16 @@ export class NoteFormComponent implements OnInit {
       // console.log('YES delete it');
       this.notesService.deleteNote(index);
       this.noteStorageService.storeNotes();
-      this.editMode = -1;
+      this.cancelEditMode();
 
     } else {
       // console.log('NO do not delete it.');
     }
+  }
+
+  cancelEditMode(){
+    this.editMode = false;
+    this.editModeChange.emit(this.editMode);
   }
 
   generateID(){
