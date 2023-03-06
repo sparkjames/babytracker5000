@@ -4,7 +4,6 @@ import { NoteStorageService } from '../notes/note-storage.service';
 import { Note } from '../notes/note.model';
 import { NotesService } from '../notes/notes.service';
 import { DetailOption } from './detail-option.model';
-import { NoteFormControls } from './note-form.model';
 import { v4 as uuid } from 'uuid';
 
 @Component({
