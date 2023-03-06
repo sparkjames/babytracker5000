@@ -13,13 +13,13 @@
 
       <div class="notes-listing-item" *ngFor="let note of notes; let i = index" (click)="onClickNoteListItem($event,i)">
 
-        <div class="row" *ngIf="editMode">
+        <div class="row" *ngIf="editMode === i">
           <div class="col-xs-12">
             <app-note-form [noteId]="i" [(editMode)]="editMode"></app-note-form>
           </div>
         </div>
 
-        <div class="row" *ngIf="!editMode">
+        <div class="row" *ngIf="editMode !== i">
 
           <div class="col-sm-6">
             {{note.description}}

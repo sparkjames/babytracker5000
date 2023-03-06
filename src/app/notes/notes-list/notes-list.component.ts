@@ -12,7 +12,7 @@ import { NotesService } from '../notes.service';
 export class NotesListComponent implements OnInit, OnDestroy {
 
   notes: Note[];
-  editMode = false;
+  editMode = -1;
   isFetching = false;
   isFetchingSubscription: Subscription;
 
@@ -55,11 +55,11 @@ export class NotesListComponent implements OnInit, OnDestroy {
     console.log('%%% CLICK %%% onClickNoteListItem()', event);
     console.log('note index = ', index);
 
-    if (this.editMode === false) {
-      this.editMode = true;
+    if (this.editMode === index) {
+      this.editMode = -1;
 
     } else {
-      this.editMode = false;
+      this.editMode = index;
     }
 
     console.log('final editMode index = ', this.editMode);

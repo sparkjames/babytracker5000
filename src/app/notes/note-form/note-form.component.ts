@@ -17,8 +17,8 @@ import { v4 as uuid } from 'uuid';
 export class NoteFormComponent implements OnInit {
 
   @Input() noteId = -1;
-  @Input() editMode = false;
-  @Output() editModeChange = new EventEmitter<boolean>();
+  @Input() editMode = -1;
+  @Output() editModeChange = new EventEmitter<number>();
 
   // https://www.netjstech.com/2020/10/checkbox-in-angular-form-example.html
   feedDetailOptions: Array<DetailOption> = [
@@ -212,7 +212,7 @@ export class NoteFormComponent implements OnInit {
   }
 
   cancelEditMode(){
-    this.editMode = false;
+    this.editMode = -1;
     this.editModeChange.emit(this.editMode);
   }
 
