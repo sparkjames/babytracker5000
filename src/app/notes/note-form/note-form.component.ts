@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { NoteStorageService } from '../notes/note-storage.service';
-import { Note } from '../notes/note.model';
-import { NotesService } from '../notes/notes.service';
+import { NoteStorageService } from '../note-storage.service';
+import { Note } from '../note.model';
+import { NotesService } from '../notes.service';
 import { DetailOption } from './detail-option.model';
 import { v4 as uuid } from 'uuid';
 
@@ -17,7 +17,7 @@ import { v4 as uuid } from 'uuid';
 export class NoteFormComponent implements OnInit {
 
   @Input() noteId = -1;
-  @Input() editMode:boolean | undefined;
+  @Input() editMode = false;
   @Output() editModeChange = new EventEmitter<boolean>();
 
   // https://www.netjstech.com/2020/10/checkbox-in-angular-form-example.html

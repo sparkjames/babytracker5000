@@ -9,7 +9,7 @@ import { NoteStorageService } from './notes/note-storage.service';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
-import { NoteFormComponent } from './note-form/note-form.component';
+import { NoteFormComponent } from './notes/note-form/note-form.component';
 import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
