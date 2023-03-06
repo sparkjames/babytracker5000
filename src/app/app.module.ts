@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
 import { NoteFormComponent } from './notes/note-form/note-form.component';
 import { FooterComponent } from './footer/footer.component';
+import { NotesListingItemComponent } from './notes/notes-listing-item/notes-listing-item.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { FooterComponent } from './footer/footer.component';
     NotesListComponent,
     HeaderComponent,
     NoteFormComponent,
-    FooterComponent
+    FooterComponent,
+    NotesListingItemComponent
   ],
   imports: [
     BrowserModule,

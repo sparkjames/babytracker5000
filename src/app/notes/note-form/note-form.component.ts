@@ -17,8 +17,8 @@ import { v4 as uuid } from 'uuid';
 export class NoteFormComponent implements OnInit {
 
   @Input() noteId = -1;
-  @Input() editMode = -1;
-  @Output() editModeChange = new EventEmitter<number>();
+  @Input() editMode = false;
+  @Output() editModeChange = new EventEmitter<boolean>();
 
   // https://www.netjstech.com/2020/10/checkbox-in-angular-form-example.html
   feedDetailOptions: Array<DetailOption> = [
@@ -61,7 +61,7 @@ export class NoteFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // console.log('in form component this.noteId = ', this.noteId);
+    console.log('in form component this.noteId = ', this.noteId);
     if (this.noteId > -1){
       const note = this.notesService.getNote(this.noteId);
       // console.log('edit this note', note);
@@ -212,7 +212,7 @@ export class NoteFormComponent implements OnInit {
   }
 
   cancelEditMode(){
-    this.editMode = -1;
+    this.editMode = false;
     this.editModeChange.emit(this.editMode);
   }
 

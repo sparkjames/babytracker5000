@@ -49,37 +49,14 @@
 //   order: 1;
 // }
 
-.notes-listing-item {
-  cursor: pointer;
-  padding-bottom: 1rem;
-  padding-top: 1rem;
+.notes-listing-item-container {
 
-  &:nth-child(odd){
-    background-color: rgb(232, 240, 251);
+  &:nth-child(odd) ::ng-deep .notes-listing-item {
+      background-color: rgb(232, 240, 251);
   }
 
-  &:hover {
+  &:hover ::ng-deep .notes-listing-item {
     background-color: var(--bs-info, lightsteelblue);
   }
 
-}
-
-.notes-listing-item .row {
-  margin-left: 0;
-  margin-right: 0;
-}
-
-
-.notes-listing-controls {
-  display: flex;
-  gap: .5em;
-  justify-content: flex-end;
-}
-
-.button-label {
-  display: inline-block;
-  height: 0;
-  pointer-events: none;
-  visibility: hidden;
-  width: 0;
 }

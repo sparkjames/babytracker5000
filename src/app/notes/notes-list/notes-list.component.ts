@@ -11,59 +11,26 @@ import { NotesService } from '../notes.service';
 })
 export class NotesListComponent implements OnInit, OnDestroy {
 
-  notes: Note[];
-  editMode = -1;
+  notes: Note[] = [];
   isFetching = false;
-  isFetchingSubscription: Subscription;
+  isFetchingSubscription: Subscription = new Subscription;
 
-  private notesSubscription: Subscription;
+  private notesSubscription: Subscription = new Subscription;
 
   constructor(
     private notesService: NotesService,
     private noteStorageService: NoteStorageService
-  ) {
+  ) {}
+
+  ngOnInit(): void {
     // Subscribe to isFetching from the storage service.
-    this.isFetchingSubscription = this.noteStorageService.isFetching.subscribe( status => this.isFetching = status );
+    this.isFetchingSubscription = this.noteStorageService.isFetching.subscribe(status => this.isFetching = status);
 
     // Subscribe to the notes and initialize the array of notes so that the HTML list populates.
     this.notesSubscription = this.notesService.notesChanged.subscribe((notes: Note[]) => {
       this.notes = notes;
     });
     this.notes = this.notesService.getNotes();
-  }
-
-  ngOnInit(): void {
-    // this.notesSubscription = this.notesService.notesChanged.subscribe((notes: Note[]) => {
-    //   this.notes = notes;
-    // });
-    // this.notes = this.notesService.getNotes();
-    // this.noteStorageSubscription = this.noteStorageService.fetchNotes().subscribe();
-  }
-
-  onClickNoteListItem(event:any, index: number){
-
-    let parent_container = event.target;
-    do {
-      parent_container = parent_container ? parent_container.parentNode : document.body;
-    }
-    while (parent_container && !parent_container.matches('form,button') && parent_container !== document.body);
-    // console.log('parent container = ', parent_container);
-
-    if (!parent_container || parent_container.matches('form,button')){
-      return;
-    }
-    // console.log('%%% CLICK %%% onClickNoteListItem()', event);
-    // console.log('note index = ', index);
-
-    if (this.editMode === index) {
-      this.editMode = -1;
-
-    } else {
-      this.editMode = index;
-    }
-
-    // console.log('final editMode index = ', this.editMode);
-
   }
 
   ngOnDestroy(): void {
