@@ -52,8 +52,8 @@ export class NotesListComponent implements OnInit, OnDestroy {
     if (!parent_container || parent_container.matches('form,button')){
       return;
     }
-    console.log('%%% CLICK %%% onClickNoteListItem()', event);
-    console.log('note index = ', index);
+    // console.log('%%% CLICK %%% onClickNoteListItem()', event);
+    // console.log('note index = ', index);
 
     if (this.editMode === index) {
       this.editMode = -1;
@@ -62,7 +62,7 @@ export class NotesListComponent implements OnInit, OnDestroy {
       this.editMode = index;
     }
 
-    console.log('final editMode index = ', this.editMode);
+    // console.log('final editMode index = ', this.editMode);
 
   }
 

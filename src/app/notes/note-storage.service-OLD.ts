@@ -17,9 +17,9 @@ export class NoteStorageService {
   ) {}
 
   storeNotes(){
-    console.log('About to store notes...');
+    // console.log('About to store notes...');
     const notes = this.notesService.getNotes();
-    console.log(notes);
+    // console.log(notes);
 
     this.isStoring.next(true);
 
@@ -30,13 +30,13 @@ export class NoteStorageService {
           notes
         )
         .subscribe(response => {
-          console.log('Notes stored.');
-          console.log(response);
+          // console.log('Notes stored.');
+          // console.log(response);
           this.isStoring.next(false);
         });
 
     } catch (error) {
-      console.log('Error fetching notes: ', error);
+      console.error('Error fetching notes: ', error);
       this.isStoring.next(false);
     }
 
@@ -44,7 +44,7 @@ export class NoteStorageService {
   }
 
   fetchNotes() {
-    console.log('start fetch');
+    // console.log('start fetch');
     this.isFetching.next(true);
 
     // const notes = localStorage.getItem('notes') ? JSON.parse(localStorage.getItem('notes') || '{}') : [];
@@ -60,7 +60,7 @@ export class NoteStorageService {
       .get<Note[]>(this.APIEndpoint)
       .pipe(
         map( notes => {
-          console.log(notes);
+          // console.log(notes);
           return notes.map( note => {
             return {
               ...note,
@@ -74,11 +74,11 @@ export class NoteStorageService {
             this.notesService.setNotes(notes);
           }
           this.isFetching.next(false);
-          console.log('finished fetch');
-          console.log(notes);
+          // console.log('finished fetch');
+          // console.log(notes);
         }),
         catchError((error, caught) => {
-          console.log('Error in fetching note list: ', error);
+          // console.log('Error in fetching note list: ', error);
           this.isFetching.next(false);
           return [];
         })

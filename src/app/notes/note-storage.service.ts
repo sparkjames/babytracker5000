@@ -23,9 +23,9 @@ export class NoteStorageService implements OnInit {
   }
 
   storeNotes(){
-    console.log('About to store notes...');
+    // console.log('About to store notes...');
     const notes = this.notesService.getNotes();
-    console.log(notes);
+    // console.log(notes);
 
     this.isStoring.next(true);
 
@@ -43,7 +43,7 @@ export class NoteStorageService implements OnInit {
       //   });
 
     } catch (error) {
-      console.log('Error fetching notes: ', error);
+      console.error('Error fetching notes: ', error);
       this.isStoring.next(false);
     }
 
@@ -51,7 +51,7 @@ export class NoteStorageService implements OnInit {
   }
 
   fetchNotes() {
-    console.log('start fetch');
+    // console.log('start fetch');
     this.isFetching.next(true);
 
     const notes = localStorage.getItem('notes') ? JSON.parse(localStorage.getItem('notes') || '{}') : [];
@@ -59,7 +59,7 @@ export class NoteStorageService implements OnInit {
       this.notesService.setNotes(notes);
     }
     this.isFetching.next(false);
-    console.log('finished fetch');
+    // console.log('finished fetch');
 
     return notes;
 

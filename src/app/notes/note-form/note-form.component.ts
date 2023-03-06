@@ -61,7 +61,7 @@ export class NoteFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('in form component this.noteId = ', this.noteId);
+    // console.log('in form component this.noteId = ', this.noteId);
     if (this.noteId > -1){
       const note = this.notesService.getNote(this.noteId);
       // console.log('edit this note', note);
@@ -146,8 +146,8 @@ export class NoteFormComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('submitted');
-    console.log(this.noteForm);
+    // console.log('submitted');
+    // console.log(this.noteForm);
 
     const selectedFeedDetails = this.getSelectedFeedDetails();
     const selectedDiaperDetails = this.getSelectedDiaperDetails();
