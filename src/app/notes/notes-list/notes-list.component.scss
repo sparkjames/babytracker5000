@@ -4,18 +4,21 @@
   .new-note-heading {
     background-color: var(--color-sticky-note-1-light);
     border-radius: 4px 4px 0 0;
-    border: 1px solid var(--color-sticky-note-1-dark);
+    border: 1px solid var(--color-sticky-note-1-border);
     border-bottom-color: var(--color-sticky-note-1-light);
+    color: var(--color-sticky-note-1-dark);
     display: inline-block;
     font-size: 1rem;
-    letter-spacing: .025em;
+    font-weight: bold;
+    letter-spacing: -.025em;
     margin-bottom: 0;
     padding: .5rem 1rem;
     position: relative;
+    text-transform: uppercase;
     top: 1px;
 
     span {
-      mix-blend-mode: hard-light;
+      // mix-blend-mode: hard-light;
       opacity: .7;
     }
   }
@@ -23,7 +26,7 @@
   .note-form-container {
     background-color: var(--color-sticky-note-1-light);
     border-radius: 0 4px 4px 4px;
-    border: 1px solid var(--color-sticky-note-1-dark);
+    border: 1px solid var(--color-sticky-note-1-border);
     display: block;
     padding: 1rem;
   }
@@ -34,6 +37,12 @@
   display: flex;
   flex-direction: column-reverse;
   width: 100%;
+
+  .lds-ring {
+    margin-left: auto;
+    margin-right: auto;
+    order: 1;
+  }
 }
 
 // .notes-listing-heading {

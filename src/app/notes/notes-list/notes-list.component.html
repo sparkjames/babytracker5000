@@ -9,6 +9,8 @@
     <div class="notes-listing">
       <!-- <h3 class="notes-listing-heading">Notes</h3> -->
 
+      <div class="lds-ring" *ngIf="isFetching"><div></div><div></div><div></div><div></div></div>
+
       <div class="notes-listing-item" *ngFor="let note of notes; let i = index" (click)="onClickNoteListItem($event,i)">
 
         <div class="row" *ngIf="editMode === i">
