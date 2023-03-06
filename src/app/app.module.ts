@@ -10,13 +10,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
 import { NoteFormComponent } from './note-form/note-form.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NotesListComponent,
     HeaderComponent,
-    NoteFormComponent
+    NoteFormComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
