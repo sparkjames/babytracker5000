@@ -7,7 +7,6 @@ import { NoteStorageService } from './notes/note-storage.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'babytracker';
 
   constructor( private noteStorageService: NoteStorageService ){}
 
