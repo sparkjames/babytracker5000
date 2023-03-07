@@ -32,12 +32,18 @@ export class NoteFormComponent implements OnInit {
     { id: 1, label: 'Wet', value: 'Wet', selected: false },
     { id: 2, label: 'Poo', value: 'Poo', selected: false },
   ];
-  // public noteForm: FormGroup = new FormGroup({});
-  noteForm: FormGroup;
+
+  // noteForm: FormGroup = new FormGroup({});
+  noteForm: FormGroup = new FormGroup({
+    description: new FormControl('', Validators.required),
+    noteType: new FormControl('Feeding', Validators.required),
+    duration: new FormControl(''),
+    feedDetails: this.createFeedDetails(this.feedDetailOptions),
+    diaperDetails: this.createDiaperDetails(this.diaperDetailOptions)
+  });
 
   selectedFeedDetails: string[] = [];
   selectedDiaperDetails: string[] = [];
-  formControls: { description: FormControl<string | null>; noteType: FormControl<string | null>; duration: FormControl<string | null>; feedDetails: FormArray<any>; diaperDetails: FormArray<any>; };
 
   input_id_description = uuid();
   input_id_noteType = uuid();
@@ -49,19 +55,12 @@ export class NoteFormComponent implements OnInit {
     private notesService: NotesService,
     private noteStorageService: NoteStorageService
   ){
-    this.formControls = {
-      description: new FormControl('', Validators.required),
-      noteType: new FormControl('Feeding', Validators.required),
-      duration: new FormControl(''),
-      feedDetails: this.createFeedDetails(this.feedDetailOptions),
-      diaperDetails: this.createDiaperDetails(this.diaperDetailOptions)
-    };
 
-    this.noteForm = new FormGroup(this.formControls);
+
   }
 
   ngOnInit(): void {
-    console.log('in form component this.noteId = ', this.noteId);
+    // console.log('in form component this.noteId = ', this.noteId);
     if (this.noteId > -1){
       const note = this.notesService.getNote(this.noteId);
       // console.log('edit this note', note);
@@ -78,7 +77,9 @@ export class NoteFormComponent implements OnInit {
         feedDetails: this.createFeedDetails(this.feedDetailOptions, feedDetails),
         diaperDetails: this.createDiaperDetails(this.diaperDetailOptions, diaperDetails)
       });
+
     }
+
   }
 
   getFeedControls(): any {
