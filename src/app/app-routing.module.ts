@@ -3,8 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { NotesListComponent } from './notes/notes-list/notes-list.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/list', pathMatch: 'full' },
-  { path: 'list', component: NotesListComponent }
+  // { path: '', redirectTo: '/babytracker', pathMatch: 'full' },
+  { path: '', component: NotesListComponent, pathMatch: 'full' }
   // login
   // account
 ];
