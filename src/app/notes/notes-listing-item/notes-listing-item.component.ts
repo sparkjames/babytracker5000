@@ -21,13 +21,14 @@ export class NotesListingItemComponent implements OnInit {
   };
 
   private userLocale = navigator.languages != undefined ? navigator.languages[0] : navigator.language;
-  noteDate: string = formatDate(this.note.createdDateTime, 'MMMM dd, hh:mm a', this.userLocale);
+  noteDate: string | undefined;
 
   constructor( private notesService: NotesService ){}
 
   ngOnInit(): void {
     // console.log('Using note for listing item: ', this.noteId);
     this.note = this.notesService.getNote(this.noteId);
+    this.noteDate = formatDate(this.note.createdDateTime, 'MMMM dd, hh:mm a', this.userLocale);
   }
 
   onClickNoteListItem(event: any){
