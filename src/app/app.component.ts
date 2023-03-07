@@ -1,12 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { NoteStorageService } from './notes/note-storage.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'babytracker';
 
-  constructor(  ){}
+  constructor( private noteStorageService: NoteStorageService ){}
+
+  ngOnInit(): void {
+    this.noteStorageService.fetchNotes();
+  }
 }

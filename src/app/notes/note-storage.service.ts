@@ -5,7 +5,7 @@ import { Note } from './note.model';
 import { BehaviorSubject, catchError, map, tap } from 'rxjs';
 
 @Injectable()
-export class NoteStorageService implements OnInit {
+export class NoteStorageService {
 
   isFetching = new BehaviorSubject<boolean>(false);
   isStoring = new BehaviorSubject<boolean>(false);
@@ -15,10 +15,6 @@ export class NoteStorageService implements OnInit {
     private http: HttpClient,
     private notesService: NotesService
   ) {
-    this.fetchNotes();
-  }
-
-  ngOnInit(): void {
     // this.fetchNotes();
   }
 
@@ -54,7 +50,7 @@ export class NoteStorageService implements OnInit {
     // console.log('start fetch');
     this.isFetching.next(true);
 
-    const notes = localStorage.getItem('notes') ? JSON.parse(localStorage.getItem('notes') || '{}') : [];
+    const notes:Note[] = localStorage.getItem('notes') ? JSON.parse(localStorage.getItem('notes') || '{}') : [];
     if (notes) {
       this.notesService.setNotes(notes);
     }
