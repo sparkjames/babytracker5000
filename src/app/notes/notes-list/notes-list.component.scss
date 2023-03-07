@@ -51,6 +51,11 @@
 
 .notes-listing-item-container {
 
+  ::ng-deep .notes-listing-item {
+    // background-color: rgb(232, 240, 251);
+    background-color: hsl(340, 88%, 95%);
+  }
+
   &:nth-child(odd) ::ng-deep .notes-listing-item {
       background-color: rgb(232, 240, 251);
   }

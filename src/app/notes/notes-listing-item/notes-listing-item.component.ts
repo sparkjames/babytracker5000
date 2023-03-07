@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Note } from '../note.model';
 import { NotesService } from '../notes.service';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-notes-listing-item',
@@ -18,6 +19,9 @@ export class NotesListingItemComponent implements OnInit {
     description: '',
     noteType: '',
   };
+
+  private userLocale = navigator.languages != undefined ? navigator.languages[0] : navigator.language;
+  noteDate: string = formatDate(this.note.createdDateTime, 'MMMM dd, hh:mm a', this.userLocale);
 
   constructor( private notesService: NotesService ){}
 

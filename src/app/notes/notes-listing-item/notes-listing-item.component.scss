@@ -1,7 +1,8 @@
 .notes-listing-item {
   cursor: pointer;
-  padding-bottom: 1rem;
-  padding-top: 1rem;
+  // padding-bottom: 1rem;
+  // padding-top: 1rem;
+  padding: 1.5rem 1rem;
 }
 
 .notes-listing-item .row {
@@ -9,6 +10,17 @@
   margin-right: 0;
 }
 
+.note-listing-item-date-container {
+  font-family: var(--bs-font-monospace);
+  font-size: .875rem;
+  margin-bottom: .5em;
+  opacity: .5;
+}
+
+.note-listing-item-date {
+  border-bottom: 1px solid var(--bs-body-color);
+  display: inline-block;
+}
 
 .notes-listing-controls {
   display: flex;
