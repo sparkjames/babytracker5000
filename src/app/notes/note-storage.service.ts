@@ -1,18 +1,19 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { NotesService } from './notes.service';
-import { HttpClient, HttpParams } from '@angular/common/http';
+// import { HttpClient, HttpParams } from '@angular/common/http';
 import { Note } from './note.model';
-import { BehaviorSubject, catchError, map, tap } from 'rxjs';
+// import { BehaviorSubject, catchError, map, tap } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class NoteStorageService {
 
   isFetching = new BehaviorSubject<boolean>(false);
   isStoring = new BehaviorSubject<boolean>(false);
-  private APIEndpoint = 'https://babytracker5000-default-rtdb.firebaseio.com/notes.json';
+  // private APIEndpoint = 'https://babytracker5000-default-rtdb.firebaseio.com/notes.json';
 
   constructor(
-    private http: HttpClient,
+    // private http: HttpClient,
     private notesService: NotesService
   ) {
     // this.fetchNotes();

@@ -2,7 +2,7 @@
 
   <div class="row note-listing-item-date-container">
     <div class="col-xs-12">
-      <p class="note-listing-item-date">{{ noteDate }}</p>
+      <p class="note-listing-item-date">{{ noteCreatedDateTime }}</p>
     </div>
   </div>
 
@@ -14,32 +14,46 @@
 
   <div class="row" *ngIf="!editMode">
 
-    <div class="col-sm-6">
-      {{note.description}}
+    <div class="col-sm-3">
+      {{note.startTime}}
     </div>
 
     <div class="col-sm">
-      <p class="listing-item-type">{{note.noteType}}</p>
+      <table>
+        <thead>
+          <th colspan="2">Duration (minutes)</th>
+        </thead>
+        <tbody>
+          <td>
+            <p>Left</p>
+            {{ note.durationLeft }}
+          </td>
+          <td>
+            <p>Right</p>
+            {{ note.durationRight }}
+          </td>
+        </tbody>
+      </table>
     </div>
 
-    <div class="col-sm" *ngIf="note.noteType === 'Sleep' && note.duration">
-      <p class="listing-item-duration">{{note.duration}}</p>
+    <div class="col-sm" *ngIf="note.formulaAmount">
+      <p>Formula</p>
+      <p class="listing-item-formulaAmount">{{note.formulaAmount}}</p>
     </div>
 
-    <div class="col-sm" *ngIf="note.noteType === 'Feeding' && note.feedDetails?.length">
+    <div class="col-sm">
       <ul>
-        <li *ngFor="let detail of note.feedDetails?.split('|')">
-          {{ detail }}
+        <li>
+          {{ note.wet }}
+        </li>
+        <li>
+          {{ note.poo }}
         </li>
       </ul>
     </div>
 
-    <div class="col-sm" *ngIf="note.noteType === 'Diaper' && note.diaperDetails?.length">
-      <ul>
-        <li *ngFor="let detail of note.diaperDetails?.split('|')">
-          {{ detail }}
-        </li>
-      </ul>
+    <div class="col-sm-6">
+      {{note.description}}
     </div>
 
   </div>

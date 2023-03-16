@@ -6,7 +6,87 @@
 
     <div class="row mb-3">
 
-      <div class="col-sm-6 note-form-section">
+      <div class="col-sm note-form-section">
+        <label for="{{ input_id_startTime }}" class="note-form-label">Start Time</label>
+        <input
+          name="startTime"
+          id="{{ input_id_startTime }}"
+          class="form-control"
+          type="time"
+          formControlName="startTime"
+        >
+
+      </div>
+
+      <div class="col-sm note-form-section note-form-duration">
+        <table>
+          <thead>
+            <th colspan="2">Duration (minutes)</th>
+          </thead>
+          <tbody>
+            <td>
+              <label for="{{ input_id_durationLeft }}" class="note-form-label">Left</label>
+              <input
+                name="durationLeft"
+                id="{{ input_id_durationLeft }}"
+                class="form-control"
+                type="text"
+                formControlName="durationLeft"
+              >
+            </td>
+            <td>
+              <label for="{{ input_id_durationRight }}" class="note-form-label">Right</label>
+              <input
+                name="durationRight"
+                id="{{ input_id_durationRight }}"
+                class="form-control"
+                type="text"
+                formControlName="durationRight"
+              >
+            </td>
+          </tbody>
+        </table>
+
+      </div>
+
+      <div class="col-sm note-form-section">
+        <label for="{{ input_id_formulaAmount }}" class="note-form-label">Formula Amount</label>
+        <input
+          name="formulaAmount"
+          id="{{ input_id_formulaAmount }}"
+          class="form-control"
+          type="text"
+          formControlName="formulaAmount"
+        >
+      </div>
+
+      <div class="col-sm note-form-section note-form-diaperDetails">
+
+        <div>
+          <label for="{{ input_id_wet }}" class="note-form-label">Wet</label>
+          <input
+            name="wet"
+            id="{{ input_id_wet }}"
+            class="form-control"
+            type="checkbox"
+            formControlName="wet"
+          >
+        </div>
+
+        <div>
+          <label for="{{ input_id_poo }}" class="note-form-label">Poo</label>
+          <input
+            name="poo"
+            id="{{ input_id_poo }}"
+            class="form-control"
+            type="checkbox"
+            formControlName="poo"
+          >
+        </div>
+
+      </div>
+
+      <div class="col-xs-12 note-form-section">
         <label for="{{ input_id_description }}" class="note-form-label">Notes</label>
           <textarea
           name="description"
@@ -18,79 +98,6 @@
           ></textarea>
       </div>
 
-      <div class="col-sm note-form-section">
-        <label for="{{ input_id_noteType }}" class="note-form-label">Type</label>
-        <div class="select-wrap">
-          <select
-          name="noteType"
-          id="{{ input_id_noteType }}"
-          class="form-control"
-          formControlName="noteType"
-          >
-            <option value="Feeding" selected>Feeding</option>
-            <option value="Diaper">Diaper</option>
-            <option value="Sleep">Sleep</option>
-            <option value="other">Other</option>
-          </select>
-        </div>
-
-      </div>
-
-      <div class="col-sm note-form-section note-form-duration" *ngIf="noteForm.value.noteType == 'Sleep'">
-        <label for="{{ input_id_duration }}" class="note-form-label">Duration</label>
-        <textarea
-          name="duration"
-          id="{{ input_id_duration }}"
-          class="form-control"
-          placeholder='E.g., 25min or 2hr&hellip;'
-          formControlName="duration"
-        ></textarea>
-
-      </div>
-
-      <div class="col-sm note-form-section note-form-feedDetails" *ngIf="noteForm.value.noteType == 'Feeding'">
-        <p class="note-form-label">Details</p>
-
-        <div class="note-form-details-options" formArrayName="feedDetails">
-
-          <div class="form-check" *ngFor="let thisControl of getFeedControls(); let i = index">
-            <input
-                name="feedDetails[]"
-                id="{{ input_id_feedDetails }}-{{ i }}"
-                value="{{ feedDetailOptions[i].label }}"
-                type="checkbox"
-                class="btn-check"
-                autocomplete="off"
-                [formControl]="thisControl"
-              >
-            <label for="{{ input_id_feedDetails }}-{{ i }}" class="note-form-checkboxLabel btn btn-outline-secondary">{{ feedDetailOptions[i].label }}</label>
-          </div>
-
-        </div>
-      </div>
-
-      <div class="col-sm note-form-section note-form-diaperDetails" *ngIf="noteForm.value.noteType == 'Diaper'">
-        <p class="note-form-label">Details</p>
-
-        <div class="note-form-details-options" formArrayName="diaperDetails">
-
-          <div class="form-check" *ngFor="let thisControl of getDiaperControls(); let i = index">
-            <input
-                name="diaperDetails[]"
-                id="{{ input_id_diaperDetails }}-{{ i }}"
-                value="{{ diaperDetailOptions[i].label }}"
-                type="checkbox"
-                class="btn-check"
-                autocomplete="off"
-                [formControl]="thisControl"
-              >
-            <label for="{{ input_id_diaperDetails }}-{{ i }}" class="note-form-checkboxLabel btn btn-outline-secondary">{{ diaperDetailOptions[i].label }}</label>
-          </div>
-
-        </div>
-
-      </div>
-
     </div>
 
     <div class="row">
@@ -98,25 +105,25 @@
 
           <button
             type="button"
-            class="btn btn-danger btn-delete"
-            (click)="onClickDeleteNoteListItem(noteId)"
+            class="btn btn-secondary"
+            (click)="onClickCancelEdit()"
             *ngIf="noteId > -1">
-            <!-- <i class="bi bi-x-circle"></i> --><span class="button-label">Delete</span>
+            <i class="bi bi-x-circle"></i> Cancel Edit
           </button>
 
           <button
             type="button"
-            class="btn btn-secondary"
-            (click)="onClickCancelEdit()"
+            class="btn btn-danger btn-delete"
+            (click)="onClickDeleteNoteListItem(noteId)"
             *ngIf="noteId > -1">
-            Cancel
+            <i class="bi bi-exclamation-circle"></i><span class="button-label">Delete</span>
           </button>
 
           <button
             type="submit"
             class="btn btn-primary"
             [disabled]="!noteForm.valid">
-            {{ noteId > -1 ? 'Save' : 'Add Note' }}
+            <i class="bi bi-check-circle"></i> {{ noteId > -1 ? 'Save' : 'Add Note' }}
           </button>
 
       </div>

@@ -21,35 +21,39 @@ export class NoteFormComponent implements OnInit {
   @Output() editModeChange = new EventEmitter<boolean>();
 
   // https://www.netjstech.com/2020/10/checkbox-in-angular-form-example.html
-  feedDetailOptions: Array<DetailOption> = [
-    { id: 1, label: 'Left Breast', value: 'Left Breast', selected: false },
-    { id: 2, label: 'Right Breast', value: 'Right Breast', selected: false },
-    { id: 3, label: 'Bottle', value: 'Bottle', selected: false },
-    { id: 4, label: 'Other', value: 'Other', selected: false },
-  ];
+  // feedDetailOptions: Array<DetailOption> = [
+  //   { id: 1, label: 'Left Breast', value: 'Left Breast', selected: false },
+  //   { id: 2, label: 'Right Breast', value: 'Right Breast', selected: false },
+  //   { id: 3, label: 'Bottle', value: 'Bottle', selected: false },
+  //   { id: 4, label: 'Other', value: 'Other', selected: false },
+  // ];
 
-  diaperDetailOptions: Array<DetailOption> = [
-    { id: 1, label: 'Wet', value: 'Wet', selected: false },
-    { id: 2, label: 'Poo', value: 'Poo', selected: false },
-  ];
+  // diaperDetailOptions: Array<DetailOption> = [
+  //   { id: 1, label: 'Wet', value: 'Wet', selected: false },
+  //   { id: 2, label: 'Poo', value: 'Poo', selected: false },
+  // ];
 
   // noteForm: FormGroup = new FormGroup({});
   noteForm: FormGroup = new FormGroup({
-    description: new FormControl('', Validators.required),
-    noteType: new FormControl('Feeding', Validators.required),
-    duration: new FormControl(''),
-    feedDetails: this.createFeedDetails(this.feedDetailOptions),
-    diaperDetails: this.createDiaperDetails(this.diaperDetailOptions)
+    startTime: new FormControl('', Validators.required),
+    durationLeft: new FormControl(''),
+    durationRight: new FormControl(''),
+    formulaAmount: new FormControl(''),
+    wet: new FormControl('0'),
+    poo: new FormControl('0'),
+    description: new FormControl('')
   });
 
-  selectedFeedDetails: string[] = [];
-  selectedDiaperDetails: string[] = [];
+  // selectedFeedDetails: string[] = [];
+  // selectedDiaperDetails: string[] = [];
 
+  input_id_startTime = uuid();
+  input_id_durationLeft = uuid();
+  input_id_durationRight = uuid();
+  input_id_formulaAmount = uuid();
+  input_id_wet = uuid();
+  input_id_poo = uuid();
   input_id_description = uuid();
-  input_id_noteType = uuid();
-  input_id_duration = uuid();
-  input_id_feedDetails = uuid();
-  input_id_diaperDetails = uuid();
 
   constructor(
     private notesService: NotesService,
@@ -63,120 +67,112 @@ export class NoteFormComponent implements OnInit {
     // console.log('in form component this.noteId = ', this.noteId);
     if (this.noteId > -1){
       const note = this.notesService.getNote(this.noteId);
-      // console.log('edit this note', note);
-      const description = note.description;
-      const noteType = note.noteType;
-      const duration = note.duration ? note.duration : '';
-      const feedDetails = note.feedDetails ? note.feedDetails.split('|') : [];
-      const diaperDetails = note.diaperDetails ? note.diaperDetails.split('|') : [];
 
+      // this.noteForm = new FormGroup({
+      //   description: new FormControl(description, Validators.required),
+      //   noteType: new FormControl(noteType, Validators.required),
+      //   duration: new FormControl(duration),
+      //   feedDetails: this.createFeedDetails(this.feedDetailOptions, feedDetails),
+      //   diaperDetails: this.createDiaperDetails(this.diaperDetailOptions, diaperDetails)
+      // });
       this.noteForm = new FormGroup({
-        description: new FormControl(description, Validators.required),
-        noteType: new FormControl(noteType, Validators.required),
-        duration: new FormControl(duration),
-        feedDetails: this.createFeedDetails(this.feedDetailOptions, feedDetails),
-        diaperDetails: this.createDiaperDetails(this.diaperDetailOptions, diaperDetails)
+        startTime: new FormControl(note.startTime, Validators.required),
+        durationLeft: new FormControl(note.durationLeft),
+        durationRight: new FormControl(note.durationRight),
+        formulaAmount: new FormControl(note.formulaAmount),
+        wet: new FormControl(note.wet),
+        poo: new FormControl(note.poo),
+        description: new FormControl(note.description)
       });
 
     }
 
   }
 
-  getFeedControls(): any {
-    const controls = (<FormArray>this.noteForm.get('feedDetails')).controls;
-    return controls;
-  }
+  // getFeedControls(): any {
+  //   const controls = (<FormArray>this.noteForm.get('feedDetails')).controls;
+  //   return controls;
+  // }
 
-  getDiaperControls(): any {
-    const controls = (<FormArray>this.noteForm.get('diaperDetails')).controls;
-    return controls;
-  }
+  // getDiaperControls(): any {
+  //   const controls = (<FormArray>this.noteForm.get('diaperDetails')).controls;
+  //   return controls;
+  // }
 
-  createFeedDetails(feedDetails: Array<DetailOption>, selectedValues: Array<string> = []): FormArray {
-    const arr = feedDetails.map(detail => {
-      let isSelected = false;
-      if (selectedValues.indexOf(detail.value) > -1) {
-        isSelected = true;
-      }
-      return new FormControl(isSelected);
-    });
-    return new FormArray(arr);
-  }
+  // createFeedDetails(feedDetails: Array<DetailOption>, selectedValues: Array<string> = []): FormArray {
+  //   const arr = feedDetails.map(detail => {
+  //     let isSelected = false;
+  //     if (selectedValues.indexOf(detail.value) > -1) {
+  //       isSelected = true;
+  //     }
+  //     return new FormControl(isSelected);
+  //   });
+  //   return new FormArray(arr);
+  // }
 
-  createDiaperDetails(diaperDetails: Array<DetailOption>, selectedValues: Array<string> = []): FormArray {
-    const arr = diaperDetails.map(detail => {
-      let isSelected = false;
-      if (selectedValues.indexOf(detail.value) > -1) {
-        isSelected = true;
-      }
-      return new FormControl(isSelected);
-    });
-    return new FormArray(arr);
-  }
+  // createDiaperDetails(diaperDetails: Array<DetailOption>, selectedValues: Array<string> = []): FormArray {
+  //   const arr = diaperDetails.map(detail => {
+  //     let isSelected = false;
+  //     if (selectedValues.indexOf(detail.value) > -1) {
+  //       isSelected = true;
+  //     }
+  //     return new FormControl(isSelected);
+  //   });
+  //   return new FormArray(arr);
+  // }
 
-  getSelectedFeedDetails(): string[] {
-    this.selectedFeedDetails = this.noteForm.value.feedDetails.map((selected: boolean, i: number) => {
-      if (selected) {
-        return this.feedDetailOptions[i].value;
-      } else {
-        return '';
-      }
-    });
+  // getSelectedFeedDetails(): string[] {
+  //   this.selectedFeedDetails = this.noteForm.value.feedDetails.map((selected: boolean, i: number) => {
+  //     if (selected) {
+  //       return this.feedDetailOptions[i].value;
+  //     } else {
+  //       return '';
+  //     }
+  //   });
 
-    return this.selectedFeedDetails.filter((element: any) => {
-      if (element !== '') {
-        return element;
-      }
-    })
-  }
+  //   return this.selectedFeedDetails.filter((element: any) => {
+  //     if (element !== '') {
+  //       return element;
+  //     }
+  //   })
+  // }
 
-  getSelectedDiaperDetails(): string[] {
-    this.selectedDiaperDetails = this.noteForm.value.diaperDetails.map((selected: boolean, i: number) => {
-      if (selected) {
-        return this.diaperDetailOptions[i].value;
-      } else {
-        return '';
-      }
-    });
+  // getSelectedDiaperDetails(): string[] {
+  //   this.selectedDiaperDetails = this.noteForm.value.diaperDetails.map((selected: boolean, i: number) => {
+  //     if (selected) {
+  //       return this.diaperDetailOptions[i].value;
+  //     } else {
+  //       return '';
+  //     }
+  //   });
 
-    return this.selectedDiaperDetails.filter((element: any) => {
-      if (element !== '') {
-        return element;
-      }
-    })
-  }
+  //   return this.selectedDiaperDetails.filter((element: any) => {
+  //     if (element !== '') {
+  //       return element;
+  //     }
+  //   })
+  // }
 
   onSubmit() {
     // console.log('submitted');
     // console.log(this.noteForm);
 
-    const selectedFeedDetails = this.getSelectedFeedDetails();
-    const selectedDiaperDetails = this.getSelectedDiaperDetails();
+    // const selectedFeedDetails = this.getSelectedFeedDetails();
+    // const selectedDiaperDetails = this.getSelectedDiaperDetails();
     // console.log(selectedFeedDetails);
     // console.log(selectedDiaperDetails);
 
-    let description;
-    let noteType;
-    let duration;
-
-    if (this.noteForm.value.description) {
-      description = this.noteForm.value.description;
-
-      if (this.noteForm.value.noteType) {
-        noteType = this.noteForm.value.noteType;
-      }
-
-      if (this.noteForm.value.duration) {
-        duration = this.noteForm.value.duration;
-      }
+    if (this.noteForm.value.startTime) {
 
       const newNote = new Note(
         new Date(),
-        description,
-        noteType,
-        duration,
-        selectedFeedDetails.join('|'),
-        selectedDiaperDetails.join('|')
+        this.noteForm.value.startTime,
+        this.noteForm.value.description,
+        this.noteForm.value.durationLeft,
+        this.noteForm.value.durationRight,
+        this.noteForm.value.formulaAmount,
+        this.noteForm.value.wet,
+        this.noteForm.value.poo,
       );
 
       if (this.noteId > -1) {
@@ -189,7 +185,6 @@ export class NoteFormComponent implements OnInit {
       }
 
       this.noteStorageService.storeNotes();
-
 
     }
 

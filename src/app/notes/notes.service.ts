@@ -29,12 +29,24 @@ export class NotesService {
     this.notesChanged.next( this.notes.slice() );
   }
 
-  getNotes(){
+  getNotes(): Note[] {
     return this.notes ? this.notes.slice() : [];
   }
 
-  getNote( index:number ){
-    return this.notes[index];
+  getNote( index:number ): Note {
+    if( index > -1 ){
+      return this.notes[index];
+    }
+    return {
+      createdDateTime: new Date(),
+      startTime: '',
+      description: '',
+      durationLeft: '',
+      durationRight: '',
+      formulaAmount: '',
+      wet: '',
+      poo: ''
+    }
   }
 
   addNote( note: Note ){

@@ -14,21 +14,35 @@ import { formatDate } from '@angular/common';
 export class NotesListingItemComponent implements OnInit {
   @Input() noteId = -1;
   editMode = false;
+
+  // createdDateTime: Date,
+  // startTime: Date,
+  // description: string,
+  // durationLeft?: string,
+  // durationRight?: string,
+  // formulaAmount?: string,
+  // wet?: boolean,
+  // poo?: boolean
   note: Note = {
     createdDateTime: new Date(),
+    startTime: '',
     description: '',
-    noteType: '',
+    durationLeft: '',
+    durationRight: '',
+    formulaAmount: '',
+    wet: '',
+    poo: ''
   };
 
   private userLocale = navigator.languages != undefined ? navigator.languages[0] : navigator.language;
-  noteDate: string | undefined;
+  noteCreatedDateTime: string | undefined;
 
   constructor( private notesService: NotesService ){}
 
   ngOnInit(): void {
     // console.log('Using note for listing item: ', this.noteId);
     this.note = this.notesService.getNote(this.noteId);
-    this.noteDate = formatDate(this.note.createdDateTime, 'MMMM dd, hh:mm a', this.userLocale);
+    this.noteCreatedDateTime = formatDate(this.note.createdDateTime, 'MMMM dd, hh:mm a', this.userLocale);
   }
 
   onClickNoteListItem(event: any){
@@ -36,7 +50,7 @@ export class NotesListingItemComponent implements OnInit {
       return;
     }
 
-    console.log('%%% CLICK %%% onClickNoteListItem()', event);
+    // console.log('%%% CLICK %%% onClickNoteListItem()', event);
     let parent_container = event.target;
     do {
       parent_container = parent_container ? parent_container.parentNode : document.body;
