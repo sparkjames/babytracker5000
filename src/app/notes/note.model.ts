@@ -7,8 +7,8 @@ export class Note {
     public durationLeft: string,
     public durationRight: string,
     public formulaAmount: string,
-    public wet: string,
-    public poo: string
+    public wet: number,
+    public poo: number
   ) {
     this.createdDateTime = createdDateTime;
     this.startTime = startTime;

@@ -39,8 +39,8 @@ export class NoteFormComponent implements OnInit {
     durationLeft: new FormControl(''),
     durationRight: new FormControl(''),
     formulaAmount: new FormControl(''),
-    wet: new FormControl('0'),
-    poo: new FormControl('0'),
+    wet: new FormControl(0),
+    poo: new FormControl(0),
     description: new FormControl('')
   });
 

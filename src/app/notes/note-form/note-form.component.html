@@ -19,33 +19,33 @@
       </div>
 
       <div class="col-sm note-form-section note-form-duration">
-        <table>
-          <thead>
-            <th colspan="2">Duration (minutes)</th>
-          </thead>
-          <tbody>
-            <td>
-              <label for="{{ input_id_durationLeft }}" class="note-form-label">Left</label>
-              <input
-                name="durationLeft"
-                id="{{ input_id_durationLeft }}"
-                class="form-control"
-                type="text"
-                formControlName="durationLeft"
-              >
-            </td>
-            <td>
-              <label for="{{ input_id_durationRight }}" class="note-form-label">Right</label>
-              <input
-                name="durationRight"
-                id="{{ input_id_durationRight }}"
-                class="form-control"
-                type="text"
-                formControlName="durationRight"
-              >
-            </td>
-          </tbody>
-        </table>
+        <h3 class="note-section-heading">Duration (minutes)</h3>
+
+        <div class="row">
+
+          <div class="col-sm-6">
+            <label for="{{ input_id_durationLeft }}" class="note-form-label">Left</label>
+            <input
+              name="durationLeft"
+              id="{{ input_id_durationLeft }}"
+              class="form-control"
+              type="text"
+              formControlName="durationLeft"
+            >
+          </div>
+
+          <div class="col-sm-6">
+            <label for="{{ input_id_durationRight }}" class="note-form-label">Right</label>
+            <input
+              name="durationRight"
+              id="{{ input_id_durationRight }}"
+              class="form-control"
+              type="text"
+              formControlName="durationRight"
+            >
+          </div>
+
+        </div>
 
       </div>
 
@@ -67,7 +67,6 @@
           <input
             name="wet"
             id="{{ input_id_wet }}"
-            class="form-control"
             type="checkbox"
             formControlName="wet"
           >
@@ -78,7 +77,6 @@
           <input
             name="poo"
             id="{{ input_id_poo }}"
-            class="form-control"
             type="checkbox"
             formControlName="poo"
           >
