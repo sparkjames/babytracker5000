@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { APP_BASE_HREF } from '@angular/common';
+// import { APP_BASE_HREF } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -31,7 +31,7 @@ import { NotesListingItemComponent } from './notes/notes-listing-item/notes-list
     ReactiveFormsModule
   ],
   providers: [
-    { provide: APP_BASE_HREF, useValue: '/babytracker' },
+    // { provide: APP_BASE_HREF, useValue: '/babytracker' },
     NotesService,
     NoteStorageService
   ],

@@ -4,7 +4,7 @@ import { NotesListComponent } from './notes/notes-list/notes-list.component';
 
 const routes: Routes = [
   // { path: '', redirectTo: '/babytracker', pathMatch: 'full' },
-  { path: '', component: NotesListComponent, pathMatch: 'full' }
+  { path: '', component: NotesListComponent }
   // login
   // account
 ];
