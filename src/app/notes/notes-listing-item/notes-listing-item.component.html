@@ -1,4 +1,3 @@
-<div class="notes-listing-day" *ngIf="showDisplayDay">{{ displayDay }}</div>
 <div class="notes-listing-item" (click)="onClickNoteListItem($event)">
 
   <!-- <div class="row note-listing-item-date-container">
@@ -13,37 +12,37 @@
 
   <div class="notes-listing-item-data" *ngIf="!editMode">
 
-    <div class="notes-listing-item-time">
+    <p class="notes-listing-item-time">
       {{displayStartDateTime}}
-    </div>
+    </p>
 
     <div class="notes-listing-item-duration">
       <h3 class="notes-listing-item-heading">Duration (minutes)</h3>
 
-      <div class="notes-listing-item-durationLeft">
-        <p>Left</p>
-        {{ note.durationLeft }}
-      </div>
+      <div class="notes-listing-item-duration-grid">
+        <div class="notes-listing-item-durationLeft">
+          <p>Left &ndash; {{ note.durationLeft }}</p>
+        </div>
 
-      <div class="notes-listing-item-durationLeft">
-        <p>Right</p>
-        {{ note.durationRight }}
+        <div class="notes-listing-item-durationLeft">
+          <p>Right &ndash; {{ note.durationRight }}</p>
+        </div>
       </div>
 
     </div>
 
     <div class="notes-listing-item-formula" *ngIf="note.formulaAmount">
-      <p>Formula</p>
-      <p class="listing-item-formulaAmount">{{note.formulaAmount}}</p>
+      <h3 class="notes-listing-item-heading">Formula</h3>
+      <p class="notes-listing-item-formulaAmount">{{note.formulaAmount}}</p>
     </div>
 
     <div class="notes-listing-item-diaper" *ngIf="note.wet || note.poo">
-      <ul>
+      <ul class="notes-listing-item-diaperDetails">
         <li *ngIf="note.wet">
-          Wet
+          <i class="bi bi-check-square"></i> Wet
         </li>
         <li *ngIf="note.poo">
-          Poo
+          <i class="bi bi-check-square"></i> Poo
         </li>
       </ul>
     </div>
@@ -55,3 +54,4 @@
   </div>
 
 </div>
+<h2 class="notes-listing-day" *ngIf="showDisplayDay"><i class="bi bi-caret-up-fill"></i> {{ displayDay }}</h2>

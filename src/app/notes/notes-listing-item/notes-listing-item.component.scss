@@ -2,37 +2,65 @@
   cursor: pointer;
   // padding-bottom: 1rem;
   // padding-top: 1rem;
-  padding: 1.5rem 1rem;
+  padding: 2.4rem 1.6rem;
   transition: background-color 150ms ease;
 }
 
-.notes-listing-item .row {
-  margin-left: 0;
-  margin-right: 0;
-}
-
-.note-listing-item-date-container {
-  font-family: var(--font-monospace);
-  font-size: .875rem;
-  margin-bottom: .5em;
-  opacity: .5;
-}
-
-.note-listing-item-date {
+.notes-listing-item-time {
   border-bottom: 1px solid var(--color-body-color);
   display: inline-block;
+  font-family: var(--font-monospace);
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  opacity: .66;
 }
 
-.notes-listing-controls {
+.notes-listing-item-heading {
+  font-size: 1.6rem;
+}
+
+.notes-listing-item-duration {
+  margin-bottom: 1.5rem;
+}
+
+.notes-listing-item-duration-grid {
+  display: grid;
+  font-size: 2rem;
+  gap: 2rem;
+  grid-template-columns: 1fr 1fr;
+}
+
+.notes-listing-item-formula {
+  margin-bottom: 1.5rem;
+}
+
+.notes-listing-item-formulaAmount {
+  font-size: 2rem;
+}
+
+.notes-listing-item-diaperDetails {
   display: flex;
-  gap: .5em;
-  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 2rem;
+  font-size: 2rem;
+
+  .bi {
+    font-size: .875em;
+  }
 }
 
-.button-label {
-  display: inline-block;
-  height: 0;
-  pointer-events: none;
-  visibility: hidden;
-  width: 0;
+.notes-listing-day {
+  color: var(--color-body-color);
+  font-weight: bold;
+  font-size: clamp(2.2rem, 3.6rem, 4vw);
+  letter-spacing: -.05em;
+  margin-bottom: 2em;
+  margin-top: .25em;
+  opacity: .66;
+
+  .bi {
+    font-size: .75em;
+    opacity: .66;
+    vertical-align: text-top;
+  }
 }
