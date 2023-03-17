@@ -39,8 +39,8 @@ export class NoteFormComponent implements OnInit {
     durationLeft: new FormControl(''),
     durationRight: new FormControl(''),
     formulaAmount: new FormControl(''),
-    wet: new FormControl(0),
-    poo: new FormControl(0),
+    wet: new FormControl(false),
+    poo: new FormControl(false),
     description: new FormControl('')
   });
 
@@ -154,8 +154,8 @@ export class NoteFormComponent implements OnInit {
   // }
 
   onSubmit() {
-    // console.log('submitted');
-    // console.log(this.noteForm);
+    console.log('submitted');
+    console.log(this.noteForm);
 
     // const selectedFeedDetails = this.getSelectedFeedDetails();
     // const selectedDiaperDetails = this.getSelectedDiaperDetails();
@@ -175,16 +175,16 @@ export class NoteFormComponent implements OnInit {
         this.noteForm.value.poo,
       );
 
-      if (this.noteId > -1) {
-        this.notesService.updateNote( this.noteId, newNote );
-        this.cancelEditMode();
+      // if (this.noteId > -1) {
+      //   this.notesService.updateNote( this.noteId, newNote );
+      //   this.cancelEditMode();
 
-      } else {
-        this.notesService.addNote(newNote);
-        this.noteForm.reset();
-      }
+      // } else {
+      //   this.notesService.addNote(newNote);
+      //   this.noteForm.reset();
+      // }
 
-      this.noteStorageService.storeNotes();
+      // this.noteStorageService.storeNotes();
 
     }
 

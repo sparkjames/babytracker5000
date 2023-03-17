@@ -44,8 +44,8 @@ export class NotesService {
       durationLeft: '',
       durationRight: '',
       formulaAmount: '',
-      wet: 0,
-      poo: 0
+      wet: false,
+      poo: false
     }
   }
 

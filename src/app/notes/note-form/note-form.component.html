@@ -4,43 +4,47 @@
   (ngSubmit)="onSubmit()"
   >
 
-    <div class="row mb-3">
+    <div class="note-form-container">
 
-      <div class="col-sm note-form-section">
+      <div class="note-form-section">
         <label for="{{ input_id_startTime }}" class="note-form-label">Start Time</label>
         <input
           name="startTime"
           id="{{ input_id_startTime }}"
           class="form-control"
           type="time"
+          pattern="[0-9]{2}:[0-9]{2}"
+          placeholder="24-hour format, e.g., 19:00"
           formControlName="startTime"
         >
 
       </div>
 
-      <div class="col-sm note-form-section note-form-duration">
+      <div class="note-form-section note-form-duration">
         <h3 class="note-section-heading">Duration (minutes)</h3>
 
-        <div class="row">
+        <div class="note-form-duration-grid">
 
-          <div class="col-sm-6">
+          <div class="note-form-duration-grid-item">
             <label for="{{ input_id_durationLeft }}" class="note-form-label">Left</label>
             <input
               name="durationLeft"
               id="{{ input_id_durationLeft }}"
               class="form-control"
               type="text"
+              placeholder="E.g., 15min"
               formControlName="durationLeft"
             >
           </div>
 
-          <div class="col-sm-6">
+          <div class="note-form-duration-grid-item">
             <label for="{{ input_id_durationRight }}" class="note-form-label">Right</label>
             <input
               name="durationRight"
               id="{{ input_id_durationRight }}"
               class="form-control"
               type="text"
+              placeholder="E.g., 15min"
               formControlName="durationRight"
             >
           </div>
@@ -49,20 +53,21 @@
 
       </div>
 
-      <div class="col-sm note-form-section">
+      <div class="note-form-section">
         <label for="{{ input_id_formulaAmount }}" class="note-form-label">Formula Amount</label>
         <input
           name="formulaAmount"
           id="{{ input_id_formulaAmount }}"
           class="form-control"
           type="text"
+          placeholder="E.g., 10mL or 2oz"
           formControlName="formulaAmount"
         >
       </div>
 
-      <div class="col-sm note-form-section note-form-diaperDetails">
+      <div class="note-form-section note-form-diaperDetails">
 
-        <div>
+        <div class="note-form-diaperDetails-item">
           <label for="{{ input_id_wet }}" class="note-form-label">Wet</label>
           <input
             name="wet"
@@ -72,7 +77,7 @@
           >
         </div>
 
-        <div>
+        <div class="note-form-diaperDetails-item">
           <label for="{{ input_id_poo }}" class="note-form-label">Poo</label>
           <input
             name="poo"
@@ -84,22 +89,22 @@
 
       </div>
 
-      <div class="col-xs-12 note-form-section">
+      <div class="note-form-section">
         <label for="{{ input_id_description }}" class="note-form-label">Notes</label>
           <textarea
           name="description"
           id="{{ input_id_description }}"
           class="form-control"
-          placeholder='E.g., "nap time" or "feeding (both)"&hellip;'
-          rows="3"
+          placeholder='E.g., 5min break between sides'
+          rows="2"
           formControlName="description"
           ></textarea>
       </div>
 
     </div>
 
-    <div class="row">
-      <div class="col-xs-12 form-buttons" style="text-align: right;">
+    <div class="note-form-actions">
+      <div class="form-buttons" style="text-align: right;">
 
           <button
             type="button"

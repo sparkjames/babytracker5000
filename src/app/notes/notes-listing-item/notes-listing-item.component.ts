@@ -30,8 +30,8 @@ export class NotesListingItemComponent implements OnInit {
     durationLeft: '',
     durationRight: '',
     formulaAmount: '',
-    wet: 0,
-    poo: 0
+    wet: false,
+    poo: false
   };
 
   private userLocale = navigator.languages != undefined ? navigator.languages[0] : navigator.language;
