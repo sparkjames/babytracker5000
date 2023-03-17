@@ -1,4 +1,4 @@
-@import '/node_modules/bootstrap/scss/bootstrap-utilities.scss';
+// @import '/node_modules/bootstrap/scss/bootstrap-utilities.scss';
 
 .note-form {
   // margin-bottom: 3rem;
@@ -8,9 +8,9 @@
   + .note-form-section {
     margin-top: 2rem;
 
-    @include media-breakpoint-up(sm) {
-      margin-top: 0;
-    }
+    // @include media-breakpoint-up(sm) {
+    //   margin-top: 0;
+    // }
   }
 }
 
@@ -22,9 +22,9 @@
   padding-left: .75rem;
   padding-right: .75rem;
 
-  @include media-breakpoint-up(sm) {
-    padding-bottom: .75rem;
-  }
+  // @include media-breakpoint-up(sm) {
+  //   padding-bottom: .75rem;
+  // }
 }
 
 .select-wrap {
