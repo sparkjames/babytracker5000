@@ -12,14 +12,14 @@
 }
 
 .note-listing-item-date-container {
-  font-family: var(--bs-font-monospace);
+  font-family: var(--font-monospace);
   font-size: .875rem;
   margin-bottom: .5em;
   opacity: .5;
 }
 
 .note-listing-item-date {
-  border-bottom: 1px solid var(--bs-body-color);
+  border-bottom: 1px solid var(--color-body-color);
   display: inline-block;
 }
 
