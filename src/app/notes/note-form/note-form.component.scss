@@ -6,7 +6,9 @@
 
 .note-form-section {
   + .note-form-section {
-    margin-top: 2rem;
+    border-top: 1px solid var(--color-sticky-note-1-border);
+    margin-top: 1rem;
+    padding-top: 1rem;
 
     // @include media-breakpoint-up(sm) {
     //   margin-top: 0;
