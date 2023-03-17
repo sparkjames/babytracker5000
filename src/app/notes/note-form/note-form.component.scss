@@ -7,8 +7,8 @@
 .note-form-section {
   + .note-form-section {
     border-top: 1px solid var(--color-sticky-note-1-border);
-    margin-top: 1rem;
-    padding-top: 1rem;
+    margin-top: 2rem;
+    padding-top: 2rem;
 
     // @include media-breakpoint-up(sm) {
     //   margin-top: 0;
@@ -34,6 +34,81 @@
   font-weight: bold;
   margin-bottom: .33em;
   opacity: .7;
+}
+
+.note-form-duration-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 1fr 1fr;
+}
+
+.note-form-diaperDetails-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4rem;
+}
+
+.note-form-diaperDetails-item {
+  position: relative;
+}
+
+.note-form-diaperDetails-label {
+  position: relative;
+
+  &::before,
+  &::after {
+    display: inline-block;
+    font-family: bootstrap-icons !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    vertical-align: -0.125em;
+    -webkit-font-smoothing: antialiased;
+    transition: opacity 125ms, color 125ms;
+  }
+
+  &::before {
+    content: '\F584';
+    margin-right: .66rem;
+  }
+
+  &::after {
+    content: '\F633';
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    top: .075em;
+  }
+}
+
+.note-form-diaperDetails-checkbox {
+  position: absolute;
+  display: block;
+  opacity: 0;
+  pointer-events: none;
+
+  &:checked + .note-form-diaperDetails-label {
+    color: var(--color-success);
+
+    &::after {
+      opacity: 1;
+    }
+
+  }
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.btn-delete {
+  i {
+    margin-right: .25em;
+  }
 }
 
 // .select-wrap {
@@ -63,28 +138,16 @@
 //   background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
 // }
 
-.form-check {
-  padding-left: 0;
-}
+// .form-check {
+//   padding-left: 0;
+// }
 
-.note-form-details-options {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .5rem;
-}
+// .note-form-details-options {
+//   display: flex;
+//   flex-wrap: wrap;
+//   gap: .5rem;
+// }
 
-.note-form-checkboxLabel {
-  font-size: .75rem;
-}
-
-.form-buttons {
-  display: flex;
-  justify-content: flex-end;
-  gap: 1rem;
-}
-
-.btn-delete {
-  i {
-    margin-right: .25em;
-  }
-}
+// .note-form-checkboxLabel {
+//   font-size: .75rem;
+// }

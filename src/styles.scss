@@ -90,8 +90,7 @@ body {
 
 
 
-input:not([type=checkbox]),
-textarea {
+.form-text-input {
   appearance: none;
   background-clip: padding-box;
   background-color: var(--color-body-bg);
@@ -105,4 +104,9 @@ textarea {
   padding: 0.375em 0.75em;
   transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
   width: 100%;
+}
+
+::placeholder {
+  color: #aaa;
+  font-style: italic;
 }

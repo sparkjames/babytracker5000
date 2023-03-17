@@ -11,7 +11,7 @@
         <input
           name="startDateTime"
           id="{{ input_id_startDateTime }}"
-          class="form-control"
+          class="form-text-input"
           type="datetime-local"
           pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}"
           placeholder="24-hour format, e.g., 19:00"
@@ -30,7 +30,7 @@
             <input
               name="durationLeft"
               id="{{ input_id_durationLeft }}"
-              class="form-control"
+              class="form-text-input"
               type="text"
               placeholder="E.g., 15min"
               formControlName="durationLeft"
@@ -42,7 +42,7 @@
             <input
               name="durationRight"
               id="{{ input_id_durationRight }}"
-              class="form-control"
+              class="form-text-input"
               type="text"
               placeholder="E.g., 15min"
               formControlName="durationRight"
@@ -58,7 +58,7 @@
         <input
           name="formulaAmount"
           id="{{ input_id_formulaAmount }}"
-          class="form-control"
+          class="form-text-input"
           type="text"
           placeholder="E.g., 10mL or 2oz"
           formControlName="formulaAmount"
@@ -67,24 +67,30 @@
 
       <div class="note-form-section note-form-diaperDetails">
 
-        <div class="note-form-diaperDetails-item">
-          <label for="{{ input_id_wet }}" class="note-form-label">Wet</label>
-          <input
-            name="wet"
-            id="{{ input_id_wet }}"
-            type="checkbox"
-            formControlName="wet"
-          >
-        </div>
+        <div class="note-form-diaperDetails-grid">
 
-        <div class="note-form-diaperDetails-item">
-          <label for="{{ input_id_poo }}" class="note-form-label">Poo</label>
-          <input
-            name="poo"
-            id="{{ input_id_poo }}"
-            type="checkbox"
-            formControlName="poo"
-          >
+          <div class="note-form-diaperDetails-item">
+            <input
+              name="wet"
+              id="{{ input_id_wet }}"
+              type="checkbox"
+              class="note-form-diaperDetails-checkbox"
+              formControlName="wet"
+            >
+            <label for="{{ input_id_wet }}" class="note-form-label note-form-diaperDetails-label">Wet</label>
+          </div>
+
+          <div class="note-form-diaperDetails-item">
+            <input
+              name="poo"
+              id="{{ input_id_poo }}"
+              type="checkbox"
+              class="note-form-diaperDetails-checkbox"
+              formControlName="poo"
+            >
+            <label for="{{ input_id_poo }}" class="note-form-label note-form-diaperDetails-label">Poo</label>
+          </div>
+
         </div>
 
       </div>
@@ -94,7 +100,7 @@
           <textarea
           name="description"
           id="{{ input_id_description }}"
-          class="form-control"
+          class="form-text-input"
           placeholder='E.g., 5min break between sides'
           rows="2"
           formControlName="description"
