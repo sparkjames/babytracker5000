@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Note } from '../note.model';
 import { formatDate } from '@angular/common';
+import { NoteDisplayDayService } from '../note-display-day.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-notes-listing-item',
@@ -30,6 +32,9 @@ export class NotesListingItemComponent implements OnInit {
   displayCreatedDateTime: string | undefined;
   displayStartDateTime: string | undefined;
   displayDay: string | undefined;
+  showDisplayDay = false;
+
+  constructor ( private noteDisplayDayService: NoteDisplayDayService ) {}
 
   ngOnInit(): void {
     if( !this.userLocale ){
@@ -42,12 +47,12 @@ export class NotesListingItemComponent implements OnInit {
 
     this.displayDay = formatDate(this.note.startDateTime, 'EEEE, MMM d', this.userLocale);
 
-    // const prev_showDay = this.showDay;
-    // this.showDay = formatDate(this.note.createdDateTime, 'EEE, MMMM dd', this.userLocale);
+    const lastDisplay = this.noteDisplayDayService.getLastDisplay();
+    if( this.displayDay !== lastDisplay ){
+      this.showDisplayDay = true;
+    }
 
-    // // TODO left off here, need a way to set display_showDay to true/false depending if prev_showDay == (the new value for this.showDay)
-
-    // this.showDayChange.emit(this.showDay);
+    this.noteDisplayDayService.setLastDisplay(this.displayDay);
 
   }
 

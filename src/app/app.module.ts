@@ -13,6 +13,7 @@ import { HeaderComponent } from './header/header.component';
 import { NoteFormComponent } from './notes/note-form/note-form.component';
 import { FooterComponent } from './footer/footer.component';
 import { NotesListingItemComponent } from './notes/notes-listing-item/notes-listing-item.component';
+import { NoteDisplayDayService } from './notes/note-display-day.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { NotesListingItemComponent } from './notes/notes-listing-item/notes-list
   providers: [
     // { provide: APP_BASE_HREF, useValue: '/babytracker' },
     NotesService,
-    NoteStorageService
+    NoteStorageService,
+    NoteDisplayDayService
   ],
   bootstrap: [AppComponent]
 })
