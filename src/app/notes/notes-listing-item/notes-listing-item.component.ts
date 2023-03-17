@@ -29,7 +29,7 @@ export class NotesListingItemComponent implements OnInit {
   private userLocale: string = navigator.languages != undefined ? navigator.languages[0] : navigator.language;
   displayCreatedDateTime: string | undefined;
   displayStartDateTime: string | undefined;
-  // noteDay: string | undefined;
+  displayDay: string | undefined;
 
   ngOnInit(): void {
     if( !this.userLocale ){
@@ -38,11 +38,9 @@ export class NotesListingItemComponent implements OnInit {
 
     this.displayCreatedDateTime = formatDate(this.note.createdDateTime, 'MMMM dd, hh:mm a', this.userLocale);
 
-    const dateStringBuilder = formatDate(this.note.createdDateTime, 'MMMM dd YYYY', this.userLocale);
-    // console.log(dateStringBuilder);
-    // this.displayStartDateTime = formatDate(new Date(dateStringBuilder + ', ' + this.note.startDateTime), 'h:mm a', this.userLocale);
     this.displayStartDateTime = formatDate(this.note.startDateTime, 'h:mm a', this.userLocale);
-    // console.log(this.displayStartDateTime);
+
+    this.displayDay = formatDate(this.note.startDateTime, 'EEEE, MMM d', this.userLocale);
 
     // const prev_showDay = this.showDay;
     // this.showDay = formatDate(this.note.createdDateTime, 'EEE, MMMM dd', this.userLocale);

@@ -74,7 +74,7 @@ export class NoteFormComponent implements OnInit {
     // console.log(selectedDiaperDetails);
 
     if( this.noteForm.status === 'INVALID' ){
-      alert('form is invalid');
+      // alert('form is invalid');
       return false;
 
     } else {
@@ -96,7 +96,9 @@ export class NoteFormComponent implements OnInit {
 
       } else {
         this.notesService.addNote(newNote);
-        this.noteForm.reset();
+        this.noteForm.reset({
+          startDateTime: formatDate(Date.now(), 'YYYY-MM-ddThh:mm', this.userLocale)
+        });
       }
 
       this.noteStorageService.storeNotes();
