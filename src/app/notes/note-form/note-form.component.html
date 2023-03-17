@@ -110,30 +110,30 @@
     </div>
 
     <div class="note-form-actions">
-      <div class="form-buttons" style="text-align: right;">
+      <div class="form-buttons">
 
-          <button
-            type="button"
-            class="btn btn-secondary"
-            (click)="onClickCancelEdit()"
-            *ngIf="noteId > -1">
-            <i class="bi bi-x-circle"></i> Cancel Edit
-          </button>
+        <button
+          type="button"
+          class="button button-secondary"
+          (click)="onClickCancelEdit()"
+          *ngIf="noteId > -1">
+          <i class="bi bi-x-circle"></i> Cancel
+        </button>
 
-          <button
-            type="button"
-            class="btn btn-danger btn-delete"
-            (click)="onClickDeleteNoteListItem(noteId)"
-            *ngIf="noteId > -1">
-            <i class="bi bi-exclamation-circle"></i><span class="button-label">Delete</span>
-          </button>
+        <button
+          type="button"
+          class="button button-danger button-delete"
+          (click)="onClickDeleteNoteListItem(noteId)"
+          *ngIf="noteId > -1">
+          <i class="bi bi-exclamation-circle"></i><span class="button-label"> Delete</span>
+        </button>
 
-          <button
-            type="submit"
-            class="btn btn-primary"
-            [disabled]="!noteForm.valid">
-            <i class="bi bi-check-circle"></i> {{ noteId > -1 ? 'Save' : 'Add Note' }}
-          </button>
+        <button
+          type="submit"
+          class="button button-primary"
+          [disabled]="!noteForm.valid">
+          <i class="bi bi-check-circle"></i> {{ noteId > -1 ? 'Save' : 'Add Note' }}
+        </button>
 
       </div>
     </div>
