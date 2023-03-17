@@ -44,6 +44,7 @@ export class NotesListingItemComponent implements OnInit {
 
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onClickNoteListItem(event: any){
     if( !event.target ){
       return;
