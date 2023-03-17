@@ -175,16 +175,16 @@ export class NoteFormComponent implements OnInit {
         this.noteForm.value.poo,
       );
 
-      // if (this.noteId > -1) {
-      //   this.notesService.updateNote( this.noteId, newNote );
-      //   this.cancelEditMode();
+      if (this.noteId > -1) {
+        this.notesService.updateNote( this.noteId, newNote );
+        this.cancelEditMode();
 
-      // } else {
-      //   this.notesService.addNote(newNote);
-      //   this.noteForm.reset();
-      // }
+      } else {
+        this.notesService.addNote(newNote);
+        this.noteForm.reset();
+      }
 
-      // this.noteStorageService.storeNotes();
+      this.noteStorageService.storeNotes();
 
     }
 

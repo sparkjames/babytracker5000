@@ -15,14 +15,6 @@ export class NotesListingItemComponent implements OnInit {
   @Input() noteId = -1;
   editMode = false;
 
-  // createdDateTime: Date,
-  // startTime: Date,
-  // description: string,
-  // durationLeft?: string,
-  // durationRight?: string,
-  // formulaAmount?: string,
-  // wet?: boolean,
-  // poo?: boolean
   note: Note = {
     createdDateTime: new Date(),
     startTime: '',
@@ -34,15 +26,26 @@ export class NotesListingItemComponent implements OnInit {
     poo: false
   };
 
-  private userLocale = navigator.languages != undefined ? navigator.languages[0] : navigator.language;
+  private userLocale: string = navigator.languages != undefined ? navigator.languages[0] : navigator.language;
   noteCreatedDateTime: string | undefined;
+  noteStartTime: string | undefined;
 
   constructor( private notesService: NotesService ){}
 
   ngOnInit(): void {
-    // console.log('Using note for listing item: ', this.noteId);
+    if( !this.userLocale ){
+      this.userLocale = 'en-US';
+    }
+
     this.note = this.notesService.getNote(this.noteId);
+
     this.noteCreatedDateTime = formatDate(this.note.createdDateTime, 'MMMM dd, hh:mm a', this.userLocale);
+
+    const dateStringBuilder = formatDate(this.note.createdDateTime, 'MMMM dd YYYY', this.userLocale);
+    // console.log(dateStringBuilder);
+    this.noteStartTime = formatDate(new Date(dateStringBuilder + ', ' + this.note.startTime), 'MMMM dd, h:mm a', this.userLocale);
+    // console.log(this.noteStartTime);
+
   }
 
   onClickNoteListItem(event: any){
