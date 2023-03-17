@@ -11,7 +11,7 @@
 
       <div class="lds-ring" *ngIf="isFetching"><div></div><div></div><div></div><div></div></div>
 
-      <app-notes-listing-item *ngFor="let note of notes; let i = index" [noteId]="i"></app-notes-listing-item>
+      <app-notes-listing-item *ngFor="let note of notes; let i = index" [noteId]="i" [note]="note"></app-notes-listing-item>
 
     </div>
 

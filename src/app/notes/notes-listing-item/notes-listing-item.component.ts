@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Note } from '../note.model';
-import { NotesService } from '../notes.service';
 import { formatDate } from '@angular/common';
 
 @Component({
@@ -13,9 +12,8 @@ import { formatDate } from '@angular/common';
 })
 export class NotesListingItemComponent implements OnInit {
   @Input() noteId = -1;
-  editMode = false;
 
-  note: Note = {
+  @Input() note: Note = {
     createdDateTime: new Date(),
     startTime: '',
     description: '',
@@ -26,18 +24,16 @@ export class NotesListingItemComponent implements OnInit {
     poo: false
   };
 
+  editMode = false;
+
   private userLocale: string = navigator.languages != undefined ? navigator.languages[0] : navigator.language;
   noteCreatedDateTime: string | undefined;
   noteStartTime: string | undefined;
-
-  constructor( private notesService: NotesService ){}
 
   ngOnInit(): void {
     if( !this.userLocale ){
       this.userLocale = 'en-US';
     }
-
-    this.note = this.notesService.getNote(this.noteId);
 
     this.noteCreatedDateTime = formatDate(this.note.createdDateTime, 'MMMM dd, hh:mm a', this.userLocale);
 
