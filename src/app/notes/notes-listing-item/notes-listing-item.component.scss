@@ -49,6 +49,11 @@
   }
 }
 
+.notes-listing-item-notes {
+  font-family: var(--font-monospace);
+  margin-top: 2rem;
+}
+
 .notes-listing-day {
   color: var(--color-body-color);
   font-weight: bold;
