@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Note } from '../note.model';
 import { formatDate } from '@angular/common';
 
@@ -15,7 +15,7 @@ export class NotesListingItemComponent implements OnInit {
 
   @Input() note: Note = {
     createdDateTime: new Date(),
-    startTime: '',
+    startDateTime: '',
     description: '',
     durationLeft: '',
     durationRight: '',
@@ -27,20 +27,29 @@ export class NotesListingItemComponent implements OnInit {
   editMode = false;
 
   private userLocale: string = navigator.languages != undefined ? navigator.languages[0] : navigator.language;
-  noteCreatedDateTime: string | undefined;
-  noteStartTime: string | undefined;
+  displayCreatedDateTime: string | undefined;
+  displayStartDateTime: string | undefined;
+  // noteDay: string | undefined;
 
   ngOnInit(): void {
     if( !this.userLocale ){
       this.userLocale = 'en-US';
     }
 
-    this.noteCreatedDateTime = formatDate(this.note.createdDateTime, 'MMMM dd, hh:mm a', this.userLocale);
+    this.displayCreatedDateTime = formatDate(this.note.createdDateTime, 'MMMM dd, hh:mm a', this.userLocale);
 
     const dateStringBuilder = formatDate(this.note.createdDateTime, 'MMMM dd YYYY', this.userLocale);
     // console.log(dateStringBuilder);
-    this.noteStartTime = formatDate(new Date(dateStringBuilder + ', ' + this.note.startTime), 'MMMM dd, h:mm a', this.userLocale);
-    // console.log(this.noteStartTime);
+    // this.displayStartDateTime = formatDate(new Date(dateStringBuilder + ', ' + this.note.startDateTime), 'h:mm a', this.userLocale);
+    this.displayStartDateTime = formatDate(this.note.startDateTime, 'h:mm a', this.userLocale);
+    // console.log(this.displayStartDateTime);
+
+    // const prev_showDay = this.showDay;
+    // this.showDay = formatDate(this.note.createdDateTime, 'EEE, MMMM dd', this.userLocale);
+
+    // // TODO left off here, need a way to set display_showDay to true/false depending if prev_showDay == (the new value for this.showDay)
+
+    // this.showDayChange.emit(this.showDay);
 
   }
 

@@ -2,7 +2,7 @@ export class Note {
 
   constructor(
     public createdDateTime: Date,
-    public startTime: string,
+    public startDateTime: string,
     public description: string,
     public durationLeft: string,
     public durationRight: string,
@@ -11,7 +11,7 @@ export class Note {
     public poo: boolean
   ) {
     this.createdDateTime = createdDateTime;
-    this.startTime = startTime;
+    this.startDateTime = startDateTime;
     this.description = description;
     this.durationLeft = durationLeft;
     this.durationRight = durationRight;

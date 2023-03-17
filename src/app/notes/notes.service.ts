@@ -39,7 +39,7 @@ export class NotesService {
     }
     return {
       createdDateTime: new Date(),
-      startTime: '',
+      startDateTime: '',
       description: '',
       durationLeft: '',
       durationRight: '',

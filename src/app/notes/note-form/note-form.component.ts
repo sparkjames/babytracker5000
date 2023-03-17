@@ -4,6 +4,7 @@ import { NoteStorageService } from '../note-storage.service';
 import { Note } from '../note.model';
 import { NotesService } from '../notes.service';
 import { v4 as uuid } from 'uuid';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-note-form',
@@ -19,8 +20,10 @@ export class NoteFormComponent implements OnInit {
   @Input() editMode = false;
   @Output() editModeChange = new EventEmitter<boolean>();
 
+  private userLocale: string = navigator.languages != undefined ? navigator.languages[0] : navigator.language;
+
   noteForm: FormGroup = new FormGroup({
-    startTime: new FormControl('', Validators.required),
+    startDateTime: new FormControl(formatDate(Date.now(), 'YYYY-MM-ddThh:mm', this.userLocale), Validators.required),
     durationLeft: new FormControl(''),
     durationRight: new FormControl(''),
     formulaAmount: new FormControl(''),
@@ -29,7 +32,7 @@ export class NoteFormComponent implements OnInit {
     description: new FormControl('')
   });
 
-  input_id_startTime = uuid();
+  input_id_startDateTime = uuid();
   input_id_durationLeft = uuid();
   input_id_durationRight = uuid();
   input_id_formulaAmount = uuid();
@@ -40,10 +43,7 @@ export class NoteFormComponent implements OnInit {
   constructor(
     private notesService: NotesService,
     private noteStorageService: NoteStorageService
-  ){
-
-
-  }
+  ){}
 
   ngOnInit(): void {
     // console.log('in form component this.noteId = ', this.noteId);
@@ -51,7 +51,7 @@ export class NoteFormComponent implements OnInit {
       const note = this.notesService.getNote(this.noteId);
 
       this.noteForm = new FormGroup({
-        startTime: new FormControl(note.startTime, Validators.required),
+        startDateTime: new FormControl(note.startDateTime, Validators.required),
         durationLeft: new FormControl(note.durationLeft),
         durationRight: new FormControl(note.durationRight),
         formulaAmount: new FormControl(note.formulaAmount),
@@ -73,11 +73,15 @@ export class NoteFormComponent implements OnInit {
     // console.log(selectedFeedDetails);
     // console.log(selectedDiaperDetails);
 
-    if (this.noteForm.value.startTime) {
+    if( this.noteForm.status === 'INVALID' ){
+      alert('form is invalid');
+      return false;
+
+    } else {
 
       const newNote = new Note(
         new Date(),
-        this.noteForm.value.startTime,
+        this.noteForm.value.startDateTime,
         this.noteForm.value.description,
         this.noteForm.value.durationLeft,
         this.noteForm.value.durationRight,
@@ -96,6 +100,8 @@ export class NoteFormComponent implements OnInit {
       }
 
       this.noteStorageService.storeNotes();
+
+      return true;
 
     }
 

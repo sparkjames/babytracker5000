@@ -1,8 +1,9 @@
+<div class="notes-listing-day">ohai{{ displayStartDateTime }}</div>
 <div class="notes-listing-item" (click)="onClickNoteListItem($event)">
 
   <!-- <div class="row note-listing-item-date-container">
     <div class="col-xs-12">
-      <p class="note-listing-item-date">{{ noteCreatedDateTime }}</p>
+      <p class="note-listing-item-date">{{ displayCreatedDateTime }}</p>
     </div>
   </div> -->
 
@@ -15,7 +16,7 @@
   <div class="row" *ngIf="!editMode">
 
     <div class="col-sm-3">
-      {{noteStartTime}}
+      {{displayStartDateTime}}
     </div>
 
     <div class="col-sm">
