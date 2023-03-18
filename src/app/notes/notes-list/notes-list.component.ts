@@ -27,10 +27,12 @@ export class NotesListComponent implements OnInit, OnDestroy {
     this.isFetchingSubscription = this.noteStorageService.isFetching.subscribe(status => this.isFetching = status);
 
     // Subscribe to the notes and initialize the array of notes so that the HTML list populates.
+    this.notes = this.notesService.getNotes();
     this.notesSubscription = this.notesService.notesChanged.subscribe((notes: Note[]) => {
       this.notes = notes;
+      // console.log('NOTES CHANGED.');
+      // console.log(this.notes);
     });
-    this.notes = this.notesService.getNotes();
     // console.log(this.notes);
   }
 
