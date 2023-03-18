@@ -96,6 +96,11 @@
     // }
 
   }
+
+  &:focus-visible + .note-form-diaperDetails-label {
+    outline: var(--color-outline) auto 1px;
+    outline-offset: .5em;
+  }
 }
 
 .note-form-actions {

@@ -24,9 +24,9 @@ export class NoteFormComponent implements OnInit {
   private startDateTimePattern = '[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}';
 
   noteForm: FormGroup = new FormGroup({
-    startDateTime: new FormControl(formatDate(Date.now(), 'YYYY-MM-ddThh:mm', this.userLocale), Validators.pattern(this.startDateTimePattern)),
-    durationLeft: new FormControl(''),
-    durationRight: new FormControl(''),
+    startDateTime: new FormControl(formatDate(Date.now(), 'YYYY-MM-ddThh:mm', this.userLocale), [Validators.required, Validators.pattern(this.startDateTimePattern)]),
+    durationLeft: new FormControl('', Validators.pattern('[0-9]*')),
+    durationRight: new FormControl('', Validators.pattern('[0-9]*')),
     formulaAmount: new FormControl(''),
     wet: new FormControl(false),
     poo: new FormControl(false),
@@ -52,9 +52,9 @@ export class NoteFormComponent implements OnInit {
       const note = this.notesService.getNote(this.noteId);
 
       this.noteForm = new FormGroup({
-        startDateTime: new FormControl(note.startDateTime, Validators.pattern(this.startDateTimePattern)),
-        durationLeft: new FormControl(note.durationLeft),
-        durationRight: new FormControl(note.durationRight),
+        startDateTime: new FormControl(note.startDateTime, [Validators.required, Validators.pattern(this.startDateTimePattern)]),
+        durationLeft: new FormControl(note.durationLeft, Validators.pattern('[0-9]*')),
+        durationRight: new FormControl(note.durationRight, Validators.pattern('[0-9]*')),
         formulaAmount: new FormControl(note.formulaAmount),
         wet: new FormControl(note.wet),
         poo: new FormControl(note.poo),
