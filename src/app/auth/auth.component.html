@@ -1,26 +1,54 @@
 <div class="auth">
   <div class="container">
 
-    <form class="loginForm">
+    <form class="loginForm" #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
+
+      <h2 class="loginForm-title">{{ authMode === 'login' ? 'Login' : 'Register account' }}</h2>
 
       <div class="loginForm-item">
         <label for="email">Email Address</label>
-        <input type="email" id="email" class="form-text-input">
+        <input
+          type="email"
+          id="email"
+          class="form-text-input"
+          ngModel
+          name="email"
+          required
+          email
+          >
       </div>
 
-      <div class="loginForm-item">
-        <label for="verify-email">Verify Email Address</label>
-        <input type="email" id="verify-email" class="form-text-input">
+      <div class="loginForm-item" *ngIf="authMode === 'register'">
+        <label for="verifyEmail">Verify Email Address</label>
+        <input
+          type="email"
+          id="verifyEmail"
+          class="form-text-input"
+          ngModel
+          name="verifyEmail"
+          required
+          email
+          >
       </div>
 
       <div class="loginForm-item">
         <label for="password">Password</label>
-        <input type="password" id="password" class="form-text-input">
+        <input
+          type="password"
+          id="password"
+          class="form-text-input"
+          ngModel
+          name="password"
+          required
+          minlength="6"
+          >
       </div>
 
       <div class="loginForm-item loginForm-actions">
-        <button type="submit" class="button">Switch to Login</button>
-        <button type="submit" class="button button-primary">Register account</button>
+
+        <button type="button" class="button" (click)="onSwitchMode()">Switch to {{ authMode === 'login' ? 'Registration' : ' Login' }}</button>
+
+        <button type="submit" class="button button-primary" [disabled]="!authForm.valid">{{ authMode === 'login' ? 'Login' : 'Register account' }}</button>
       </div>
 
     </form>
