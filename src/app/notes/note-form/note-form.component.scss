@@ -59,33 +59,23 @@
 .note-form-diaperDetails-label {
   margin-bottom: 0;
   position: relative;
+  transition: color 125ms;
 
-  &::before,
-  &::after {
+  &::before {
+    -webkit-font-smoothing: antialiased;
+    content: '\F584';
     display: inline-block;
     font-family: bootstrap-icons !important;
     font-style: normal;
-    font-weight: normal !important;
     font-variant: normal;
-    text-transform: none;
+    font-weight: normal !important;
     line-height: 1;
-    vertical-align: -0.125em;
-    -webkit-font-smoothing: antialiased;
-    transition: opacity 125ms, color 125ms;
-  }
-
-  &::before {
-    content: '\F584';
     margin-right: .66rem;
+    text-transform: none;
+    transition: color 125ms;
+    vertical-align: -0.125em;
   }
 
-  &::after {
-    content: '\F633';
-    left: 0;
-    opacity: 0;
-    position: absolute;
-    top: .075em;
-  }
 }
 
 .note-form-diaperDetails-checkbox {
@@ -95,11 +85,15 @@
   pointer-events: none;
 
   &:checked + .note-form-diaperDetails-label {
-    color: var(--color-success);
+    // color: var(--color-success);
 
-    &::after {
-      opacity: 1;
+    &::before {
+      content: '\F26D';
     }
+
+    // &::after {
+    //   opacity: 1;
+    // }
 
   }
 }

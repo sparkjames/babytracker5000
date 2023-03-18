@@ -21,9 +21,10 @@ export class NoteFormComponent implements OnInit {
   @Output() editModeChange = new EventEmitter<boolean>();
 
   private userLocale: string = navigator.languages != undefined ? navigator.languages[0] : navigator.language;
+  private startDateTimePattern = '[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}';
 
   noteForm: FormGroup = new FormGroup({
-    startDateTime: new FormControl(formatDate(Date.now(), 'YYYY-MM-ddThh:mm', this.userLocale), Validators.required),
+    startDateTime: new FormControl(formatDate(Date.now(), 'YYYY-MM-ddThh:mm', this.userLocale), Validators.pattern(this.startDateTimePattern)),
     durationLeft: new FormControl(''),
     durationRight: new FormControl(''),
     formulaAmount: new FormControl(''),
@@ -51,7 +52,7 @@ export class NoteFormComponent implements OnInit {
       const note = this.notesService.getNote(this.noteId);
 
       this.noteForm = new FormGroup({
-        startDateTime: new FormControl(note.startDateTime, Validators.required),
+        startDateTime: new FormControl(note.startDateTime, Validators.pattern(this.startDateTimePattern)),
         durationLeft: new FormControl(note.durationLeft),
         durationRight: new FormControl(note.durationRight),
         formulaAmount: new FormControl(note.formulaAmount),
