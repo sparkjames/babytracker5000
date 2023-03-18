@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { NotesService } from './notes.service';
-import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Note } from './note.model';
-import { BehaviorSubject, map, tap, Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
+import { BehaviorSubject, throwError } from 'rxjs';
 
 @Injectable()
 export class NoteStorageService {
