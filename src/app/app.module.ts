@@ -14,6 +14,7 @@ import { NoteFormComponent } from './notes/note-form/note-form.component';
 import { FooterComponent } from './footer/footer.component';
 import { NotesListingItemComponent } from './notes/notes-listing-item/notes-listing-item.component';
 import { NoteDisplayDayService } from './notes/note-display-day.service';
+import { AuthComponent } from './auth/auth.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { NoteDisplayDayService } from './notes/note-display-day.service';
     HeaderComponent,
     NoteFormComponent,
     FooterComponent,
-    NotesListingItemComponent
+    NotesListingItemComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,

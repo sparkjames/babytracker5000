@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthComponent } from './auth/auth.component';
 import { NotesListComponent } from './notes/notes-list/notes-list.component';
 
 const routes: Routes = [
-  // { path: '', redirectTo: '/babytracker', pathMatch: 'full' },
-  { path: '', component: NotesListComponent }
-  // login
+  { path: '', redirectTo: '/list', pathMatch: 'full' },
+  { path: 'list', component: NotesListComponent },
+  { path: 'auth', component: AuthComponent }
   // account
 ];
 
