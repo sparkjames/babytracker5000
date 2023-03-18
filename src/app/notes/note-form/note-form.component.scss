@@ -85,15 +85,10 @@
   pointer-events: none;
 
   &:checked + .note-form-diaperDetails-label {
-    // color: var(--color-success);
 
     &::before {
       content: '\F26D';
     }
-
-    // &::after {
-    //   opacity: 1;
-    // }
 
   }
 
