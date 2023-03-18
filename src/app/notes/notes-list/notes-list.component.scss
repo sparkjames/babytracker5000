@@ -50,6 +50,12 @@
 //   order: 1;
 // }
 
+.new-note {
+  ::ng-deep .note-form-diaperDetails-checkbox:checked + .note-form-diaperDetails-label {
+    color: var(--color-success);
+  }
+}
+
 .notes-listing-item-container {
 
   ::ng-deep .notes-listing-item {
@@ -61,8 +67,8 @@
       background-color: rgb(232, 240, 251);
   }
 
-  &:hover ::ng-deep .notes-listing-item {
-    background-color: var(--color-info, lightsteelblue);
-  }
+  // &:hover ::ng-deep .notes-listing-item {
+  //   background-color: var(--color-info, lightsteelblue);
+  // }
 
 }

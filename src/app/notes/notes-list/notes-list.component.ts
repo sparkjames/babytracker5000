@@ -31,7 +31,7 @@ export class NotesListComponent implements OnInit, OnDestroy {
       this.notes = notes;
     });
     this.notes = this.notesService.getNotes();
-    console.log(this.notes);
+    // console.log(this.notes);
   }
 
   ngOnDestroy(): void {

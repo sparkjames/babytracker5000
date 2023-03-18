@@ -113,10 +113,10 @@ body {
 }
 
 .button {
-  background-color: var(--color-primary);
-  border: none;
+  background-color: transparent;
+  border: 2px solid var(--color-primary);
   border-radius: 4px;
-  color: var(--color-invert);
+  color: var(--color-primary);
   font-size: 1.6rem;
   padding: .66em .5em;
   line-height: 1;
@@ -128,10 +128,18 @@ body {
   }
 }
 
+.button-primary {
+  background-color: var(--color-primary);
+  border: none;
+  color: var(--color-invert);
+}
+
 .button-secondary {
-  background-color: var(--color-secondary);
+  border: 2px solid var(--color-secondary);
+  color: var(--color-secondary);
 }
 
 .button-danger {
-  background-color: var(--color-danger);
+  border: 2px solid var(--color-danger);
+  color: var(--color-danger);
 }
