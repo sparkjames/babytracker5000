@@ -3,7 +3,7 @@
 
     <form class="loginForm" #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
 
-      <h2 class="loginForm-title">{{ authMode === 'login' ? 'Login' : 'Register account' }}</h2>
+      <h2 class="loginForm-title">{{ isLoginMode ? 'Login' : 'Register account' }}</h2>
 
       <div class="loginForm-item">
         <label class="loginForm-label" for="email">Email Address</label>
@@ -19,7 +19,7 @@
           >
       </div>
 
-      <!-- <div class="loginForm-item" *ngIf="authMode === 'register'">
+      <!-- <div class="loginForm-item" *ngIf="!isLoginMode">
         <label class="loginForm-label" for="verifyEmail">Verify Email Address</label>
         <input
           type="email"
@@ -44,18 +44,18 @@
           required
           minlength="6"
           >
-        <p class="loginForm-input-note" *ngIf="authMode === 'register'">Must be at least 6 characters. Use any letters, numbers, symbols, or spaces.</p>
+        <p class="loginForm-input-note" *ngIf="!isLoginMode">Must be at least 6 characters. Use any letters, numbers, symbols, or spaces.</p>
       </div>
 
       <div class="loginForm-item loginForm-actions">
 
-        <button type="button" class="button button-link" (click)="onSwitchMode()">Switch to {{ authMode === 'login' ? 'Registration' : ' Login' }}</button>
+        <button type="button" class="button button-link" (click)="onSwitchMode()">Switch to {{ isLoginMode ? 'Registration' : ' Login' }}</button>
 
         <div class="loginForm-spinner" *ngIf="isLoading">
           <app-loading-spinner></app-loading-spinner>
         </div>
 
-        <button type="submit" class="button button-primary" [disabled]="!authForm.valid || isLoading">{{ authMode === 'login' ? 'Login' : 'Register account' }}</button>
+        <button type="submit" class="button button-primary" [disabled]="!authForm.valid || isLoading">{{ isLoginMode ? 'Login' : 'Register account' }}</button>
       </div>
 
       <div class="loginForm-item loginForm-error" *ngIf="errorMessage">

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AbstractControl, NgForm } from '@angular/forms';
-import { AuthService } from './auth.service';
+import { Observable } from 'rxjs';
+import { AuthResponseData, AuthService } from './auth.service';
 
 @Component({
   selector: 'app-auth',
@@ -9,20 +10,14 @@ import { AuthService } from './auth.service';
 })
 export class AuthComponent {
   // NOTE - query params video #269
-  authMode = 'login';
+  isLoginMode = true;
   isLoading = false;
   errorMessage = '';
 
-  constructor( private authService: AuthService ){
-
-  }
+  constructor( private authService: AuthService ){}
 
   onSwitchMode(){
-    if( this.authMode === 'login' ){
-      this.authMode = 'register';
-    } else {
-      this.authMode = 'login';
-    }
+    this.isLoginMode = !this.isLoginMode;
   }
 
   onSubmit( form: NgForm ){
@@ -34,22 +29,25 @@ export class AuthComponent {
     const email = form.value.email;
     const password = form.value.password;
 
+    let authObs: Observable<AuthResponseData>;
+
     this.isLoading = true;
 
-    if (this.authMode === 'register' ){
+    if (this.isLoginMode) {
+      authObs = this.authService.login(email, password);
 
-      this.authService.signup(email, password).subscribe(responseData => {
-        console.log(responseData);
-        this.isLoading = false;
-      }, errorResponse => {
-        console.log('Error registering new account: ', errorResponse);
-        this.errorMessage = errorResponse;
-        this.isLoading = false;
-      });
-
-    } else if (this.authMode === 'login') {
-      // do login
+    } else {
+      authObs = this.authService.signup(email, password);
     }
+
+    authObs.subscribe(responseData => {
+      console.log(responseData);
+      this.isLoading = false;
+    }, errorResponse => {
+      console.log('Auth error: ', errorResponse);
+      this.errorMessage = errorResponse;
+      this.isLoading = false;
+    });
 
     form.reset();
   }
