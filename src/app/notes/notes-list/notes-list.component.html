@@ -13,6 +13,7 @@
       <div class="notes-listing-error" *ngIf="errorMessage">
         <h2 class="notes-listing-error-heading">An error occurred:</h2>
         <p>{{ errorMessage }}</p>
+        <button class="button" (click)="onAcknowledgeError()">OK</button>
       </div>
 
       <app-notes-listing-item *ngFor="let note of notes; let i = index" [noteId]="i" [note]="note"></app-notes-listing-item>

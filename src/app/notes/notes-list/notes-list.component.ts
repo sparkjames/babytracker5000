@@ -35,6 +35,7 @@ export class NotesListComponent implements OnInit, OnDestroy {
     },
     error => {
       this.errorMessage = error.message;
+      this.isFetching = false;
     });
 
     // Subscribe to the notes and initialize the array of notes so that the HTML list populates.
@@ -50,6 +51,10 @@ export class NotesListComponent implements OnInit, OnDestroy {
     this.errorSubscription = this.noteStorageService.storeErrorMessage.subscribe( newErrorMessage => {
       this.errorMessage = newErrorMessage;
     })
+  }
+
+  onAcknowledgeError(): void {
+    this.errorMessage = '';
   }
 
   ngOnDestroy(): void {
