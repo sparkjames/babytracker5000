@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { NotesService } from './notes.service';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Note } from './note.model';
-import { catchError, map, tap, throwError } from 'rxjs';
+import { catchError, map, Subject, tap, throwError } from 'rxjs';
 
 @Injectable()
 export class NoteStorageService {
 
-  // isFetching = new BehaviorSubject<boolean>(false);
-  // isStoring = new BehaviorSubject<boolean>(false);
+  storeErrorMessage = new Subject<string>();
+
   private APIEndpoint = 'https://babytracker5000-default-rtdb.firebaseio.com/notes.json';
 
   constructor(
@@ -20,8 +20,6 @@ export class NoteStorageService {
     // console.log('About to store notes...');
     const notes = this.notesService.getNotes();
     // console.log(notes);
-
-    // this.isStoring.next(true);
 
     try {
       // LocalStorage method
@@ -36,12 +34,16 @@ export class NoteStorageService {
         .subscribe(response => {
           console.log('Notes stored.');
           console.log(response);
-          // this.isStoring.next(false);
+        }, error => {
+          let errorMessage = error.message;
+          if( error.status == 401 ){
+            errorMessage = 'You must login to store notes.';
+          }
+          this.storeErrorMessage.next(errorMessage);
         });
 
     } catch (error) {
       console.error('Error fetching notes: ', error);
-      // this.isStoring.next(false);
     }
 
 
@@ -49,14 +51,12 @@ export class NoteStorageService {
 
   fetchNotes() {
     console.log('start fetch');
-    // this.isFetching.next(true);
 
     // LocalStorage method
     // const notes:Note[] = localStorage.getItem('notes') ? JSON.parse(localStorage.getItem('notes') || '{}') : [];
     // if (notes) {
     //   this.notesService.setNotes(notes);
     // }
-    // this.isFetching.next(false);
 
     // return notes;
 
@@ -74,7 +74,6 @@ export class NoteStorageService {
           console.log('tap notes = ', typeof notes);
           console.log(notes);
           this.notesService.setNotes(notes);
-          // this.isFetching.next(false);
         }),
         catchError(this.handleError)
       );
@@ -82,8 +81,7 @@ export class NoteStorageService {
   }
 
   private handleError(error: HttpErrorResponse) {
-    console.log('handleError');
-    // this.isFetching.next(false);
+    // console.log('handleError');
     if (error.status === 0) {
       // A client-side or network error occurred. Handle it accordingly.
       console.error('An error occurred:', error.error);
@@ -103,9 +101,8 @@ export class NoteStorageService {
     return throwError(() => new Error(errorMessage));
   }
 
-  private handleComplete() {
-    console.log('handleComplete');
-    // this.isFetching.next(false);
-  }
+  // private handleComplete() {
+  //   console.log('handleComplete');
+  // }
 
 }

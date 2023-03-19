@@ -14,7 +14,8 @@ export class NotesListComponent implements OnInit, OnDestroy {
   notes: Note[] = [];
   isFetching = false;
   // isFetchingSubscription: Subscription = new Subscription;
-  errorMessage = null;
+  errorMessage = '';
+  private errorSubscription: Subscription = new Subscription;
 
   private notesSubscription: Subscription = new Subscription;
   private noteStorageSubscription: Subscription = new Subscription;
@@ -44,6 +45,11 @@ export class NotesListComponent implements OnInit, OnDestroy {
       this.isFetching = false;
     });
     // console.log(this.notes);
+
+    // Subscribe to possible error messages from storing posts.
+    this.errorSubscription = this.noteStorageService.storeErrorMessage.subscribe( newErrorMessage => {
+      this.errorMessage = newErrorMessage;
+    })
   }
 
   ngOnDestroy(): void {
