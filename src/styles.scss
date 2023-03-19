@@ -9,12 +9,14 @@
     --color-info: #b5e5ef;
     --color-warning: #FDBB2D;
     --color-danger: #dc3545;
+    --color-danger-dark: #931d29;
     --color-invert: #fafafa;
     --color-dark: #212529;
-    --color-body-color: #222;
+    --color-body-color: #343434;
+    --color-body-color-light: #ced4da;
     --color-body-bg: #fafafa;
     --color-link-color: #0d6efd;
-    --color-link-hover-color: #0a58ca;
+    --color-link-hover-color: #0c3f8b;
     --color-sticky-note-1-light: hsl(45, 100%, 90%);
     --color-sticky-note-1-border: hsl(45, 100%, 75%);
     --color-sticky-note-1-dark: hsl(45, 100%, 25%);
@@ -96,7 +98,7 @@ body {
   background-clip: padding-box;
   background-color: var(--color-body-bg);
   border-radius: 0.375rem;
-  border: 1px solid #ced4da;
+  border: 1px solid var(--color-body-color-light);
   color: var(--color-body-color);
   display: block;
   font-family: var(--font-sans);
@@ -122,10 +124,16 @@ body {
   border: 2px solid var(--color-primary);
   border-radius: 4px;
   color: var(--color-primary);
+  cursor: pointer;
   font-size: 1.6rem;
   padding: .66em .5em;
   line-height: 1;
-  transition: background-color 150ms, color 150ms;
+  transition: background-color 150ms, border 150ms, color 150ms;
+
+  &:hover,
+  &:focus-visible {
+    border-color: var(--color-link-hover-color);
+  }
 
   &[disabled] {
     cursor: not-allowed;
@@ -137,14 +145,43 @@ body {
   background-color: var(--color-primary);
   border: none;
   color: var(--color-invert);
+
+  &:hover,
+  &:focus-visible {
+    background-color: var(--color-link-hover-color);
+  }
 }
 
 .button-secondary {
   border: 2px solid var(--color-secondary);
   color: var(--color-secondary);
+
+  &:hover,
+  &:focus-visible {
+    border-color: var(--color-link-hover-color);
+    color: var(--color-link-hover-color);
+  }
 }
 
 .button-danger {
   border: 2px solid var(--color-danger);
   color: var(--color-danger);
+
+  &:hover,
+  &:focus-visible {
+    border-color: var(--color-danger-dark);
+    color: var(--color-danger-dark);
+  }
+}
+
+.button-link {
+  border-color: transparent;
+
+  &:hover,
+  &:focus-visible {
+    border-color: transparent;
+    color: var(--color-link-hover-color);
+    text-decoration: underline;
+  }
+
 }
