@@ -1,7 +1,8 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { Subject, throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
+import { User } from './user.model';
 
 export interface AuthResponseData {
   idToken:	string;	// A Firebase Auth ID token for the newly created user.
@@ -16,6 +17,8 @@ export interface AuthResponseData {
   providedIn: 'root'
 })
 export class AuthService {
+
+  user = new Subject<User>();
 
   private API_KEY = 'AIzaSyDIEqviVlKF9ZdNe-irNP4NNgj1Tmtc2XQ';
   private signinAPIEndpoint = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' + this.API_KEY;
@@ -32,7 +35,15 @@ export class AuthService {
         returnSecureToken: true
       }
     ).pipe(
-      catchError(this.handleError)
+      catchError(this.handleError),
+      tap( responseData => {
+        this.handleAuthentication(
+          responseData.email,
+          responseData.localId,
+          responseData.idToken,
+          +responseData.expiresIn
+        )
+      })
     );
   }
 
@@ -45,8 +56,27 @@ export class AuthService {
         returnSecureToken: true
       }
     ).pipe(
-      catchError(this.handleError)
+      catchError(this.handleError),
+      tap(responseData => {
+        this.handleAuthentication(
+          responseData.email,
+          responseData.localId,
+          responseData.idToken,
+          +responseData.expiresIn
+        )
+      })
     );
+  }
+
+  private handleAuthentication(email: string, localId: string, idToken: string, expiresIn: number) {
+    const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
+    const responseUser = new User(
+      email,
+      localId,
+      idToken,
+      expirationDate
+    );
+    this.user.next(responseUser);
   }
 
   private handleError( errorResponse: HttpErrorResponse ){
