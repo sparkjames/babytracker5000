@@ -8,7 +8,12 @@
 
     <div class="notes-listing">
 
-      <div class="lds-ring" *ngIf="isFetching"><div></div><div></div><div></div><div></div></div>
+      <div class="lds-ring" *ngIf="isFetching && !errorMessage"><div></div><div></div><div></div><div></div></div>
+
+      <div class="notes-listing-error" *ngIf="errorMessage">
+        <h2 class="notes-listing-error-heading">An error occurred:</h2>
+        <p>{{ errorMessage }}</p>
+      </div>
 
       <app-notes-listing-item *ngFor="let note of notes; let i = index" [noteId]="i" [note]="note"></app-notes-listing-item>
 

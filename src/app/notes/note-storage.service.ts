@@ -94,8 +94,13 @@ export class NoteStorageService {
         `Backend returned code ${error.status}, body was: `, error.error);
     }
 
+    let errorMessage = 'Something bad happened; please try again later.';
+    if( error.status == 401 ){
+      errorMessage = 'You must log in to access your notes.';
+    }
+
     // Return an observable with a user-facing error message.
-    return throwError(() => new Error('Something bad happened; please try again later.'));
+    return throwError(() => new Error(errorMessage));
   }
 
   private handleComplete() {
