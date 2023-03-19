@@ -54,6 +54,7 @@ export class NotesListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.notesSubscription.unsubscribe();
+    this.errorSubscription.unsubscribe();
   }
 
 }
