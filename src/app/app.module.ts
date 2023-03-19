@@ -15,6 +15,7 @@ import { FooterComponent } from './footer/footer.component';
 import { NotesListingItemComponent } from './notes/notes-listing-item/notes-listing-item.component';
 import { NoteDisplayDayService } from './notes/note-display-day.service';
 import { AuthComponent } from './auth/auth.component';
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { AuthComponent } from './auth/auth.component';
     NoteFormComponent,
     FooterComponent,
     NotesListingItemComponent,
-    AuthComponent
+    AuthComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,

@@ -19,7 +19,7 @@
           >
       </div>
 
-      <div class="loginForm-item" *ngIf="authMode === 'register'">
+      <!-- <div class="loginForm-item" *ngIf="authMode === 'register'">
         <label class="loginForm-label" for="verifyEmail">Verify Email Address</label>
         <input
           type="email"
@@ -30,7 +30,7 @@
           required
           email
           >
-      </div>
+      </div> -->
 
       <div class="loginForm-item">
         <label class="loginForm-label" for="password">Password</label>
@@ -51,7 +51,15 @@
 
         <button type="button" class="button button-link" (click)="onSwitchMode()">Switch to {{ authMode === 'login' ? 'Registration' : ' Login' }}</button>
 
-        <button type="submit" class="button button-primary" [disabled]="!authForm.valid">{{ authMode === 'login' ? 'Login' : 'Register account' }}</button>
+        <div class="loginForm-spinner" *ngIf="isLoading">
+          <app-loading-spinner></app-loading-spinner>
+        </div>
+
+        <button type="submit" class="button button-primary" [disabled]="!authForm.valid || isLoading">{{ authMode === 'login' ? 'Login' : 'Register account' }}</button>
+      </div>
+
+      <div class="loginForm-item loginForm-error" *ngIf="errorMessage">
+        <p>{{ errorMessage }}</p>
       </div>
 
     </form>
