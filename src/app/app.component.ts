@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { NoteStorageService } from './notes/note-storage.service';
 
 @Component({
@@ -6,11 +7,17 @@ import { NoteStorageService } from './notes/note-storage.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
+  private noteStorageSubscription: Subscription = new Subscription;
 
   constructor( private noteStorageService: NoteStorageService ){}
 
   ngOnInit(): void {
-    this.noteStorageService.fetchNotes();
+    this.noteStorageSubscription = this.noteStorageService.fetchNotes().subscribe();
   }
+
+  ngOnDestroy(): void {
+    this.noteStorageSubscription.unsubscribe();
+  }
+
 }

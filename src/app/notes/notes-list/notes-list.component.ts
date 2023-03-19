@@ -13,9 +13,10 @@ export class NotesListComponent implements OnInit, OnDestroy {
 
   notes: Note[] = [];
   isFetching = false;
-  isFetchingSubscription: Subscription = new Subscription;
+  // isFetchingSubscription: Subscription = new Subscription;
 
   private notesSubscription: Subscription = new Subscription;
+  private noteStorageSubscription: Subscription = new Subscription;
 
   constructor(
     private notesService: NotesService,
@@ -24,7 +25,11 @@ export class NotesListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     // Subscribe to isFetching from the storage service.
-    this.isFetchingSubscription = this.noteStorageService.isFetching.subscribe(status => this.isFetching = status);
+    // this.isFetchingSubscription = this.noteStorageService.isFetching.subscribe(status => this.isFetching = status);
+    this.isFetching = true;
+    this.noteStorageSubscription = this.noteStorageService.fetchNotes().subscribe( notes => {
+      this.isFetching = false;
+    });
 
     // Subscribe to the notes and initialize the array of notes so that the HTML list populates.
     this.notes = this.notesService.getNotes();

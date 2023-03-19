@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { NotesService } from './notes.service';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Note } from './note.model';
-import { BehaviorSubject, throwError } from 'rxjs';
+import { catchError, map, tap, throwError } from 'rxjs';
 
 @Injectable()
 export class NoteStorageService {
 
-  isFetching = new BehaviorSubject<boolean>(false);
-  isStoring = new BehaviorSubject<boolean>(false);
+  // isFetching = new BehaviorSubject<boolean>(false);
+  // isStoring = new BehaviorSubject<boolean>(false);
   private APIEndpoint = 'https://babytracker5000-default-rtdb.firebaseio.com/notes.json';
 
   constructor(
@@ -21,7 +21,7 @@ export class NoteStorageService {
     const notes = this.notesService.getNotes();
     // console.log(notes);
 
-    this.isStoring.next(true);
+    // this.isStoring.next(true);
 
     try {
       // LocalStorage method
@@ -36,12 +36,12 @@ export class NoteStorageService {
         .subscribe(response => {
           console.log('Notes stored.');
           console.log(response);
-          this.isStoring.next(false);
+          // this.isStoring.next(false);
         });
 
     } catch (error) {
       console.error('Error fetching notes: ', error);
-      this.isStoring.next(false);
+      // this.isStoring.next(false);
     }
 
 
@@ -49,7 +49,7 @@ export class NoteStorageService {
 
   fetchNotes() {
     console.log('start fetch');
-    this.isFetching.next(true);
+    // this.isFetching.next(true);
 
     // LocalStorage method
     // const notes:Note[] = localStorage.getItem('notes') ? JSON.parse(localStorage.getItem('notes') || '{}') : [];
@@ -61,26 +61,29 @@ export class NoteStorageService {
     // return notes;
 
     // Remote method
-    return this.http.get(this.APIEndpoint).subscribe( notes => {
-      // console.log('fetched notes: ');
-      // console.log(typeof notes);
-      // console.log(notes);
+    return this.http.get<object>(this.APIEndpoint)
+      .pipe(
+        map((responseData) => {
+          console.log('responseData = ', typeof responseData);
+          console.log(responseData);
+          const newNotes: Note[] = [];
+          Object.values(responseData).forEach(note => newNotes.push(note));
+          return newNotes;
+        }),
+        tap((notes: Note[]) => {
+          console.log('tap notes = ', typeof notes);
+          console.log(notes);
+          this.notesService.setNotes(notes);
+          // this.isFetching.next(false);
+        }),
+        catchError(this.handleError)
+      );
 
-      // const newNotes = Object.values(notes);
-      const newNotes: Note[] = [];
-      Object.values(notes).forEach( note => newNotes.push(note) );
-      // console.log('newNotes = ', newNotes);
-
-      if( newNotes ){
-        this.notesService.setNotes(newNotes);
-      }
-      this.isFetching.next(false);
-      // console.log('finished fetch');
-      // console.log(notes);
-    }, this.handleError)
   }
 
   private handleError(error: HttpErrorResponse) {
+    console.log('handleError');
+    // this.isFetching.next(false);
     if (error.status === 0) {
       // A client-side or network error occurred. Handle it accordingly.
       console.error('An error occurred:', error.error);
@@ -90,8 +93,14 @@ export class NoteStorageService {
       console.error(
         `Backend returned code ${error.status}, body was: `, error.error);
     }
+
     // Return an observable with a user-facing error message.
     return throwError(() => new Error('Something bad happened; please try again later.'));
+  }
+
+  private handleComplete() {
+    console.log('handleComplete');
+    // this.isFetching.next(false);
   }
 
 }
