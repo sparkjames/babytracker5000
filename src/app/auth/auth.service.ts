@@ -25,6 +25,7 @@ export class AuthService {
   private API_KEY = 'AIzaSyDIEqviVlKF9ZdNe-irNP4NNgj1Tmtc2XQ';
   private signinAPIEndpoint = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' + this.API_KEY;
   private signupAPIEndpoint = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + this.API_KEY;
+  private tokenExpirationTimer:any;
 
   constructor( private http: HttpClient, private router: Router ){}
 
@@ -49,6 +50,29 @@ export class AuthService {
     );
   }
 
+  autoLogin(){
+    const userData: {
+      email:string;
+      id:string;
+      _token:string;
+      _tokenExpirationDate:string;
+    } = JSON.parse(localStorage.getItem('userData') || '');
+    if( !userData ){
+      return;
+    }
+
+    const loadedUser = new User(userData.email, userData.id, userData._token, new Date(userData._tokenExpirationDate));
+
+    if( loadedUser.token ){
+      this.user.next(loadedUser);
+
+      const expirationDuration = new Date(userData._tokenExpirationDate).getTime() - new Date().getTime();
+      this.autoLogout(expirationDuration);
+
+    }
+
+  }
+
   login( email:string, password: string ){
     return this.http.post<AuthResponseData>(
       this.signinAPIEndpoint,
@@ -70,9 +94,19 @@ export class AuthService {
     );
   }
 
+  autoLogout(expirationDuration: number){
+    this.tokenExpirationTimer = setTimeout( () => {
+      this.logout();
+    }, expirationDuration );
+  }
+
   logout(){
     this.user.next(null);
     this.router.navigate(['/auth']);
+    if (this.tokenExpirationTimer){
+      clearTimeout(this.tokenExpirationTimer);
+    }
+    localStorage.removeItem('userData');
   }
 
   private handleAuthentication(email: string, localId: string, idToken: string, expiresIn: number) {
@@ -84,8 +118,13 @@ export class AuthService {
       expirationDate
     );
     this.user.next(responseUser);
-    console.log('AUTHENTICATED');
-    console.log(this.user);
+
+    this.autoLogout(expiresIn * 1000);
+
+    localStorage.setItem('userData', JSON.stringify(responseUser));
+
+    // console.log('AUTHENTICATED');
+    // console.log(this.user);
   }
 
   private handleError( errorResponse: HttpErrorResponse ){
