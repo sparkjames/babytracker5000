@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { NotesService } from './notes.service';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Note } from './note.model';
-import { catchError, map, Subject, tap, throwError } from 'rxjs';
+import { catchError, exhaustMap, map, Subject, take, tap, throwError } from 'rxjs';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable()
 export class NoteStorageService {
@@ -13,7 +14,8 @@ export class NoteStorageService {
 
   constructor(
     private http: HttpClient,
-    private notesService: NotesService
+    private notesService: NotesService,
+    private authService: AuthService
   ) {}
 
   storeNotes(){

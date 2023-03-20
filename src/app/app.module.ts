@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { NotesListComponent } from './notes/notes-list/notes-list.component';
 import { NotesService } from './notes/notes.service';
 import { NoteStorageService } from './notes/note-storage.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
 import { NoteFormComponent } from './notes/note-form/note-form.component';
@@ -16,6 +16,7 @@ import { NotesListingItemComponent } from './notes/notes-listing-item/notes-list
 import { NoteDisplayDayService } from './notes/note-display-day.service';
 import { AuthComponent } from './auth/auth.component';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
+import { AuthInterceptorService } from './auth/auth-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinne
     // { provide: APP_BASE_HREF, useValue: '/babytracker' },
     NotesService,
     NoteStorageService,
-    NoteDisplayDayService
+    NoteDisplayDayService,
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}
   ],
   bootstrap: [AppComponent]
 })

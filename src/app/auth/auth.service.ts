@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject, throwError } from 'rxjs';
+import { BehaviorSubject, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { User } from './user.model';
 
@@ -18,7 +18,8 @@ export interface AuthResponseData {
 })
 export class AuthService {
 
-  user = new Subject<User>();
+  user = new BehaviorSubject<User>(new User('','','',new Date()));
+  // user = new BehaviorSubject<User | null>(null);
 
   private API_KEY = 'AIzaSyDIEqviVlKF9ZdNe-irNP4NNgj1Tmtc2XQ';
   private signinAPIEndpoint = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' + this.API_KEY;
@@ -77,6 +78,8 @@ export class AuthService {
       expirationDate
     );
     this.user.next(responseUser);
+    console.log('AUTHENTICATED');
+    console.log(this.user);
   }
 
   private handleError( errorResponse: HttpErrorResponse ){

@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/auth/auth.service';
 import { NoteStorageService } from '../note-storage.service';
 import { Note } from '../note.model';
 import { NotesService } from '../notes.service';
@@ -22,30 +23,34 @@ export class NotesListComponent implements OnInit, OnDestroy {
 
   constructor(
     private notesService: NotesService,
-    private noteStorageService: NoteStorageService
+    private noteStorageService: NoteStorageService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
-    // Subscribe to isFetching from the storage service.
-    // this.isFetchingSubscription = this.noteStorageService.isFetching.subscribe(status => this.isFetching = status);
-
+    console.log('INIT notes-listing-component');
     this.isFetching = true;
-    this.noteStorageSubscription = this.noteStorageService.fetchNotes().subscribe( notes => {
-      // console.log(notes);
-    },
-    error => {
-      this.errorMessage = error.message;
-      this.isFetching = false;
+
+    // Subscribe to the auth service to check if user logged in, then fetch notes from the server.
+    this.authService.user.subscribe( user => {
+      if (user.token && this.notes.length === 0){
+
+        this.noteStorageSubscription = this.noteStorageService.fetchNotes().subscribe(notes => {
+          // console.log(notes);
+        },
+        error => {
+          this.errorMessage = error.message;
+          this.isFetching = false;
+        });
+
+      }
     });
 
     // Subscribe to the notes and initialize the array of notes so that the HTML list populates.
     this.notesSubscription = this.notesService.notesChanged.subscribe((notes: Note[]) => {
       this.notes = notes;
-      // console.log('NOTES CHANGED.');
-      // console.log(this.notes);
       this.isFetching = false;
     });
-    // console.log(this.notes);
 
     // Subscribe to possible error messages from storing posts.
     this.errorSubscription = this.noteStorageService.storeErrorMessage.subscribe( newErrorMessage => {
@@ -59,6 +64,7 @@ export class NotesListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.notesSubscription.unsubscribe();
+    this.noteStorageSubscription.unsubscribe();
     this.errorSubscription.unsubscribe();
   }
 

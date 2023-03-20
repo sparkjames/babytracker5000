@@ -5,8 +5,8 @@ import { NotesListComponent } from './notes/notes-list/notes-list.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/auth', pathMatch: 'full' },
-  { path: 'notes', component: NotesListComponent },
-  { path: 'auth', component: AuthComponent }
+  { path: 'auth', component: AuthComponent },
+  { path: 'notes', component: NotesListComponent }
   // account
 ];
 
