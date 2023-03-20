@@ -33,7 +33,7 @@ export class NotesListComponent implements OnInit, OnDestroy {
 
     // Subscribe to the auth service to check if user logged in, then fetch notes from the server.
     this.authService.user.subscribe( user => {
-      if (user.token && this.notes.length === 0){
+      if (user && this.notes.length === 0){
 
         this.noteStorageSubscription = this.noteStorageService.fetchNotes().subscribe(notes => {
           // console.log(notes);

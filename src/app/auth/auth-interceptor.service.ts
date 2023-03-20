@@ -17,6 +17,7 @@ export class AuthInterceptorService implements HttpInterceptor {
         if( !user || !user.token ){
           console.log('no user, continuing...');
           return next.handle(req);
+
         } else {
           console.log('user found...');
           const modifiedReq = req.clone({

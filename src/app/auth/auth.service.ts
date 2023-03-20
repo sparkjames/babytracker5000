@@ -1,5 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { User } from './user.model';
@@ -18,14 +19,14 @@ export interface AuthResponseData {
 })
 export class AuthService {
 
-  user = new BehaviorSubject<User>(new User('','','',new Date()));
-  // user = new BehaviorSubject<User | null>(null);
+  // user = new BehaviorSubject<User>(new User('','','',new Date()));
+  user = new BehaviorSubject<User | null>(null);
 
   private API_KEY = 'AIzaSyDIEqviVlKF9ZdNe-irNP4NNgj1Tmtc2XQ';
   private signinAPIEndpoint = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' + this.API_KEY;
   private signupAPIEndpoint = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + this.API_KEY;
 
-  constructor( private http: HttpClient ){}
+  constructor( private http: HttpClient, private router: Router ){}
 
   signup(email: string, password: string){
     return this.http.post<AuthResponseData>(
@@ -67,6 +68,11 @@ export class AuthService {
         )
       })
     );
+  }
+
+  logout(){
+    this.user.next(null);
+    this.router.navigate(['/auth']);
   }
 
   private handleAuthentication(email: string, localId: string, idToken: string, expiresIn: number) {
