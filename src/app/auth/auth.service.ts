@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { User } from './user.model';
+import { environment } from 'src/environments/environment';
 
 export interface AuthResponseData {
   idToken:	string;	// A Firebase Auth ID token for the newly created user.
@@ -22,9 +23,8 @@ export class AuthService {
   // user = new BehaviorSubject<User>(new User('','','',new Date()));
   user = new BehaviorSubject<User | null>(null);
 
-  private API_KEY = 'AIzaSyDIEqviVlKF9ZdNe-irNP4NNgj1Tmtc2XQ';
-  private signinAPIEndpoint = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' + this.API_KEY;
-  private signupAPIEndpoint = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + this.API_KEY;
+  private signinAPIEndpoint = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' + environment.firebaseAPIKey;
+  private signupAPIEndpoint = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + environment.firebaseAPIKey;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private tokenExpirationTimer:any;
 
