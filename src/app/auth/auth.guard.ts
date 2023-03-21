@@ -9,6 +9,7 @@ export class AuthGuard implements CanActivate {
   constructor ( private authService: AuthService, private router: Router ){}
 
   // If not logged in, redirect from the notes listing page to the auth page.
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
     return this.authService.user.pipe(
       take(1),

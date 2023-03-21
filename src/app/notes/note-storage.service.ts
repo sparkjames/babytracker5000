@@ -2,7 +2,7 @@ import { Injectable, OnDestroy, OnInit } from '@angular/core';
 import { NotesService } from './notes.service';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Note } from './note.model';
-import { catchError,  exhaustMap,  map, Subject,  Subscription,  take,  tap, throwError } from 'rxjs';
+import { catchError,  map, Subject,  Subscription, tap, throwError } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { User } from '../auth/user.model';
 

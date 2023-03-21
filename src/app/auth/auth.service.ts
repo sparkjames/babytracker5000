@@ -25,6 +25,7 @@ export class AuthService {
   private API_KEY = 'AIzaSyDIEqviVlKF9ZdNe-irNP4NNgj1Tmtc2XQ';
   private signinAPIEndpoint = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' + this.API_KEY;
   private signupAPIEndpoint = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + this.API_KEY;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private tokenExpirationTimer:any;
 
   constructor( private http: HttpClient, private router: Router ){}

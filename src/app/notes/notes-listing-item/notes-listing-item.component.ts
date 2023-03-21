@@ -1,8 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Note } from '../note.model';
 import { formatDate } from '@angular/common';
 import { NoteDisplayDayService } from '../note-display-day.service';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-notes-listing-item',

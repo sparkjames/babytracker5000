@@ -35,6 +35,7 @@ export class NotesListComponent implements OnInit, OnDestroy {
     this.authService.user.subscribe( user => {
       if (user && this.notes.length === 0){
 
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         this.noteStorageSubscription = this.noteStorageService.fetchNotes().subscribe(notes => {
           // console.log(notes);
         },
