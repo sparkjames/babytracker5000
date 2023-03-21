@@ -1,16 +1,21 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy, OnInit } from '@angular/core';
 import { NotesService } from './notes.service';
-import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Note } from './note.model';
-import { catchError, exhaustMap, map, Subject, take, tap, throwError } from 'rxjs';
+import { catchError,  exhaustMap,  map, Subject,  Subscription,  take,  tap, throwError } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
+import { User } from '../auth/user.model';
 
 @Injectable()
-export class NoteStorageService {
+export class NoteStorageService implements OnInit, OnDestroy {
 
   storeErrorMessage = new Subject<string>();
 
+  private currentUser: User | null = null;
+  private currentUserSub: Subscription = new Subscription;
+
   private APIEndpoint = 'https://babytracker5000-default-rtdb.firebaseio.com/notes.json';
+  // private _APIEndpoint = 'https://babytracker5000-default-rtdb.firebaseio.com/notes';
 
   constructor(
     private http: HttpClient,
@@ -18,19 +23,51 @@ export class NoteStorageService {
     private authService: AuthService
   ) {}
 
+  ngOnInit(): void {
+    // this.currentUserSub = this.authService.user.subscribe( user => {
+    //   this.currentUser = user;
+    //   if( user ){
+    //     console.log('update APIEndpoint');
+    //     this.APIEndpoint = `https://babytracker5000-default-rtdb.firebaseio.com/notes/${user.id}.json`;
+    //   }
+
+    // });
+  }
+
   storeNotes(){
-    // console.log('About to store notes...');
+    console.log('About to store notes...');
     const notes = this.notesService.getNotes();
     // console.log(notes);
+
+    // const notesForStorage = this.authService.user.pipe(
+    //   take(1),
+    //   map( user => {
+    //     if( user ){
+    //       return {
+    //         id: user.id,
+    //         notes: notes
+    //       };
+    //     } else {
+    //       return null;
+    //     }
+    //   })
+    // );
 
     try {
       // LocalStorage method
       // localStorage.setItem('notes', JSON.stringify(notes));
 
       // Remote method
-      this.http
+      const user = this.authService.user.getValue();
+      let storeEndpoint = 'https://babytracker5000-default-rtdb.firebaseio.com/notes';
+      if (user && user?.id) {
+        storeEndpoint += '/' + user?.id + '.json';
+      }
+
+      if (notes) {
+        this.http
         .put(
-          this.APIEndpoint,
+          storeEndpoint,
           notes
         )
         .subscribe(response => {
@@ -43,6 +80,7 @@ export class NoteStorageService {
           }
           this.storeErrorMessage.next(errorMessage);
         });
+      }
 
     } catch (error) {
       console.error('Error fetching notes: ', error);
@@ -51,8 +89,34 @@ export class NoteStorageService {
 
   }
 
+  // get APIEndpoint(): string{
+  //   let returnedAPIEndpoint = this.APIEndpoint;
+
+  //   // const user = this.authService.user.pipe(
+  //   //   take(1),
+  //   //   map( user => {
+  //   //     returnedAPIEndpoint += '/' + user?.id;
+  //   //     return user;
+  //   //   })
+  //   // );
+
+  //   // this.authService.user.subscribe( user => {
+  //   //   returnedAPIEndpoint += '/' + user?.id;
+  //   // }).unsubscribe();
+
+  //   // const user = this.authService.user;
+  //   // console.log('APIEndpoint user = ', user);
+
+  //   if( this.currentUser ){
+  //     returnedAPIEndpoint += '/' + this.currentUser.id;
+  //   }
+
+  //   return returnedAPIEndpoint;
+  // }
+
   fetchNotes() {
     console.log('start fetch');
+    // console.log( this.APIEndpoint );
 
     // LocalStorage method
     // const notes:Note[] = localStorage.getItem('notes') ? JSON.parse(localStorage.getItem('notes') || '{}') : [];
@@ -63,7 +127,13 @@ export class NoteStorageService {
     // return notes;
 
     // Remote method
-    return this.http.get<object>(this.APIEndpoint)
+    const user = this.authService.user.getValue();
+    let fetchEndpoint = 'https://babytracker5000-default-rtdb.firebaseio.com/notes';
+    if( user && user?.id ){
+      fetchEndpoint += '/' + user?.id + '.json';
+    }
+    console.log('fetchEndpoint = ', fetchEndpoint);
+    return this.http.get<object>(fetchEndpoint)
       .pipe(
         map((responseData) => {
           console.log('responseData = ', typeof responseData);
@@ -106,5 +176,9 @@ export class NoteStorageService {
   // private handleComplete() {
   //   console.log('handleComplete');
   // }
+
+  ngOnDestroy(): void {
+    // this.currentUserSub.unsubscribe();
+  }
 
 }
