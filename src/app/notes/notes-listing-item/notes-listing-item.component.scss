@@ -7,10 +7,14 @@ $breakpoint-notes-max-width: 900px;
   // padding-top: 1rem;
   padding: 2.4rem 1.6rem;
   transition: background-color 150ms ease;
+
+  @media print {
+    page-break-inside: avoid;
+  }
 }
 
 .notes-listing-item-data {
-  @media screen and (min-width: $breakpoint-note-flex) {
+  @media print, screen and (min-width: $breakpoint-note-flex) {
     display: flex;
     flex-wrap: wrap;
     gap: 1em 2em;
@@ -26,9 +30,9 @@ $breakpoint-notes-max-width: 900px;
   margin-bottom: 1rem;
   opacity: .66;
 
-  @media screen and (min-width: $breakpoint-note-flex) {
+  @media print, screen and (min-width: $breakpoint-note-flex) {
     border-bottom: none;
-  margin-bottom: 0;
+    margin-bottom: 0;
   }
 
 }
@@ -41,7 +45,7 @@ $breakpoint-notes-max-width: 900px;
   max-width: 14em;
   margin-bottom: 1.5rem;
 
-  @media screen and (min-width: $breakpoint-note-flex) {
+  @media print, screen and (min-width: $breakpoint-note-flex) {
     // flex-basis: 20%;
     margin-bottom: 0;
   }
@@ -54,11 +58,34 @@ $breakpoint-notes-max-width: 900px;
   grid-template-columns: 1fr 1fr;
 }
 
+.notes-listing-item-durationLabel {
+  font-size: 1.6rem;
+  // opacity: .75;
+}
+
+.notes-listing-item-logLine {
+  // display: inline-block;
+  // position: relative;
+  font-weight: bold;
+  opacity: .9;
+
+  // &::before {
+  //   content: '';
+  //   display: block;
+  //   height: 1px;
+  //   width: 100%;
+  //   position: absolute;
+  //   bottom: 0;
+  //   left: 0;
+  //   background-color: var(--color-this-note-dark);
+  // }
+}
+
 .notes-listing-item-formula {
   margin-bottom: 1.5rem;
   max-width: 5em;
 
-  @media screen and (min-width: $breakpoint-note-flex) {
+  @media print, screen and (min-width: $breakpoint-note-flex) {
     // flex-basis: 10%;
     margin-bottom: 0;
   }
@@ -74,7 +101,7 @@ $breakpoint-notes-max-width: 900px;
   gap: 2rem;
   font-size: 2rem;
 
-  @media screen and (min-width: $breakpoint-note-flex) {
+  @media print, screen and (min-width: $breakpoint-note-flex) {
     flex-direction: column;
     // flex-basis: 10%;
     gap: .25em;
@@ -83,6 +110,11 @@ $breakpoint-notes-max-width: 900px;
   .bi {
     font-size: .875em;
   }
+}
+
+.notes-listing-item-diaperDetail {
+  font-weight: bold;
+  opacity: .9;
 }
 
 .notes-listing-item-notes {
@@ -97,6 +129,12 @@ $breakpoint-notes-max-width: 900px;
 
   @media screen and (min-width: $breakpoint-notes-max-width) {
     flex-basis: 50%;
+    margin-top: 0;
+  }
+
+  @media print {
+    flex-basis: 40%;
+    margin-top: 0;
   }
 }
 
@@ -113,5 +151,9 @@ $breakpoint-notes-max-width: 900px;
     font-size: .75em;
     opacity: .66;
     vertical-align: text-top;
+  }
+
+  @media print {
+    page-break-before: avoid;
   }
 }

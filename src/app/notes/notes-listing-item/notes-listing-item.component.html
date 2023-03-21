@@ -17,15 +17,15 @@
     </p>
 
     <div class="notes-listing-item-duration">
-      <h3 class="notes-listing-item-heading">Duration (minutes)</h3>
+      <h3 class="notes-listing-item-heading">Duration <em>(minutes)</em></h3>
 
       <div class="notes-listing-item-duration-grid">
         <div class="notes-listing-item-durationLeft">
-          <p>Left &ndash; {{ note.durationLeft }}</p>
+          <p><span class="notes-listing-item-durationLabel">Left:</span> <span class="notes-listing-item-logLine">{{ note.durationLeft }}</span></p>
         </div>
 
         <div class="notes-listing-item-durationLeft">
-          <p>Right &ndash; {{ note.durationRight }}</p>
+          <p><span class="notes-listing-item-durationLabel">Right:</span> <span class="notes-listing-item-logLine">{{ note.durationRight }}</span></p>
         </div>
       </div>
 
@@ -33,15 +33,15 @@
 
     <div class="notes-listing-item-formula" *ngIf="note.formulaAmount">
       <h3 class="notes-listing-item-heading">Formula</h3>
-      <p class="notes-listing-item-formulaAmount">{{note.formulaAmount}}</p>
+      <p class="notes-listing-item-formulaAmount"><span class="notes-listing-item-logLine">{{note.formulaAmount}}</span></p>
     </div>
 
     <div class="notes-listing-item-diaper" *ngIf="note.wet || note.poo">
       <ul class="notes-listing-item-diaperDetails">
-        <li *ngIf="note.wet">
+        <li class="notes-listing-item-diaperDetail" *ngIf="note.wet">
           <i class="bi bi-check-square"></i> Wet
         </li>
-        <li *ngIf="note.poo">
+        <li class="notes-listing-item-diaperDetail" *ngIf="note.poo">
           <i class="bi bi-check-square"></i> Poo
         </li>
       </ul>

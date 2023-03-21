@@ -68,12 +68,15 @@
 .notes-listing-item-container {
 
   ::ng-deep .notes-listing-item {
-    // background-color: rgb(232, 240, 251);
-    background-color: hsl(340, 88%, 95%);
+    --color-this-note: hsl(340, 88%, 95%);
+    --color-this-note-dark: hsl(340, 88%, 85%);
+    background-color: var(--color-this-note, hsl(340, 88%, 95%));
   }
 
   &:nth-child(odd) ::ng-deep .notes-listing-item {
-      background-color: rgb(232, 240, 251);
+    --color-this-note: hsl(215, 70%, 95%);
+    --color-this-note-dark: hsl(215, 70%, 85%);
+    background-color: var(--color-this-note, hsl(215, 70%, 95%));
   }
 
   // &:hover ::ng-deep .notes-listing-item {

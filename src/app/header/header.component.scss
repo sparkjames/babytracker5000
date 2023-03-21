@@ -4,6 +4,10 @@
   margin-bottom: 3rem;
   padding-bottom: 2rem;
   padding-top: 2rem;
+
+  @media print {
+    display: none;
+  }
 }
 
 .header-container {

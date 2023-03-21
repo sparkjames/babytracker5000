@@ -150,3 +150,10 @@ body {
   }
 
 }
+
+
+@media print {
+  body {
+    font-size: 1.2rem;
+  }
+}
