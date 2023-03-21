@@ -56,6 +56,12 @@
   }
 }
 
+@media print {
+  .new-note {
+    display: none;
+  }
+}
+
 .notes-listing-item-container {
 
   ::ng-deep .notes-listing-item {
