@@ -24,8 +24,21 @@ export class NotesService {
     // )
   ];
 
+  private sortNotes(): void{
+    this.notes.sort( (a,b): number => {
+      if (new Date(a.startDateTime).getTime() > new Date(b.startDateTime).getTime() ){
+        return 1;
+      } else if (new Date(a.startDateTime).getTime() < new Date(b.startDateTime).getTime()) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
+  }
+
   setNotes(notes: Note[]){
     this.notes = notes;
+    this.sortNotes();
     this.notesChanged.next( this.notes.slice() );
   }
 
@@ -50,17 +63,20 @@ export class NotesService {
   }
 
   addNote( note: Note ){
-    this.notes.push( note );
+    this.notes.push(note);
+    this.sortNotes();
     this.notesChanged.next( this.notes.slice() );
   }
 
   deleteNote( index: number ){
     this.notes.splice(index, 1);
+    this.sortNotes();
     this.notesChanged.next( this.notes.slice() );
   }
 
   updateNote( index: number, note: Note ){
     this.notes[index] = note;
+    this.sortNotes();
     this.notesChanged.next(this.notes.slice());
   }
 
