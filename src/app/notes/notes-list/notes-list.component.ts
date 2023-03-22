@@ -28,7 +28,7 @@ export class NotesListComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    console.log('INIT notes-listing-component');
+    // console.log('INIT notes-listing-component');
     this.isFetching = true;
 
     // Subscribe to the auth service to check if user logged in, then fetch notes from the server.

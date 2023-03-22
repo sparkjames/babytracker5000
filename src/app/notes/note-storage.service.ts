@@ -21,7 +21,7 @@ export class NoteStorageService {
   private get APIEndpoint(){
     const user = this.authService.user.getValue();
     if (user) {
-      console.log('update APIEndpoint');
+      // console.log('update APIEndpoint');
       return `https://babytracker5000-default-rtdb.firebaseio.com/notes/${user.id}.json`;
     } else {
       return '';
@@ -29,7 +29,7 @@ export class NoteStorageService {
   }
 
   storeNotes(){
-    console.log('About to store notes...');
+    // console.log('About to store notes...');
     const notes = this.notesService.getNotes();
     // console.log(notes);
 
@@ -45,8 +45,8 @@ export class NoteStorageService {
           notes
         )
         .subscribe(response => {
-          console.log('Notes stored.');
-          console.log(response);
+          // console.log('Notes stored.');
+          // console.log(response);
         }, error => {
           let errorMessage = error.message;
           if( error.status == 401 ){
@@ -64,7 +64,7 @@ export class NoteStorageService {
   }
 
   fetchNotes() {
-    console.log('start fetch');
+    // console.log('start fetch');
     // console.log( this.APIEndpoint );
 
     // LocalStorage method
@@ -79,15 +79,18 @@ export class NoteStorageService {
     return this.http.get<object>(this.APIEndpoint)
       .pipe(
         map((responseData) => {
-          console.log('responseData = ', typeof responseData);
-          console.log(responseData);
+          // console.log('responseData = ', typeof responseData);
+          // console.log(responseData);
           const newNotes: Note[] = [];
-          Object.values(responseData).forEach(note => newNotes.push(note));
+          if( responseData ){
+            Object.values(responseData).forEach(note => newNotes.push(note));
+          }
+
           return newNotes;
         }),
         tap((notes: Note[]) => {
-          console.log('tap notes = ', typeof notes);
-          console.log(notes);
+          // console.log('tap notes = ', typeof notes);
+          // console.log(notes);
           this.notesService.setNotes(notes);
         }),
         catchError(this.handleError)

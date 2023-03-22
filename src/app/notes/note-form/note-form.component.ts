@@ -66,8 +66,8 @@ export class NoteFormComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('submitted');
-    console.log(this.noteForm);
+    // console.log('submitted');
+    // console.log(this.noteForm);
 
     // const selectedFeedDetails = this.getSelectedFeedDetails();
     // const selectedDiaperDetails = this.getSelectedDiaperDetails();
