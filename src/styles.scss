@@ -96,6 +96,10 @@ body {
   transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
   width: 100%;
 
+  &:-webkit-autofill {
+    background-color: var(--color-success);
+  }
+
   &.ng-invalid.ng-touched {
     border-color: var(--color-danger);
   }

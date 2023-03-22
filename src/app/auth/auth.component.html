@@ -16,7 +16,7 @@
           name="email"
           required
           email
-          (input)="onDetectInput()"
+          (change)="onDetectInput()"
           >
       </div>
 
@@ -44,7 +44,7 @@
           name="password"
           required
           minlength="6"
-          (input)="onDetectInput()"
+          (change)="onDetectInput()"
           >
         <p class="loginForm-input-note" *ngIf="!isLoginMode">Must be at least 6 characters. Use any letters, numbers, symbols, or spaces.</p>
       </div>
