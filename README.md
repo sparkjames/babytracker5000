@@ -1,6 +1,6 @@
 # BabyTracker5000
 
-[View on my website](https://jpfleiderer.com/babytracker/)
+[View on babytracker5000.com](https://babytracker5000.com/)
 
 Track your newborn's feedings, sleeps, and diapers.
 
