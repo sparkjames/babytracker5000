@@ -14,11 +14,16 @@ export class AuthComponent {
   isLoginMode = true;
   isLoading = false;
   errorMessage = '';
+  isTouched = false;
 
   constructor( private authService: AuthService, private router: Router ){}
 
   onSwitchMode(){
     this.isLoginMode = !this.isLoginMode;
+  }
+
+  onDetectInput(){
+    this.isTouched = true;
   }
 
   onSubmit( form: NgForm ){
