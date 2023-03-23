@@ -16,7 +16,8 @@
           name="email"
           required
           email
-          (change)="onDetectInput()"
+          (input)="onDetectInput()"
+          autocomplete="email"
           >
       </div>
 
@@ -44,7 +45,8 @@
           name="password"
           required
           minlength="6"
-          (change)="onDetectInput()"
+          (input)="onDetectInput()"
+          autocomplete="{{ isLoginMode ? 'current-password' : 'new-password' }}"
           >
         <p class="loginForm-input-note" *ngIf="!isLoginMode">Must be at least 6 characters. Use any letters, numbers, symbols, or spaces.</p>
       </div>
