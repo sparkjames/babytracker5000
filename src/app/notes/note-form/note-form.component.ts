@@ -24,7 +24,7 @@ export class NoteFormComponent implements OnInit {
   private startDateTimePattern = '[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}';
 
   noteForm: FormGroup = new FormGroup({
-    startDateTime: new FormControl(formatDate(Date.now(), 'YYYY-MM-ddThh:mm', this.userLocale), [Validators.required, Validators.pattern(this.startDateTimePattern)]),
+    startDateTime: new FormControl(formatDate(Date.now(), 'YYYY-MM-ddTHH:mm', this.userLocale), [Validators.required, Validators.pattern(this.startDateTimePattern)]),
     durationLeft: new FormControl('', Validators.pattern('[0-9]*')),
     durationRight: new FormControl('', Validators.pattern('[0-9]*')),
     formulaAmount: new FormControl(''),
@@ -98,7 +98,7 @@ export class NoteFormComponent implements OnInit {
       } else {
         this.notesService.addNote(newNote);
         this.noteForm.reset({
-          startDateTime: formatDate(Date.now(), 'YYYY-MM-ddThh:mm', this.userLocale)
+          startDateTime: formatDate(Date.now(), 'YYYY-MM-ddTHH:mm', this.userLocale)
         });
       }
 

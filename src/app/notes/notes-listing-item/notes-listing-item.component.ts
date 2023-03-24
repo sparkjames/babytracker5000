@@ -28,7 +28,7 @@ export class NotesListingItemComponent implements OnInit {
   editMode = false;
 
   private userLocale: string = navigator.languages != undefined ? navigator.languages[0] : navigator.language;
-  displayCreatedDateTime: string | undefined;
+  // displayCreatedDateTime: string | undefined;
   displayStartDateTime: string | undefined;
   displayDay: string | undefined;
   showDisplayDay = false;
@@ -40,7 +40,7 @@ export class NotesListingItemComponent implements OnInit {
       this.userLocale = 'en-US';
     }
 
-    this.displayCreatedDateTime = formatDate(this.note.createdDateTime, 'MMMM dd, hh:mm a', this.userLocale);
+    // this.displayCreatedDateTime = formatDate(this.note.createdDateTime, 'MMMM dd, h:mm a', this.userLocale);
 
     this.displayStartDateTime = formatDate(this.note.startDateTime, 'h:mm a', this.userLocale);
 

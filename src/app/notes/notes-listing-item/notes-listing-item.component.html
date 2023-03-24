@@ -1,11 +1,5 @@
 <div class="notes-listing-item" (click)="onClickNoteListItem($event)">
 
-  <!-- <div class="row note-listing-item-date-container">
-    <div class="col-xs-12">
-      <p class="note-listing-item-date">{{ displayCreatedDateTime }}</p>
-    </div>
-  </div> -->
-
   <div class="notes-listing-item-edit" *ngIf="editMode">
     <app-note-form [noteId]="noteId" [(editMode)]="editMode"></app-note-form>
   </div>
