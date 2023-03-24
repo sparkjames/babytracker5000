@@ -16,15 +16,15 @@
       {{displayStartDateTime}}
     </p>
 
-    <div class="notes-listing-item-duration">
+    <div class="notes-listing-item-duration" *ngIf="note.durationLeft || note.durationRight">
       <h3 class="notes-listing-item-heading">Duration <em>(minutes)</em></h3>
 
       <div class="notes-listing-item-duration-grid">
-        <div class="notes-listing-item-durationLeft">
+        <div class="notes-listing-item-durationLeft" *ngIf="note.durationLeft">
           <p><span class="notes-listing-item-durationLabel">Left:</span> <span class="notes-listing-item-logLine">{{ note.durationLeft }}</span></p>
         </div>
 
-        <div class="notes-listing-item-durationLeft">
+        <div class="notes-listing-item-durationRight" *ngIf="note.durationRight">
           <p><span class="notes-listing-item-durationLabel">Right:</span> <span class="notes-listing-item-logLine">{{ note.durationRight }}</span></p>
         </div>
       </div>
