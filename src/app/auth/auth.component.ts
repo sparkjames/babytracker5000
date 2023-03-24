@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -16,13 +16,20 @@ export class AuthComponent {
   errorMessage = '';
   isTouched = false;
 
+  @ViewChild('authForm') authForm: NgForm | undefined;
+
   constructor( private authService: AuthService, private router: Router ){}
 
   onSwitchMode(){
     this.isLoginMode = !this.isLoginMode;
   }
 
-  onDetectInput(){
+  onDetectInput( event: Event ){
+    console.log('Inside onDetectInput');
+    console.log(event);
+    if(this.authForm){
+      console.log('authForm = ', this.authForm);
+    }
     this.isTouched = true;
   }
 
