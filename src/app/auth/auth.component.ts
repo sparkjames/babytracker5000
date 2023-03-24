@@ -14,7 +14,6 @@ export class AuthComponent {
   isLoginMode = true;
   isLoading = false;
   errorMessage = '';
-  isTouched = false;
 
   @ViewChild('authForm') authForm: NgForm | undefined;
 
@@ -24,13 +23,21 @@ export class AuthComponent {
     this.isLoginMode = !this.isLoginMode;
   }
 
-  onDetectInput( event: Event ){
-    console.log('Inside onDetectInput');
-    console.log(event);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onDetectInput( event: any ){
+    // console.log('Inside onDetectInput');
+    // console.log(event);
     if(this.authForm){
-      console.log('authForm = ', this.authForm);
+      // console.log('authForm = ', this.authForm);
+
+      // Let autofill (like from LastPass) trigger the fields to be revalidated, thus enabling the submit button to login.
+      if (event.target.name === 'email' || event.target.name === 'password' ){
+        const fieldName = event.target.name;
+        this.authForm.form.controls[fieldName].updateValueAndValidity();
+      }
+
     }
-    this.isTouched = true;
+
   }
 
   onSubmit( form: NgForm ){

@@ -59,7 +59,7 @@
           <app-loading-spinner></app-loading-spinner>
         </div>
 
-        <button type="submit" class="button button-primary" [disabled]="!authForm.valid || isLoading || !isTouched">{{ isLoginMode ? 'Login' : 'Register account' }}</button>
+        <button type="submit" class="button button-primary" [disabled]="!authForm.valid || isLoading">{{ isLoginMode ? 'Login' : 'Register account' }}</button>
       </div>
 
       <div class="loginForm-item loginForm-error" *ngIf="errorMessage">
