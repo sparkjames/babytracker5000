@@ -4,7 +4,7 @@
 
 Track your newborn's feedings, sleeps, and diapers.
 
-BabyTracker5000 works by using your device's local storage. If you delete your data for this website, your notes will be lost.
+BabyTracker5000 works by using ~~your device's local storage. If you delete your data for this website, your notes will be lost.~~ Firebase authentication and database. Now you and your spouse/caregiver can share the same log.
 
 Something I made so I can learn Angular, and also make something useful for my wife and I.
 
