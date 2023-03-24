@@ -27,16 +27,21 @@ export class AuthComponent {
   onDetectInput( event: any ){
     // console.log('Inside onDetectInput');
     // console.log(event);
-    if(this.authForm){
-      // console.log('authForm = ', this.authForm);
+    try {
+      if (this.authForm) {
+        // console.log('authForm = ', this.authForm);
 
-      // Let autofill (like from LastPass) trigger the fields to be revalidated, thus enabling the submit button to login.
-      if (event.target.name === 'email' || event.target.name === 'password' ){
-        const fieldName = event.target.name;
-        this.authForm.form.controls[fieldName].updateValueAndValidity();
+        // Let autofill (like from LastPass) trigger the fields to be revalidated, thus enabling the submit button to login.
+        if (event.target.name === 'email' || event.target.name === 'password') {
+          const fieldName = event.target.name;
+          this.authForm.form.controls[fieldName].updateValueAndValidity();
+        }
+
       }
-
+    } catch (error) {
+      console.error('Error detecting field input: ', error);
     }
+
 
   }
 
