@@ -67,8 +67,10 @@ export class AuthComponent {
 
     authObs.subscribe(responseData => {
       // console.log(responseData);
-      this.isLoading = false;
-      this.router.navigate(['/notes']);
+      if( responseData ) {
+        this.isLoading = false;
+        this.router.navigate(['/notes']);
+      }
 
     }, errorResponse => {
       // console.log('Auth error: ', errorResponse);
