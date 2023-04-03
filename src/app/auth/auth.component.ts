@@ -12,6 +12,7 @@ import { AuthResponseData, AuthService } from './auth.service';
 export class AuthComponent {
   // NOTE - query params video #269
   isLoginMode = true;
+  isOfflineMode = false;
   isLoading = false;
   errorMessage = '';
 
@@ -21,6 +22,11 @@ export class AuthComponent {
 
   onSwitchMode(){
     this.isLoginMode = !this.isLoginMode;
+  }
+
+  onUseOfflineMode(){
+    // this.isOfflineMode = !this.isOfflineMode;
+    this.authService.loginOffline();
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

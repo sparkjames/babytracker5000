@@ -58,8 +58,17 @@ export class AuthService {
       _token:string;
       _tokenExpirationDate:string;
     } = JSON.parse(localStorage.getItem('userData') || '{}');
+
     if( !userData ){
-      return;
+
+      const notes = JSON.parse(localStorage.getItem('notes') || '{}');
+      if( notes && notes.length > 0 ){
+        this.handleOfflineAuthentication();
+
+      } else {
+        return;
+      }
+
     }
 
     const loadedUser = new User(userData.email, userData.id, userData._token, new Date(userData._tokenExpirationDate));
@@ -70,6 +79,8 @@ export class AuthService {
       const expirationDuration = new Date(userData._tokenExpirationDate).getTime() - new Date().getTime();
       this.autoLogout(expirationDuration);
 
+    } else if( loadedUser.id === 'offline' ){
+      this.handleOfflineAuthentication();
     }
 
   }
@@ -95,6 +106,10 @@ export class AuthService {
     );
   }
 
+  loginOffline(){
+    this.handleOfflineAuthentication();
+  }
+
   autoLogout(expirationDuration: number){
     this.tokenExpirationTimer = setTimeout( () => {
       this.logout();
@@ -108,6 +123,22 @@ export class AuthService {
       clearTimeout(this.tokenExpirationTimer);
     }
     localStorage.removeItem('userData');
+  }
+
+  private handleOfflineAuthentication(){
+    console.log('START handleOfflineAuthentication()');
+    if (!this.user.getValue() || this.user.getValue()?.id !== 'offline' ){
+      const offlineUser = new User(
+        '',
+        'offline',
+        '',
+        new Date()
+      );
+      console.log('should be offline user: ', offlineUser);
+      localStorage.setItem('userData', JSON.stringify(offlineUser));
+      this.user.next(offlineUser);
+      this.router.navigate(['/notes']);
+    }
   }
 
   private handleAuthentication(email: string, localId: string, idToken: string, expiresIn: number) {

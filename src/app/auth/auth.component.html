@@ -5,6 +5,10 @@
 
       <h2 class="loginForm-title">{{ isLoginMode ? 'Login' : 'Register account' }}</h2>
 
+      <!-- <div class="loginForm-item loginForm-actions">
+        <button class="button button-link" type="button">Use Offline Mode</button>
+      </div> -->
+
       <div class="loginForm-item">
         <label class="loginForm-label" for="email">Email Address</label>
         <input
@@ -51,15 +55,22 @@
         <p class="loginForm-input-note" *ngIf="!isLoginMode">Must be at least 6 characters. Use any letters, numbers, symbols, or spaces.</p>
       </div>
 
-      <div class="loginForm-item loginForm-actions">
-
-        <button type="button" class="button button-link" (click)="onSwitchMode()">Switch to {{ isLoginMode ? 'Registration' : ' Login' }}</button>
+      <div class="loginForm-item loginForm-actions loginForm-actions--primary">
 
         <div class="loginForm-spinner" *ngIf="isLoading">
           <app-loading-spinner></app-loading-spinner>
         </div>
 
         <button type="submit" class="button button-primary" [disabled]="!authForm.valid || isLoading">{{ isLoginMode ? 'Login' : 'Register account' }}</button>
+
+      </div>
+
+      <div class="loginForm-item loginForm-actions loginForm-actions--secondary">
+
+        <button class="button button-link" type="button" (click)="onUseOfflineMode()">Use Offline Mode</button>
+
+        <button type="button" class="button button-link" (click)="onSwitchMode()">{{ isLoginMode ? 'Register' : ' Login' }}</button>
+
       </div>
 
       <div class="loginForm-item loginForm-error" *ngIf="errorMessage">

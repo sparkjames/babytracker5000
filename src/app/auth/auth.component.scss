@@ -28,8 +28,12 @@
 
 .loginForm-actions {
   display: flex;
-  gap: 2rem;
+  gap: 3rem;
   justify-content: flex-end;
+}
+
+.loginForm-actions--primary {
+  // padding-right: .5em;
 }
 
 .loginForm-error {
