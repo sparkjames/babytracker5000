@@ -15,7 +15,7 @@ export class AuthInterceptorService implements HttpInterceptor {
         // console.log('request is: ', req);
         // console.log('user is: ', user);
 
-        if( !user || !user.token ){
+        if( !user || !user.token || user.id === 'offline' ){
           // console.log('no user, continuing...');
           return next.handle(req);
 
