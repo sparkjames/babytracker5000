@@ -27,6 +27,7 @@ export class AuthComponent {
   onUseOfflineMode(){
     // this.isOfflineMode = !this.isOfflineMode;
     this.authService.loginOffline();
+    this.router.navigate(['/notes']);
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

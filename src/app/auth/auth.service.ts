@@ -143,7 +143,11 @@ export class AuthService {
       // console.log('should be offline user: ', offlineUser);
       localStorage.setItem('userData', JSON.stringify(offlineUser));
       this.user.next(offlineUser);
-      this.router.navigate(['/notes']);
+
+      if( localStorage.getItem('notes') ){
+        this.router.navigate(['/notes']);
+      }
+
     // }
   }
 

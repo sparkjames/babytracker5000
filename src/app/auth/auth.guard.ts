@@ -14,7 +14,7 @@ export class AuthGuard implements CanActivate {
     return this.authService.user.pipe(
       take(1),
       map( user => {
-        return (!user || user?.id === 'offline') ? true : false;
+        return (!user || user?.id === 'offline') ? true : this.router.createUrlTree(['/notes']);
       })
     );
   }

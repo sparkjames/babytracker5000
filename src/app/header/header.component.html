@@ -8,11 +8,11 @@
         <li class="site-nav-item" routerLinkActive="active" *ngIf="isAuthenticated">
           <a routerLink="/notes" class="site-nav-link">Notes</a>
         </li>
-        <li class="site-nav-item" routerLinkActive="active" *ngIf="!isAuthenticated">
+        <li class="site-nav-item" routerLinkActive="active" *ngIf="!isAuthenticated || isOfflineMode">
           <a routerLink="/auth" class="site-nav-link">Login/Register</a>
         </li>
-        <li class="site-nav-item" routerLinkActive="active" *ngIf="isAuthenticated">
-          <a class="site-nav-link" (click)="onLogout()">{{isOfflineMode ? 'Login/Register' : 'Logout'}}</a>
+        <li class="site-nav-item" routerLinkActive="active" *ngIf="isAuthenticated && !isOfflineMode">
+          <a class="site-nav-link" (click)="onLogout()">Logout</a>
         </li>
       </ul>
     </nav>
