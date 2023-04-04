@@ -12,7 +12,7 @@
           <a routerLink="/auth" class="site-nav-link">Login/Register</a>
         </li>
         <li class="site-nav-item" routerLinkActive="active" *ngIf="isAuthenticated">
-          <a class="site-nav-link" (click)="onLogout()">{{isOfflineMode ? 'Login' : 'Logout'}}</a>
+          <a class="site-nav-link" (click)="onLogout()">{{isOfflineMode ? 'Login/Register' : 'Logout'}}</a>
         </li>
       </ul>
     </nav>
