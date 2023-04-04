@@ -1,7 +1,11 @@
 <div class="footer">
   <div class="container">
 
-    <!-- <p>BabyTracker5000 works by using your device's local storage. If you delete your data for this website, your notes will be lost.</p> -->
+    <p *ngIf="checkUserData()">
+      <button class="button button-link button--invert" (click)="onDeleteOfflineData()">Delete Offline Data</button>
+    </p>
+
+    <p>BabyTracker5000 is available under <a href="https://www.gnu.org/licenses/gpl-3.0" rel="nofollow noopener">GNU General Public License</a>. Login and notes data is stored on Google Firebase. BabyTracker5000 is not intended to be professional software, use at your own risk.</p>
 
     <p>&copy; James Pfleiderer 2023</p>
 

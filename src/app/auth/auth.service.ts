@@ -117,28 +117,34 @@ export class AuthService {
   }
 
   logout(){
-    this.user.next(null);
+    const currentUser = this.user.getValue();
+    if( currentUser && currentUser.id !== 'offline' ){
+      localStorage.removeItem('userData');
+      this.user.next(null);
+    }
+
     this.router.navigate(['/auth']);
+
     if (this.tokenExpirationTimer){
       clearTimeout(this.tokenExpirationTimer);
     }
-    localStorage.removeItem('userData');
+
   }
 
   private handleOfflineAuthentication(){
-    console.log('START handleOfflineAuthentication()');
-    if (!this.user.getValue() || this.user.getValue()?.id !== 'offline' ){
+    // console.log('START handleOfflineAuthentication()');
+    // if (!this.user.getValue() || this.user.getValue()?.id !== 'offline' ){
       const offlineUser = new User(
         '',
         'offline',
         '',
         new Date()
       );
-      console.log('should be offline user: ', offlineUser);
+      // console.log('should be offline user: ', offlineUser);
       localStorage.setItem('userData', JSON.stringify(offlineUser));
       this.user.next(offlineUser);
       this.router.navigate(['/notes']);
-    }
+    // }
   }
 
   private handleAuthentication(email: string, localId: string, idToken: string, expiresIn: number) {

@@ -77,12 +77,12 @@ export class NoteStorageService {
   }
 
   fetchNotes() {
-    console.log('start fetch');
+    // console.log('start fetch');
     // console.log( this.APIEndpoint );
 
     if( this.APIEndpoint ){
       // Remote method
-      console.log('fetching REMOTE notes');
+      // console.log('fetching REMOTE notes');
       this.http.get<object>(this.APIEndpoint)
         .pipe(
           map((responseData) => {
@@ -105,7 +105,7 @@ export class NoteStorageService {
 
     } else {
       // LocalStorage method
-      console.log('fetching LOCAL notes');
+      // console.log('fetching LOCAL notes');
       // fetchObs = new Observable((observer) => {
       //   let notes = localStorage.getItem('notes') ? JSON.parse(localStorage.getItem('notes') || '{}') : [];
       //   this.notesService.setNotes(notes);
@@ -121,7 +121,7 @@ export class NoteStorageService {
       const notes:Note[] = localStorage.getItem('notes') ? JSON.parse(localStorage.getItem('notes') || '{}') : [];
       // if (notes) {
         this.notesService.setNotes(notes);
-        console.log('notes set to ', notes);
+        // console.log('notes set to ', notes);
       // }
 
     }
